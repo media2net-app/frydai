@@ -4,7 +4,8 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { cx } from "@/lib/cx";
-import { copy, site } from "@/lib/copy";
+import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
+import { copy } from "@/lib/copy";
 import { FAQ_ITEMS } from "@/lib/faq-data";
 
 function FaqItemRow({
@@ -97,12 +98,9 @@ export function FaqSection() {
 
         <div className="mt-10 text-center">
           <p className="text-sm text-white/45">{t.stillHaveQuestions}</p>
-          <a
-            href={site.whopCheckout}
-            className="mt-4 inline-flex rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-500 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:brightness-110"
-          >
-            {t.contactCta} →
-          </a>
+          <DeployFrydaiButton variant="compact" className="mt-4">
+            {t.contactCta}
+          </DeployFrydaiButton>
         </div>
       </div>
     </section>

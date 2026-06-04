@@ -10,7 +10,7 @@ const MARQUEE_TRACK = [...CREATIVES_PER_HALF, ...CREATIVES_PER_HALF];
 
 function CreativeCard({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="group relative shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-violet-500/30 hover:shadow-[0_0_28px_rgba(124,58,237,0.2)]">
+    <div className="group relative shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-violet-500/30 hover:shadow-[0_0_40px_rgba(124,58,237,0.12)]">
       <div className="relative aspect-[3/4] w-[168px] sm:w-[200px] md:w-[220px]">
         <Image
           src={src}

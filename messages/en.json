@@ -10,7 +10,27 @@
   "checkoutModal": {
     "title": "Get access",
     "close": "Close checkout",
-    "loading": "Loading checkout…"
+    "demoBadge": "Demo checkout",
+    "demoNote": "No payment is processed. This preview shows how checkout will work once billing is live.",
+    "planName": "Frydai operator",
+    "planPeriod": "Billed every 4 weeks",
+    "emailLabel": "Work email",
+    "emailPlaceholder": "you@brand.com",
+    "nameLabel": "Full name",
+    "namePlaceholder": "Alex Founder",
+    "paymentTitle": "Payment method",
+    "cardNumber": "Card number",
+    "cardExpiry": "MM / YY",
+    "cardCvc": "CVC",
+    "terms": "I agree to the demo terms and understand no charge will be made.",
+    "submit": "Complete demo checkout",
+    "processing": "Processing…",
+    "successTitle": "You're in — demo complete",
+    "successBody": "In production this step confirms your Whop subscription. For now, explore the operator dashboard with the demo login.",
+    "successCta": "Open demo dashboard",
+    "successClose": "Close",
+    "errorEmail": "Enter a valid email address.",
+    "errorTerms": "Accept the demo terms to continue."
   },
   "nav": {
     "features": "Features",
@@ -121,6 +141,23 @@
     "ctaSecondary": "See command center",
     "ctaNote": "Founding access · $187 / 4 weeks · cancel anytime"
   },
+  "transformation": {
+    "eyebrow": "Same store · different results",
+    "titlePrefix": "From this…",
+    "titleHighlight": "to this",
+    "subtitle": "Same store. Different results. Illustrative case — one DTC brand before and after deploying Frydai.",
+    "beforeLabel": "Before",
+    "beforeTitle": "Manual ops · bleeding budget",
+    "afterLabel": "After · With Frydai",
+    "afterTitle": "Operator on autopilot",
+    "pills": [
+      "Works while you sleep",
+      "Real outputs in Telegram",
+      "Replace tool sprawl"
+    ],
+    "cta": "Start now",
+    "disclaimer": "Example store metrics · 90-day illustrative comparison · ROAS, CPA, and profit vary by niche and ad account."
+  },
   "results": {
     "eyebrow": "Results",
     "title": "Replace the stack. Keep the output.",
@@ -145,7 +182,7 @@
     "planTitle": "Frydai operator",
     "planSubtitle": "Everything in one subscription",
     "cta": "Deploy Frydai",
-    "ctaNote": "Limited founding seats · checkout on Whop",
+    "ctaNote": "Limited founding seats · demo checkout",
     "mathLabel": "You save",
     "mathPer": "per month vs. a blended team",
     "mathNote": "$187 billed every 4 weeks · illustrative team breakdown",

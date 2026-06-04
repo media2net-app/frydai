@@ -1,19 +1,25 @@
-import Link from "next/link";
-import { copy, site } from "@/lib/copy";
+import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
+import { copy } from "@/lib/copy";
 
-/** Fixed bar height — keep in sync with SiteHeader `withNotice` offset */
-export const FOUNDING_NOTICE_OFFSET = "top-9 sm:top-10";
+/** Notice strip height — keep in sync with SiteHeader offset + hero spacer */
+export const FOUNDING_NOTICE_HEIGHT = "h-11 sm:h-12";
+
+/** Header flush under notice (no gap) */
+export const FOUNDING_NOTICE_OFFSET = "top-11 sm:top-12";
+
+/** Spacer in hero: notice (h-11/h-12) + site header (h-14/h-16) */
+export const HERO_CHROME_TOP_SPACER = "h-[6.25rem] sm:h-[7rem]";
 
 export function FoundingNoticeBar() {
   const t = copy.foundingNotice;
 
   return (
     <div
-      className="fixed inset-x-0 top-0 z-[60] border-b border-violet-500/25 bg-gradient-to-r from-violet-950/95 via-[#0d0d14] to-indigo-950/95 backdrop-blur-md"
+      className={`fixed inset-x-0 top-0 z-[60] border-b border-violet-500/25 bg-gradient-to-r from-violet-950/95 via-[#0d0d14] to-indigo-950/95 backdrop-blur-md ${FOUNDING_NOTICE_HEIGHT}`}
       role="region"
       aria-label={t.badge}
     >
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-2 gap-y-1 px-3 py-2 sm:gap-x-3 sm:px-6 sm:py-2.5">
+      <div className="mx-auto flex h-full max-w-7xl flex-wrap items-center justify-center gap-x-2 gap-y-1 px-3 sm:gap-x-3 sm:px-6">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-200 sm:text-[11px]">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-70" />
@@ -30,12 +36,9 @@ export function FoundingNoticeBar() {
           <span className="font-semibold text-violet-200">{t.price}</span>
         </span>
 
-        <Link
-          href={site.whopCheckout}
-          className="shrink-0 rounded-full bg-gradient-to-r from-violet-600 to-indigo-500 px-3 py-1 text-[11px] font-semibold text-white transition-opacity hover:opacity-90 sm:px-4 sm:py-1.5 sm:text-xs"
-        >
-          {t.cta} →
-        </Link>
+        <DeployFrydaiButton variant="pill" showArrow>
+          {t.cta}
+        </DeployFrydaiButton>
       </div>
     </div>
   );

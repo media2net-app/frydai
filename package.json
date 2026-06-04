@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@whop/checkout": "^0.0.54",
     "framer-motion": "^12.40.0",
     "next": "16.2.7",
     "react": "19.2.4",

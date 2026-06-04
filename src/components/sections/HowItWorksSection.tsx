@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { cx } from "@/lib/cx";
+import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
 import { copy, site } from "@/lib/copy";
 import { HowItWorksStepVisual } from "@/components/sections/how-it-works/HowItWorksStepVisual";
 
@@ -59,7 +60,7 @@ export function HowItWorksSection() {
                       className={cx(
                         "relative flex h-full min-h-0 flex-col overflow-hidden p-5 transition-all duration-300 sm:p-6",
                         isActive &&
-                          "border-violet-400/40 shadow-[0_0_32px_rgba(124,58,237,0.18)] ring-1 ring-violet-500/20",
+                          "border-violet-400/40 shadow-[0_0_48px_rgba(124,58,237,0.18)] ring-1 ring-violet-500/20",
                       )}
                     >
                       <div className="flex items-start justify-between gap-3">
@@ -108,12 +109,7 @@ export function HowItWorksSection() {
 
         <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center gap-4 sm:mt-14">
           <div className="flex w-full flex-col gap-3 sm:flex-row sm:justify-center">
-            <a
-              href={site.whopCheckout}
-              className="inline-flex w-full justify-center rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-500 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-violet-500/30 transition-all hover:brightness-110 sm:w-auto"
-            >
-              {t.ctaPrimary} →
-            </a>
+            <DeployFrydaiButton className="w-full sm:w-auto" />
             <a
               href={site.demoUrl}
               className="inline-flex w-full justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-base font-semibold text-white/90 backdrop-blur-sm transition-colors hover:bg-white/10 sm:w-auto"

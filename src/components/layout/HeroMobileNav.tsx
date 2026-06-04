@@ -118,7 +118,7 @@ export function HeroMobileNav({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="relative z-20 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20 md:hidden"
+        className="relative z-20 inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm font-medium leading-none text-white transition-colors hover:bg-white/20 md:hidden"
         aria-expanded={open}
         aria-controls="hero-mobile-nav"
       >

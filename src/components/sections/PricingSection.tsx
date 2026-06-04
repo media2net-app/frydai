@@ -1,7 +1,8 @@
 "use client";
 
 import { GlassCard } from "@/components/ui/GlassCard";
-import { copy, site } from "@/lib/copy";
+import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
+import { copy } from "@/lib/copy";
 import {
   FOUNDING_FEATURES,
   FRYDAI_PERIOD,
@@ -68,7 +69,7 @@ export function PricingSection() {
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-indigo-600/15 blur-3xl"
+              className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-indigo/15 blur-3xl"
               aria-hidden
             />
 
@@ -97,12 +98,9 @@ export function PricingSection() {
                 ))}
               </ul>
 
-              <a
-                href={site.whopCheckout}
-                className="mt-8 inline-flex w-full justify-center rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-500 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-violet-500/30 transition-all hover:brightness-110"
-              >
-                {t.cta} →
-              </a>
+              <DeployFrydaiButton className="mt-8 w-full">
+                {t.cta}
+              </DeployFrydaiButton>
               <p className="mt-3 text-center text-xs text-white/40">{t.ctaNote}</p>
             </div>
           </GlassCard>

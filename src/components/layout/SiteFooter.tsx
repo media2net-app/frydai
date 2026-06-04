@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
 import { copy, site } from "@/lib/copy";
 
 const PRODUCT_LINKS = [
@@ -40,12 +41,7 @@ export function SiteFooter() {
           </h2>
           <p className="mt-3 text-base text-white/55 sm:text-lg">{t.ctaSubtitle}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={site.whopCheckout}
-              className="inline-flex w-full justify-center rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-500 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-violet-500/30 transition-all hover:brightness-110 sm:w-auto"
-            >
-              {t.ctaPrimary} →
-            </a>
+            <DeployFrydaiButton className="w-full sm:w-auto" />
             <a
               href={site.demoUrl}
               className="inline-flex w-full justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-base font-semibold text-white/90 backdrop-blur-sm transition-colors hover:bg-white/10 sm:w-auto"
