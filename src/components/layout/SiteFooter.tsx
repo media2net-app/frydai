@@ -34,18 +34,18 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="border-t border-white/10 bg-[#08080f]">
-      <div className="border-b border-white/10 bg-gradient-to-b from-violet-950/30 to-transparent">
+    <footer className="border-t border-border-subtle bg-surface">
+      <div className="footer-cta-band border-b border-border-subtle bg-gradient-to-b from-violet-950/30 to-transparent">
         <div className="mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 sm:py-16 md:py-20">
-          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
             {t.ctaTitle}
           </h2>
-          <p className="mt-3 text-base text-white/55 sm:text-lg">{t.ctaSubtitle}</p>
+          <p className="mt-3 text-base text-muted sm:text-lg">{t.ctaSubtitle}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <DeployFrydaiButton className="w-full sm:w-auto" />
             <a
               href={site.demoUrl}
-              className="inline-flex w-full justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-base font-semibold text-white/90 backdrop-blur-sm transition-colors hover:bg-white/10 sm:w-auto"
+              className="btn-secondary-hero inline-flex w-full justify-center rounded-full border border-border-subtle bg-fill-subtle px-8 py-3.5 text-base font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-fill-muted sm:w-auto"
             >
               {t.ctaSecondary}
             </a>
@@ -60,14 +60,14 @@ export function SiteFooter() {
               wordmarkClassName="text-xl"
               markClassName="h-8 w-8"
             />
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/50">{t.tagline}</p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">{t.tagline}</p>
             <p className="mt-4 font-mono text-[10px] uppercase tracking-wider text-teal-300/70">
               {t.channels}
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-white/40">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t.product}
             </p>
             <ul className="mt-4 space-y-2.5">
@@ -75,7 +75,7 @@ export function SiteFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-white"
+                    className="text-sm text-muted transition-colors hover:text-foreground"
                   >
                     {productLabels[link.labelKey]}
                   </Link>
@@ -85,7 +85,7 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-white/40">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t.company}
             </p>
             <ul className="mt-4 space-y-2.5">
@@ -94,14 +94,14 @@ export function SiteFooter() {
                   {link.external ? (
                     <a
                       href={link.href}
-                      className="text-sm text-white/60 transition-colors hover:text-white"
+                      className="text-sm text-muted transition-colors hover:text-foreground"
                     >
                       {companyLabels[link.labelKey]}
                     </a>
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-sm text-white/60 transition-colors hover:text-white"
+                      className="text-sm text-muted transition-colors hover:text-foreground"
                     >
                       {companyLabels[link.labelKey]}
                     </Link>
@@ -112,14 +112,14 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-white/40">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t.legal}
             </p>
             <ul className="mt-4 space-y-2.5">
               <li>
                 <a
                   href={t.privacyUrl}
-                  className="text-sm text-white/60 transition-colors hover:text-white"
+                  className="text-sm text-muted transition-colors hover:text-foreground"
                 >
                   {t.privacy}
                 </a>
@@ -127,7 +127,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href={t.termsUrl}
-                  className="text-sm text-white/60 transition-colors hover:text-white"
+                  className="text-sm text-muted transition-colors hover:text-foreground"
                 >
                   {t.terms}
                 </a>
@@ -137,12 +137,12 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="border-t border-border-subtle">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 py-6 text-center sm:px-6">
-          <p className="text-xs text-white/35">
+          <p className="text-xs text-muted">
             {t.copyright.replace("{year}", String(year))}
           </p>
-          <p className="max-w-2xl text-[10px] leading-relaxed text-white/30">{t.disclaimer}</p>
+          <p className="max-w-2xl text-[10px] leading-relaxed text-muted">{t.disclaimer}</p>
         </div>
       </div>
     </footer>

@@ -25,18 +25,18 @@ function MetricGrid({ variant }: { variant: "before" | "after" }) {
             className={cx(
               "rounded-xl border px-3 py-2.5 sm:px-4 sm:py-3",
               variant === "before"
-                ? "border-white/[0.08] bg-white/[0.02]"
-                : "border-emerald-500/15 bg-emerald-500/[0.05]",
+                ? "metric-before border-border-subtle bg-surface-raised"
+                : "metric-after border-emerald-500/15 bg-emerald-500/[0.05]",
             )}
           >
-            <dt className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
+            <dt className="text-[10px] font-semibold uppercase tracking-wider text-muted">
               {metric.label}
             </dt>
             <dd className="mt-1 flex flex-wrap items-baseline gap-x-1.5">
               <span
                 className={cx(
                   "text-sm font-semibold tabular-nums sm:text-base",
-                  variant === "before" ? "text-white/60" : "text-white",
+                  variant === "before" ? "metric-value text-muted-strong" : "metric-value text-foreground",
                 )}
               >
                 {value}
@@ -68,8 +68,8 @@ function TransformationPanel({
       className={cx(
         "h-full p-5 sm:p-7",
         variant === "before"
-          ? "border-rose-500/20 bg-gradient-to-b from-rose-950/25 via-transparent to-transparent"
-          : "border-violet-500/30 bg-gradient-to-b from-violet-950/30 via-transparent to-transparent shadow-[0_0_48px_rgba(124,58,237,0.18)]",
+          ? "transformation-before-panel border-rose-500/20 bg-gradient-to-b from-rose-950/25 via-transparent to-transparent"
+          : "transformation-after-panel card-transformation-after border-violet-500/30 bg-gradient-to-b from-violet-950/30 via-transparent to-transparent shadow-[0_0_48px_rgba(124,58,237,0.18)]",
       )}
     >
       <div className="flex items-center justify-between gap-3">
@@ -91,18 +91,18 @@ function TransformationPanel({
         </span>
       </div>
 
-      <h3 className="mt-3 text-lg font-bold text-white sm:text-xl">{title}</h3>
+      <h3 className="mt-3 text-lg font-bold text-foreground sm:text-xl">{title}</h3>
 
-      <div className="mt-6 border-b border-white/10 pb-6">
+      <div className="mt-6 border-b border-border-subtle pb-6">
         <p
           className={cx(
             "text-3xl font-bold tracking-tight tabular-nums sm:text-4xl md:text-[2.75rem]",
-            variant === "before" ? "text-white/70" : "text-white",
+            variant === "before" ? "hero-stat-value-before text-muted-strong" : "hero-stat-value-after text-foreground",
           )}
         >
           {hero.value}
         </p>
-        <p className="mt-1 text-sm text-white/45">{hero.label}</p>
+        <p className="mt-1 text-sm text-muted">{hero.label}</p>
       </div>
 
       <MetricGrid variant={variant} />
@@ -116,20 +116,20 @@ export function TransformationSection() {
   return (
     <section
       id="transformation"
-      className="scroll-mt-20 border-t border-white/10 bg-[#08080f] py-16 sm:py-24 md:py-28"
+      className="scroll-mt-20 border-t border-border-subtle bg-surface py-16 sm:py-24 md:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-teal-300/80 sm:text-xs">
             {t.eyebrow}
           </p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
             {t.titlePrefix}{" "}
             <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-violet-200 bg-clip-text text-transparent">
               {t.titleHighlight}
             </span>
           </h2>
-          <p className="mt-3 text-base text-white/55 sm:mt-4 sm:text-lg">{t.subtitle}</p>
+          <p className="mt-3 text-base text-muted sm:mt-4 sm:text-lg">{t.subtitle}</p>
         </div>
 
         <div className="mt-8 flex justify-center gap-2 lg:hidden">
@@ -144,7 +144,7 @@ export function TransformationSection() {
                   ? view === "after"
                     ? "border-violet-500/50 bg-violet-500/20 text-white"
                     : "border-rose-500/40 bg-rose-500/15 text-white"
-                  : "border-white/10 bg-white/[0.03] text-white/50",
+                  : "border-border-subtle bg-inset text-muted",
               )}
             >
               {view === "before" ? t.beforeLabel : t.afterLabel}
@@ -157,7 +157,7 @@ export function TransformationSection() {
             className="pointer-events-none absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 lg:flex"
             aria-hidden
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-[#08080f] text-lg font-bold text-white/40">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border-subtle bg-surface text-lg font-bold text-muted">
               →
             </div>
           </div>
@@ -194,7 +194,7 @@ export function TransformationSection() {
           {t.pills.map((pill) => (
             <li
               key={pill}
-              className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/65 sm:px-4 sm:text-sm"
+              className="rounded-full border border-border-subtle bg-fill-subtle px-3 py-1.5 text-xs font-medium text-muted sm:px-4 sm:text-sm"
             >
               {pill}
             </li>
@@ -203,7 +203,7 @@ export function TransformationSection() {
 
         <div className="mt-8 flex flex-col items-center gap-3">
           <DeployFrydaiButton>{t.cta}</DeployFrydaiButton>
-          <p className="max-w-xl text-center text-[11px] leading-relaxed text-white/35">
+          <p className="max-w-xl text-center text-[11px] leading-relaxed text-muted">
             {t.disclaimer}
           </p>
         </div>

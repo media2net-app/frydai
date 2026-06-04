@@ -23,30 +23,30 @@ export function UspBar() {
     <>
       <div className="hidden flex-wrap items-center justify-center gap-x-12 gap-y-6 text-center sm:flex">
         <div>
-          <p className="text-2xl font-bold text-white">{items[0].title}</p>
-          <p className="text-sm text-white/45">{items[0].desc}</p>
+          <p className="text-2xl font-bold text-foreground">{items[0].title}</p>
+          <p className="text-sm text-muted">{items[0].desc}</p>
         </div>
-        <div className="h-8 w-px bg-white/15" aria-hidden />
+        <div className="h-8 w-px bg-border-subtle" aria-hidden />
         <div>
-          <p className="text-2xl font-bold text-white">{items[1].title}</p>
-          <p className="text-sm text-white/45">{items[1].desc}</p>
+          <p className="text-2xl font-bold text-foreground">{items[1].title}</p>
+          <p className="text-sm text-muted">{items[1].desc}</p>
         </div>
-        <div className="h-8 w-px bg-white/15" aria-hidden />
+        <div className="h-8 w-px bg-border-subtle" aria-hidden />
         <div>
-          <p className="text-2xl font-bold text-white">{items[2].title}</p>
-          <p className="text-sm text-white/45">{items[2].desc}</p>
+          <p className="text-2xl font-bold text-foreground">{items[2].title}</p>
+          <p className="text-sm text-muted">{items[2].desc}</p>
         </div>
-        <div className="h-8 w-px bg-white/15" aria-hidden />
+        <div className="h-8 w-px bg-border-subtle" aria-hidden />
         <div>
-          <p className="text-2xl font-bold text-white">{items[3].title}</p>
-          <p className="text-sm text-white/45">{items[3].desc}</p>
+          <p className="text-2xl font-bold text-foreground">{items[3].title}</p>
+          <p className="text-sm text-muted">{items[3].desc}</p>
         </div>
       </div>
 
       <div className="w-full sm:hidden">
         <div className="mx-auto max-w-sm text-center">
-          <p className="text-2xl font-bold text-white">{items[active].title}</p>
-          <p className="mt-1 text-sm text-white/45">{items[active].desc}</p>
+          <p className="text-2xl font-bold text-foreground">{items[active].title}</p>
+          <p className="mt-1 text-sm text-muted">{items[active].desc}</p>
         </div>
         <div className="mt-4 flex justify-center gap-2">
           {items.map((item, i) => (
@@ -54,7 +54,7 @@ export function UspBar() {
               key={item.desc}
               type="button"
               onClick={() => setActive(i)}
-              className={`h-2 rounded-full transition-all ${i === active ? "w-6 bg-violet-400" : "w-2 bg-white/20"}`}
+              className={`h-2 rounded-full transition-all ${i === active ? "w-6 bg-violet-500" : "w-2 bg-fill-muted"}`}
               aria-label={item.desc}
               aria-current={i === active ? "true" : undefined}
             />

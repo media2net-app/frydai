@@ -39,17 +39,17 @@ export function CapabilitiesSection() {
   return (
     <section
       id="capabilities"
-      className="scroll-mt-20 border-t border-white/10 bg-[#08080f] py-16 sm:py-24 md:py-28"
+      className="scroll-mt-20 border-t border-border-subtle bg-surface py-16 sm:py-24 md:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-teal-300/80 sm:text-xs">
             {t.eyebrow}
           </p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
             {t.title}
           </h2>
-          <p className="mt-3 text-base text-white/55 sm:mt-4 sm:text-lg">{t.subtitle}</p>
+          <p className="mt-3 text-base text-muted sm:mt-4 sm:text-lg">{t.subtitle}</p>
         </div>
 
         <div className="mt-10 sm:mt-14">
@@ -65,7 +65,7 @@ export function CapabilitiesSection() {
                     "shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
                     isActive
                       ? "border-violet-500/50 bg-violet-500/20 text-white shadow-[0_0_20px_rgba(124,58,237,0.25)]"
-                      : "border-white/10 bg-white/[0.03] text-white/55 hover:border-white/20 hover:text-white/80",
+                      : "border-border-subtle bg-inset text-muted hover:border-border-subtle hover:text-muted-strong",
                   )}
                 >
                   {cap.label}

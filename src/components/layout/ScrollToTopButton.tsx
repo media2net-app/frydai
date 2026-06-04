@@ -27,7 +27,7 @@ export function ScrollToTopButton() {
       onClick={scrollToTop}
       aria-label={copy.scrollToTop}
       className={cx(
-        "fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#08080f] text-white/80 shadow-[0_8px_28px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-violet-500/40 hover:bg-[#12101f] hover:text-white sm:bottom-6 sm:right-6",
+        "fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-border-subtle bg-surface text-muted-strong shadow-[0_8px_28px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-violet-500/40 hover:bg-surface-elevated hover:text-foreground sm:bottom-6 sm:right-6",
         visible
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none translate-y-2 opacity-0",

@@ -1,4 +1,6 @@
 import { CheckoutProvider } from "@/components/checkout/CheckoutProvider";
+import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
+import { HomepageChromeProvider } from "@/components/layout/HomepageChromeContext";
 import { HeroBlock } from "@/components/hero/HeroBlock";
 import { FoundingNoticeBar } from "@/components/layout/FoundingNoticeBar";
 import { ScrollToTopButton } from "@/components/layout/ScrollToTopButton";
@@ -18,7 +20,8 @@ import { TransformationSection } from "@/components/sections/TransformationSecti
 export default function HomePage() {
   return (
     <CheckoutProvider>
-      <div className="min-h-screen overflow-x-clip bg-[#08080f] text-white">
+      <HomepageChromeProvider>
+      <div className="min-h-screen overflow-x-clip bg-surface text-foreground">
         <FoundingNoticeBar />
         <SiteHeader withNotice />
         <HeroBlock />
@@ -34,7 +37,9 @@ export default function HomePage() {
         <FaqSection />
         <SiteFooter />
         <ScrollToTopButton />
+        <ThemeSwitcher />
       </div>
+      </HomepageChromeProvider>
     </CheckoutProvider>
   );
 }

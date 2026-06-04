@@ -1,0 +1,147 @@
+/**
+ * Command Center — licht thema: zachte sectie-achtergrond + glass board.
+ */
+
+[data-theme="light"] .command-center-section {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #faf8ff 28%,
+    #f0ebff 55%,
+    #f5f3fc 100%
+  );
+}
+
+[data-theme="light"] .command-center-section-glow {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(64px);
+}
+
+[data-theme="light"] .command-center-section-glow-violet {
+  left: 50%;
+  top: 55%;
+  height: min(480px, 70vw);
+  width: min(900px, 95vw);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(167, 139, 250, 0.38),
+    transparent 68%
+  );
+}
+
+[data-theme="light"] .command-center-section-glow-teal {
+  right: -8%;
+  top: 18%;
+  height: 280px;
+  width: 360px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(45, 212, 191, 0.14),
+    transparent 70%
+  );
+}
+
+[data-theme="light"] .command-center-section-glow-indigo {
+  left: -6%;
+  bottom: 8%;
+  height: 240px;
+  width: 320px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(99, 102, 241, 0.16),
+    transparent 72%
+  );
+}
+
+[data-theme="light"] .command-center-section .command-center-glow {
+  opacity: 0.55;
+  background: rgba(139, 92, 246, 0.22) !important;
+}
+
+/* Hoofd-board — frosted glass */
+[data-theme="light"] .command-center-board {
+  -webkit-backdrop-filter: blur(26px) saturate(1.45);
+  backdrop-filter: blur(26px) saturate(1.45);
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.1),
+    0 12px 40px rgba(91, 33, 182, 0.14),
+    0 4px 12px rgba(10, 10, 18, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92) !important;
+}
+
+[data-theme="light"] .command-center-board .command-center-board-header {
+  background: rgba(255, 255, 255, 0.42);
+  border-bottom-color: rgba(124, 58, 237, 0.12);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+[data-theme="light"] .command-center-board .command-center-activity-panel {
+  background: rgba(237, 233, 254, 0.28);
+  border-left: 1px solid rgba(124, 58, 237, 0.08);
+}
+
+@media (min-width: 1024px) {
+  [data-theme="light"] .command-center-board .command-center-activity-panel {
+    border-left: 1px solid rgba(124, 58, 237, 0.1);
+  }
+}
+
+/* Kanban-kaartjes — nested glass */
+[data-theme="light"] .command-center-board .command-center-task-card {
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
+  background: rgba(255, 255, 255, 0.55) !important;
+  border-color: rgba(124, 58, 237, 0.14) !important;
+  box-shadow:
+    0 1px 2px rgba(91, 33, 182, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+[data-theme="light"] .command-center-board .command-center-task-card.is-highlighted-done {
+  background: rgba(209, 250, 229, 0.45) !important;
+  border-color: rgba(4, 120, 87, 0.3) !important;
+}
+
+[data-theme="light"] .command-center-board .command-center-task-card.is-highlighted-done .text-emerald-300 {
+  color: #065f46 !important;
+}
+
+[data-theme="light"] .command-center-board .command-center-task-card.is-highlighted-progress {
+  background: rgba(237, 233, 254, 0.65) !important;
+  border-color: rgba(124, 58, 237, 0.3) !important;
+}
+
+[data-theme="light"] .command-center-board .command-center-task-card.is-highlighted-new {
+  background: rgba(204, 251, 241, 0.5) !important;
+  border-color: rgba(45, 212, 191, 0.35) !important;
+}
+
+[data-theme="light"] .command-center-board .command-center-activity-item {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.48) !important;
+  border-color: rgba(124, 58, 237, 0.12) !important;
+}
+
+[data-theme="light"] .command-center-board .command-center-activity-item.is-just-now {
+  background: rgba(209, 250, 229, 0.4) !important;
+  border-color: rgba(4, 120, 87, 0.22) !important;
+}
+
+[data-theme="light"] .command-center-board .command-center-agent-chip {
+  background: rgba(255, 255, 255, 0.45) !important;
+  border-color: rgba(124, 58, 237, 0.12) !important;
+}
+
+[data-theme="light"] .command-center-board .command-center-empty-slot {
+  border-color: rgba(124, 58, 237, 0.18) !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+}

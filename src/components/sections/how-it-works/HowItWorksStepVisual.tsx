@@ -46,7 +46,7 @@ function ConnectVisual({ active }: { active: boolean }) {
                 {node.letter}
               </span>
             )}
-            <span className="text-[9px] font-medium text-white/50">{node.label}</span>
+            <span className="text-[9px] font-medium text-muted">{node.label}</span>
           </motion.div>
         ))}
       </div>
@@ -76,13 +76,13 @@ function ConfigureVisual({ active }: { active: boolean }) {
             x: active && i === 1 ? [0, 2, 0] : 0,
           }}
           transition={{ duration: 0.4, delay: i * 0.05 }}
-          className="flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5"
+          className="flex items-center justify-between gap-2 rounded-lg border border-border-subtle bg-inset px-2.5 py-1.5"
         >
-          <span className="text-[10px] text-white/65">{rule}</span>
+          <span className="text-[10px] text-muted">{rule}</span>
           <span
             className={cx(
               "relative h-4 w-7 shrink-0 rounded-full transition-colors",
-              i < 3 ? "bg-violet-500/60" : "bg-white/15",
+              i < 3 ? "bg-violet-500/60" : "bg-fill-muted",
             )}
           >
             <motion.span
@@ -112,14 +112,14 @@ function OperateVisual({ active }: { active: boolean }) {
 
   return (
     <div className={cx(VISUAL_AREA, "justify-end pb-1")}>
-      <div className="w-full rounded-xl border border-white/10 bg-[#0d1117]/80 p-3">
+      <div className="how-it-works-terminal w-full rounded-xl border border-border-subtle bg-inset p-3">
         <div className="mb-2 flex items-center gap-2">
           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-violet-500/30 text-[10px] font-bold text-violet-200">
             F
           </span>
           <div>
-            <p className="text-[10px] font-semibold text-white/80">Frydai</p>
-            <p className="text-[9px] text-white/40">operator · just now</p>
+            <p className="text-[10px] font-semibold text-muted-strong">Frydai</p>
+            <p className="text-[9px] text-muted">operator · just now</p>
           </div>
           {active && (
             <span className="ml-auto flex items-center gap-1 text-[9px] text-emerald-400">
@@ -135,13 +135,13 @@ function OperateVisual({ active }: { active: boolean }) {
           key={active ? messages[index] : messages[0]}
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-[11px] leading-snug text-white/75"
+          className="text-[11px] leading-snug text-muted-strong"
         >
           {active ? messages[index] : messages[0]}
         </motion.p>
-        <div className="mt-2 flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.04] px-2 py-1">
+        <div className="mt-2 flex items-center gap-1.5 rounded-md border border-border-subtle bg-fill-subtle px-2 py-1">
           <span className="text-[9px] text-violet-300/90">📄</span>
-          <span className="truncate text-[9px] text-white/45">weekly_intel.pdf</span>
+          <span className="truncate text-[9px] text-muted">weekly_intel.pdf</span>
         </div>
       </div>
     </div>

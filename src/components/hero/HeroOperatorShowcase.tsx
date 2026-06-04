@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { FrydaiMark } from "@/components/brand/FrydaiLogo";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { copy } from "@/lib/copy";
 import { cx } from "@/lib/cx";
@@ -25,20 +26,18 @@ function TelegramCard({ className }: { className?: string }) {
   const { hero } = copy;
 
   return (
-    <GlassCard className={cx("p-4 shadow-[0_20px_50px_rgba(0,0,0,0.45)]", className)}>
+    <GlassCard className={cx("hero-showcase-card p-4", className)}>
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-500 text-sm font-bold text-white">
-          F
-        </div>
+        <FrydaiMark className="h-10 w-10 shrink-0" variant="purple" />
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold text-white">{hero.telegramSender}</p>
-          <p className="mt-0.5 text-xs text-white/45">
+          <p className="text-sm font-semibold text-foreground">{hero.telegramSender}</p>
+          <p className="mt-0.5 text-xs text-muted">
             {hero.telegramRole} · {hero.telegramTime}
           </p>
-          <p className="mt-2 text-sm leading-relaxed text-white/75">
+          <p className="mt-2 text-sm leading-relaxed text-muted-strong">
             &ldquo;{hero.telegramPreview}&rdquo;
           </p>
-          <div className="mt-3 flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
+          <div className="mt-3 flex items-center gap-2 rounded-lg border border-border-subtle bg-fill-subtle px-3 py-2">
             <span className="text-lg" aria-hidden>
               📄
             </span>
@@ -56,11 +55,11 @@ function RevenueChip({ className }: { className?: string }) {
   const { hero } = copy;
 
   return (
-    <GlassCard className={cx("p-3 shadow-[0_12px_40px_rgba(0,0,0,0.35)]", className)}>
-      <p className="text-[10px] font-medium uppercase tracking-wider text-white/45">
+    <GlassCard className={cx("hero-showcase-card p-3", className)}>
+      <p className="text-[10px] font-medium uppercase tracking-wider text-muted">
         {hero.revenueLabel}
       </p>
-      <p className="mt-1 text-xl font-bold tracking-tight text-white sm:text-2xl">
+      <p className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
         {hero.revenueValue}
       </p>
       <p className="mt-0.5 text-xs font-medium text-emerald-400">{hero.revenueTrend}</p>
@@ -80,7 +79,7 @@ function ResearchProgressBar() {
   }, []);
 
   return (
-    <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10">
+    <div className="mt-2 h-1 overflow-hidden rounded-full bg-fill-muted">
       <motion.div
         key={cycle}
         className="h-full rounded-full bg-gradient-to-r from-violet-500 to-teal-400"
@@ -100,9 +99,9 @@ function ResearchProgressBar() {
 
 function TaskStack({ className }: { className?: string }) {
   return (
-    <GlassCard className={cx("p-3 shadow-[0_16px_44px_rgba(0,0,0,0.4)]", className)}>
+    <GlassCard className={cx("hero-showcase-card p-3", className)}>
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-white/45">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
           Live queue
         </span>
         <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">
@@ -113,9 +112,9 @@ function TaskStack({ className }: { className?: string }) {
         {TASKS.map((task, i) => (
           <li
             key={task.label}
-            className="rounded-lg border border-white/8 bg-white/[0.03] px-2.5 py-2"
+            className="rounded-lg border border-border-subtle bg-inset px-2.5 py-2"
           >
-            <p className="truncate text-[11px] font-medium text-white/85">{task.label}</p>
+            <p className="truncate text-[11px] font-medium text-muted-strong">{task.label}</p>
             <p
               className={`mt-0.5 text-[10px] font-medium ${
                 task.tone === "violet"
@@ -246,12 +245,12 @@ function MobileShowcase() {
             aria-current={active === index ? "true" : undefined}
             className={cx(
               "h-1.5 rounded-full transition-all duration-300",
-              active === index ? "w-6 bg-violet-400" : "w-1.5 bg-white/25",
+              active === index ? "w-6 bg-violet-400" : "w-1.5 bg-fill-muted",
             )}
           />
         ))}
       </div>
-      <p className="mt-2 text-center text-[10px] text-white/35">Swipe for more</p>
+      <p className="mt-2 text-center text-[10px] text-muted">Swipe for more</p>
     </div>
   );
 }

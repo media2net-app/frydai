@@ -7,6 +7,7 @@ import type { CapabilityItem, CapabilityId } from "@/lib/capabilities-data";
 import { getAccentStyles } from "@/lib/capability-demo/accent";
 import type { CapabilityDemoConfig, DemoState, StepTemplate } from "@/lib/capability-demo/types";
 import { useCapabilityPipelineDemo } from "@/hooks/use-capability-pipeline-demo";
+import { useTheme } from "@/components/theme/ThemeProvider";
 import { CapabilityPanelIcon } from "@/components/sections/capabilities/CapabilityPanelIcon";
 import { LiveFeedBar } from "@/components/sections/capabilities/shared/LiveFeedBar";
 import { PipelineStepCard } from "@/components/sections/capabilities/shared/PipelineStepCard";
@@ -33,7 +34,7 @@ function AssetPreviewStrip({ active }: { active: boolean }) {
             "flex h-8 flex-1 items-center justify-center rounded-md border text-[9px] font-semibold uppercase tracking-wide",
             i < 3
               ? "border-fuchsia-500/25 bg-gradient-to-br from-fuchsia-500/15 to-violet-500/10 text-fuchsia-200/90"
-              : "border-white/10 bg-white/[0.03] text-white/30",
+              : "border-border-subtle bg-inset text-muted",
           )}
         >
           {label}
@@ -87,12 +88,12 @@ function StepContent({
             key={cycleText(config, state, template.cycleKey)}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm font-medium leading-snug text-white/85"
+            className="text-sm font-medium leading-snug text-foreground"
           >
             {cycleText(config, state, template.cycleKey)}
           </motion.p>
           {template.subtext ? (
-            <p className="mt-2 text-[10px] text-white/40">{template.subtext}</p>
+            <p className="mt-2 text-[10px] text-muted">{template.subtext}</p>
           ) : null}
         </>
       );
@@ -104,11 +105,11 @@ function StepContent({
             key={cycleText(config, state, template.cycleKey)}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm font-medium text-white/85"
+            className="text-sm font-medium text-foreground"
           >
             {cycleText(config, state, template.cycleKey)}
           </motion.p>
-          <p className="mt-1 text-[10px] tabular-nums text-white/40">
+          <p className="mt-1 text-[10px] tabular-nums text-muted">
             {metrics[template.metricKey] ?? 0} {template.metricLabel}
           </p>
           {capabilityId === "adCreative" && stepId === "assets" ? (
@@ -121,13 +122,13 @@ function StepContent({
       const value = metrics[template.metricKey] ?? 0;
       return (
         <>
-          <motion.p key={value} className="text-sm font-bold tabular-nums text-white">
+          <motion.p key={value} className="text-sm font-bold tabular-nums text-foreground">
             {value}
-            <span className="text-white/45">/{template.max}</span>{" "}
-            <span className="text-xs font-normal text-white/45">{template.suffix}</span>
+            <span className="text-muted">/{template.max}</span>{" "}
+            <span className="text-xs font-normal text-muted">{template.suffix}</span>
           </motion.p>
           {template.progress ? (
-            <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10">
+            <div className="mt-2 h-1 overflow-hidden rounded-full bg-fill-muted">
               <motion.div
                 className={cx("h-full rounded-full bg-gradient-to-r", accentBar)}
                 animate={{ width: `${(value / template.max) * 100}%` }}
@@ -136,7 +137,7 @@ function StepContent({
             </div>
           ) : null}
           {template.subtext ? (
-            <p className="mt-2 text-[10px] text-white/40">{template.subtext}</p>
+            <p className="mt-2 text-[10px] text-muted">{template.subtext}</p>
           ) : null}
           {capabilityId === "landingPages" && stepId === "build" ? (
             <PageBlockStrip active={activeStep === "build"} />
@@ -151,12 +152,12 @@ function StepContent({
       const qIdx = state.cycleIndex[template.quoteCycleKey] ?? 0;
       return (
         <>
-          <motion.p key={value} className="text-sm font-bold tabular-nums text-white">
+          <motion.p key={value} className="text-sm font-bold tabular-nums text-foreground">
             {value}
-            <span className="text-white/45">/{template.max}</span>{" "}
-            <span className="text-xs font-normal text-white/45">{template.suffix}</span>
+            <span className="text-muted">/{template.max}</span>{" "}
+            <span className="text-xs font-normal text-muted">{template.suffix}</span>
           </motion.p>
-          <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10">
+          <div className="mt-2 h-1 overflow-hidden rounded-full bg-fill-muted">
             <motion.div
               className={cx("h-full rounded-full bg-gradient-to-r", accentBar)}
               animate={{ width: `${(value / template.max) * 100}%` }}
@@ -185,17 +186,17 @@ function StepContent({
         : raw;
       return (
         <>
-          <motion.p key={raw} className="text-sm font-bold tabular-nums text-white">
+          <motion.p key={raw} className="text-sm font-bold tabular-nums text-foreground">
             {display}
             {!template.displayDivisor ? (
               <>
-                <span className="text-white/45">/{template.max}</span>{" "}
+                <span className="text-muted">/{template.max}</span>{" "}
               </>
             ) : null}{" "}
             <span className="text-xs font-normal text-emerald-400/90">{template.scoreLabel}</span>
           </motion.p>
           {template.progress ? (
-            <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10">
+            <div className="mt-2 h-1 overflow-hidden rounded-full bg-fill-muted">
               <motion.div
                 className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400"
                 animate={{ width: `${progressPct}%` }}
@@ -214,7 +215,7 @@ function StepContent({
             key={cycleText(config, state, template.cycleKey)}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm font-medium text-white/85"
+            className="text-sm font-medium text-foreground"
           >
             {cycleText(config, state, template.cycleKey)}
           </motion.p>
@@ -232,7 +233,7 @@ function StepContent({
             key={cycleText(config, state, template.cycleKey)}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm font-medium text-white/85"
+            className="text-sm font-medium text-foreground"
           >
             {cycleText(config, state, template.cycleKey)}
           </motion.p>
@@ -257,8 +258,13 @@ export function CapabilityDynamicPanel({
   item: CapabilityItem;
   isActive: boolean;
 }) {
+  const { theme } = useTheme();
   const live = useCapabilityPipelineDemo(item.id, isActive);
   const accent = getAccentStyles(item.id);
+  const skillInactiveBorder =
+    theme === "light" ? "rgba(124, 58, 237, 0.14)" : "rgba(255, 255, 255, 0.1)";
+  const skillInactiveBg =
+    theme === "light" ? "rgba(124, 58, 237, 0.06)" : "rgba(255, 255, 255, 0.04)";
   const { config, activeStep, activeIndex, feedLine, state, metrics } = live;
   const accentBar = `bg-gradient-to-r ${accent.progressBar}`;
 
@@ -278,8 +284,8 @@ export function CapabilityDynamicPanel({
           <CapabilityPanelIcon id={item.id} />
         </motion.div>
         <div className="min-w-0 flex-1">
-          <h3 className="text-xl font-bold tracking-tight text-white sm:text-2xl">{item.title}</h3>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/55 sm:text-base">
+          <h3 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">{item.title}</h3>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted sm:text-base">
             {item.description}
           </p>
         </div>
@@ -293,13 +299,13 @@ export function CapabilityDynamicPanel({
               borderColor:
                 isActive && i === activeIndex % item.skills.length
                   ? accent.skillBorder
-                  : "rgba(255, 255, 255, 0.1)",
+                  : skillInactiveBorder,
               backgroundColor:
                 isActive && i === activeIndex % item.skills.length
                   ? accent.skillBg
-                  : "rgba(255, 255, 255, 0.04)",
+                  : skillInactiveBg,
             }}
-            className="rounded-full border px-3 py-1 text-xs font-medium text-white/65"
+            className="capability-skill-pill rounded-full border px-3 py-1 text-xs font-medium text-muted-strong"
           >
             {skill}
           </motion.span>

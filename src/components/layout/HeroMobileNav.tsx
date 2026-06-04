@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { FrydaiLogo } from "@/components/brand/FrydaiLogo";
-
 type HeroMobileNavProps = {
   menuLabel: string;
   closeLabel: string;
@@ -72,11 +71,11 @@ export function HeroMobileNav({
             aria-modal="true"
             aria-label={menuLabel}
             aria-hidden={!open}
-            className={`fixed right-0 top-0 z-[201] flex h-full w-[min(100vw,20rem)] flex-col border-l border-white/10 bg-[#12101f] shadow-2xl transition-transform duration-300 ease-out md:hidden ${
+            className={`fixed right-0 top-0 z-[201] flex h-full w-[min(100vw,20rem)] flex-col border-l border-border-subtle bg-[#12101f] shadow-2xl transition-transform duration-300 ease-out md:hidden ${
               open ? "translate-x-0" : "pointer-events-none translate-x-full"
             }`}
           >
-            <div className="flex h-16 shrink-0 items-center justify-between border-b border-white/10 px-4">
+            <div className="flex h-16 shrink-0 items-center justify-between border-b border-border-subtle px-4">
               <FrydaiLogo
                 markClassName="h-7 w-7"
                 wordmarkClassName="text-base font-semibold"
@@ -84,7 +83,7 @@ export function HeroMobileNav({
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                className="rounded-lg p-2 text-muted-strong transition-colors hover:bg-fill-muted hover:text-foreground"
                 aria-label={closeLabel}
               >
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -99,14 +98,14 @@ export function HeroMobileNav({
                   key={href}
                   href={href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-3 text-base font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white"
+                  className="rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-fill-muted hover:text-foreground"
                 >
                   {label}
                 </Link>
               ))}
               <a
                 href={loginUrl}
-                className="mt-4 rounded-full border border-white/20 px-4 py-3 text-center text-base font-medium text-white/90 transition-colors hover:bg-white/10"
+                className="mt-4 rounded-full border border-border-subtle px-4 py-3 text-center text-base font-medium text-foreground transition-colors hover:bg-fill-muted"
               >
                 {login}
               </a>
@@ -122,7 +121,7 @@ export function HeroMobileNav({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="relative z-20 inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm font-medium leading-none text-white transition-colors hover:bg-white/20 md:hidden"
+        className="relative z-20 inline-flex items-center rounded-lg border border-border-subtle bg-fill-muted px-3 py-2 text-sm font-medium leading-none text-foreground transition-colors hover:bg-fill-subtle md:hidden"
         aria-expanded={open}
         aria-controls="hero-mobile-nav"
       >

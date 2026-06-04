@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export function LiveFeedBar({ label, line }: { label: string; line: string }) {
   return (
-    <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] px-3 py-3 sm:px-4 sm:py-3.5">
+    <div className="mt-4 overflow-hidden rounded-xl border border-border-subtle bg-surface-raised px-3 py-3 sm:px-4 sm:py-3.5">
       <div className="flex items-start justify-between gap-4">
         <div className="relative min-h-9 min-w-0 flex-1 overflow-hidden">
           <AnimatePresence mode="wait">
@@ -14,7 +14,7 @@ export function LiveFeedBar({ label, line }: { label: string; line: string }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25 }}
-              className="text-xs text-white/70 sm:text-sm"
+              className="text-xs text-muted-strong sm:text-sm"
             >
               {line}
             </motion.p>

@@ -77,7 +77,7 @@ function ProgressBar({
     columnKind === "done" || value >= 100
       ? "bg-emerald-400"
       : value === 0
-        ? "bg-white/15"
+        ? "bg-fill-muted"
         : "bg-gradient-to-r from-emerald-600 via-emerald-400 to-teal-400";
 
   return (
@@ -89,14 +89,14 @@ function ProgressBar({
               ? "font-medium text-emerald-400/90"
               : active
                 ? "font-medium text-emerald-400/80"
-                : "text-white/35",
+                : "text-muted",
           )}
         >
           {label}
         </span>
-        <span className="tabular-nums text-white/40">{Math.round(value)}%</span>
+        <span className="tabular-nums text-muted">{Math.round(value)}%</span>
       </div>
-      <div className="h-1 overflow-hidden rounded-full bg-white/10">
+      <div className="h-1 overflow-hidden rounded-full bg-fill-muted">
         <motion.div
           className={cx("h-full rounded-full", fillClass)}
           initial={false}
@@ -145,18 +145,18 @@ function TaskCard({
       animate={taskEnter.animate}
       transition={{ type: "spring", stiffness: 480, damping: 34 }}
       className={cx(
-        "flex h-full min-h-0 flex-col gap-1 overflow-hidden rounded-xl border p-2.5 sm:p-3",
+        "command-center-task-card flex h-full min-h-0 flex-col gap-1 overflow-hidden rounded-xl border p-2.5 sm:p-3",
         isHighlighted && highlightTone === "done" &&
-          "border-emerald-400/50 bg-emerald-500/15 shadow-[0_0_20px_rgba(16,185,129,0.18)]",
+          "is-highlighted-done border-emerald-400/50 bg-emerald-500/15 shadow-[0_0_20px_rgba(16,185,129,0.18)]",
         isHighlighted && highlightTone === "progress" &&
-          "border-violet-400/40 bg-violet-500/10 ring-1 ring-violet-400/30",
+          "is-highlighted-progress border-violet-400/40 bg-violet-500/10 ring-1 ring-violet-400/30",
         isHighlighted && highlightTone === "new" &&
-          "border-teal-400/40 bg-teal-500/10",
-        !isHighlighted && "border-white/10 bg-white/[0.03]",
+          "is-highlighted-new border-teal-400/40 bg-teal-500/10",
+        !isHighlighted && "border-border-subtle bg-inset",
       )}
     >
       <div className="min-h-0 shrink-0">
-        <p className="line-clamp-2 text-xs font-medium leading-snug text-white/90">{task.title}</p>
+        <p className="line-clamp-2 text-xs font-medium leading-snug text-foreground">{task.title}</p>
         <motion.p
           key={task.status}
           initial={instant ? false : { opacity: 0 }}
@@ -165,7 +165,7 @@ function TaskCard({
             "mt-0.5 line-clamp-1 text-[11px] leading-tight",
             isHighlighted && highlightTone === "done"
               ? "font-medium text-emerald-300"
-              : "text-white/50",
+              : "text-muted",
           )}
         >
           {task.status}
@@ -261,7 +261,7 @@ function KanbanColumn({
   return (
     <div className="flex min-w-0 flex-1 flex-col">
       <div className="mb-3 flex shrink-0 items-center justify-between gap-2">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-white/55">{title}</h4>
+        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">{title}</h4>
         <motion.span
           key={count}
           initial={{ scale: 1.15 }}
@@ -306,7 +306,7 @@ function KanbanColumn({
                   />
                 ) : (
                   <div
-                    className="h-full rounded-xl border border-dashed border-white/[0.06] bg-white/[0.01]"
+                    className="command-center-empty-slot h-full rounded-xl border border-dashed border-border-subtle bg-surface-raised"
                     aria-hidden
                   />
                 )}
@@ -322,12 +322,12 @@ function KanbanColumn({
 function AnimatedStat({ label, value }: { label: string; value: number | string }) {
   return (
     <div className="text-right">
-      <p className="text-[10px] text-white/40">{label}</p>
+      <p className="text-[10px] text-muted">{label}</p>
       <motion.p
         key={String(value)}
         initial={{ opacity: 0, y: -4 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-xs font-bold text-white"
+        className="text-xs font-bold text-foreground"
       >
         {value}
       </motion.p>
@@ -351,10 +351,10 @@ export function CommandCenterBoard() {
   );
 
   return (
-    <GlassCard className="overflow-hidden p-0">
-      <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-white/[0.02] px-4 py-3 sm:px-5">
+    <GlassCard className="command-center-board overflow-hidden p-0">
+      <div className="command-center-board-header flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-border-subtle bg-surface-raised px-4 py-3 sm:px-5">
         <div className="flex items-center gap-3">
-          <span className="text-sm font-semibold text-white">{t.boardTitle}</span>
+          <span className="text-sm font-semibold text-foreground">{t.boardTitle}</span>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-300">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -372,13 +372,13 @@ export function CommandCenterBoard() {
       </div>
 
       <div className="grid gap-0 lg:grid-cols-[1fr_minmax(0,220px)]">
-        <div className="border-b border-white/10 p-4 sm:p-5 lg:border-b-0 lg:border-r">
+        <div className="border-b border-border-subtle p-4 sm:p-5 lg:border-b-0 lg:border-r">
           <div className="flex flex-col gap-4 md:flex-row md:gap-3">
             <KanbanColumn
               title={t.columns.todo}
               count={live.todo.length}
               tasks={live.todo}
-              accent="bg-white/10 text-white/70"
+              accent="bg-fill-muted text-muted-strong"
               highlightId={live.highlightId}
               highlightTone={live.highlightTone}
               columnKind="todo"
@@ -407,7 +407,7 @@ export function CommandCenterBoard() {
             />
           </div>
 
-          <div className="mt-5 shrink-0 space-y-2 border-t border-white/10 pt-4">
+          <div className="mt-5 shrink-0 space-y-2 border-t border-border-subtle pt-4">
             {(
               [
                 [t.agentTeams.research, AGENT_ROSTER.research],
@@ -416,14 +416,14 @@ export function CommandCenterBoard() {
               ] as const
             ).map(([team, agents]) => (
               <div key={team} className="flex flex-wrap items-center gap-2">
-                <span className="w-16 shrink-0 text-[10px] font-semibold uppercase tracking-wider text-white/35">
+                <span className="w-16 shrink-0 text-[10px] font-semibold uppercase tracking-wider text-muted">
                   {team}
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {agents.map((name) => (
                     <span
                       key={name}
-                      className="rounded-md border border-white/8 bg-white/[0.04] px-2 py-0.5 text-[10px] font-medium text-white/50"
+                      className="command-center-agent-chip rounded-md border border-border-subtle bg-fill-subtle px-2 py-0.5 text-[10px] font-medium text-muted"
                     >
                       {name}
                     </span>
@@ -434,8 +434,8 @@ export function CommandCenterBoard() {
           </div>
         </div>
 
-        <div className="flex flex-col bg-white/[0.01] p-4 sm:p-5">
-          <h4 className="mb-3 shrink-0 text-xs font-semibold uppercase tracking-wider text-white/55">
+        <div className="command-center-activity-panel flex flex-col bg-surface-raised p-4 sm:p-5">
+          <h4 className="mb-3 shrink-0 text-xs font-semibold uppercase tracking-wider text-muted">
             {t.activityTitle}
           </h4>
           <ul className={cx("flex shrink-0 flex-col gap-2 overflow-hidden", KANBAN_LIST_HEIGHT_CLASS)}>
@@ -449,13 +449,13 @@ export function CommandCenterBoard() {
                       animate={activityEnter.animate}
                       transition={{ duration: 0.22 }}
                       className={cx(
-                        "flex h-full flex-col justify-center rounded-lg border px-3 py-2",
+                        "command-center-activity-item flex h-full flex-col justify-center rounded-lg border px-3 py-2",
                         item.time === "Just now"
-                          ? "border-emerald-500/25 bg-emerald-500/[0.06]"
-                          : "border-white/8 bg-white/[0.02]",
+                          ? "is-just-now border-emerald-500/25 bg-emerald-500/[0.06]"
+                          : "border-border-subtle bg-surface-raised",
                       )}
                     >
-                      <p className="line-clamp-1 text-[11px] leading-snug text-white/75">
+                      <p className="line-clamp-1 text-[11px] leading-snug text-muted-strong">
                         {item.message}
                       </p>
                       <p
@@ -463,7 +463,7 @@ export function CommandCenterBoard() {
                           "mt-0.5 text-[10px]",
                           item.time === "Just now"
                             ? "font-medium text-emerald-400/90"
-                            : "text-white/35",
+                            : "text-muted",
                         )}
                       >
                         {item.time}
@@ -471,7 +471,7 @@ export function CommandCenterBoard() {
                     </motion.div>
                   ) : (
                     <div
-                      className="h-full rounded-lg border border-dashed border-white/[0.05] bg-transparent"
+                      className="command-center-empty-slot h-full rounded-lg border border-dashed border-border-subtle bg-transparent"
                       aria-hidden
                     />
                   )}

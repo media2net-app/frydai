@@ -25,17 +25,17 @@ export function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      className="scroll-mt-20 border-t border-white/10 bg-[#08080f] py-16 sm:py-24 md:py-28"
+      className="scroll-mt-20 border-t border-border-subtle bg-surface py-16 sm:py-24 md:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-teal-300/80 sm:text-xs">
             {t.eyebrow}
           </p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
             {t.title}
           </h2>
-          <p className="mt-3 text-base text-white/55 sm:mt-4 sm:text-lg">{t.subtitle}</p>
+          <p className="mt-3 text-base text-muted sm:mt-4 sm:text-lg">{t.subtitle}</p>
         </div>
 
         <div className="relative mt-10 sm:mt-14">
@@ -67,7 +67,7 @@ export function HowItWorksSection() {
                         <span
                           className={cx(
                             "font-mono text-xs font-bold tracking-wider",
-                            isActive ? "text-violet-300" : "text-white/30",
+                            isActive ? "text-violet-300" : "text-muted",
                           )}
                         >
                           {step.number}
@@ -77,19 +77,19 @@ export function HowItWorksSection() {
                             "rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
                             isActive
                               ? "border-violet-500/40 bg-violet-500/15 text-violet-200"
-                              : "border-white/10 bg-white/[0.03] text-white/40",
+                              : "border-border-subtle bg-inset text-muted",
                           )}
                         >
                           {step.tag}
                         </span>
                       </div>
 
-                      <h3 className="mt-4 text-lg font-bold tracking-tight text-white sm:text-xl">
+                      <h3 className="mt-4 text-lg font-bold tracking-tight text-foreground sm:text-xl">
                         {step.title}
                       </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-white/55">{step.description}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">{step.description}</p>
 
-                      <div className="mt-5 flex min-h-[11rem] flex-1 flex-col border-t border-white/10 pt-4">
+                      <div className="mt-5 flex min-h-[11rem] flex-1 flex-col border-t border-border-subtle pt-4">
                         <HowItWorksStepVisual stepIndex={index} active={isActive} />
                       </div>
 
@@ -112,12 +112,12 @@ export function HowItWorksSection() {
             <DeployFrydaiButton className="w-full sm:w-auto" />
             <a
               href={site.demoUrl}
-              className="inline-flex w-full justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-base font-semibold text-white/90 backdrop-blur-sm transition-colors hover:bg-white/10 sm:w-auto"
+              className="inline-flex w-full justify-center rounded-full border border-border-subtle bg-fill-subtle px-8 py-3.5 text-base font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-fill-muted sm:w-auto"
             >
               {t.ctaSecondary}
             </a>
           </div>
-          <p className="text-center text-xs text-white/40">{t.ctaNote}</p>
+          <p className="text-center text-xs text-muted">{t.ctaNote}</p>
         </div>
       </div>
     </section>

@@ -76,7 +76,7 @@ function ChannelPill({
         "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium",
         active
           ? "border-violet-500/40 bg-violet-500/15 text-violet-100"
-          : "border-white/10 bg-white/[0.03] text-white/55",
+          : "border-border-subtle bg-inset text-muted",
       )}
     >
       {icon ? (
@@ -115,17 +115,17 @@ function OperatorChatMock() {
 
   return (
     <GlassCard className="overflow-hidden p-0">
-      <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.03] px-4 py-3">
+      <div className="flex items-center justify-between border-b border-border-subtle bg-inset px-4 py-3">
         <div className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-500 text-xs font-bold text-white">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-500 text-xs font-bold text-foreground">
             F
           </span>
           <div>
-            <p className="text-sm font-semibold text-white">{hero.telegramSender}</p>
+            <p className="text-sm font-semibold text-foreground">{hero.telegramSender}</p>
             <p className="text-[10px] text-emerald-400">{t.chatStatus}</p>
           </div>
         </div>
-        <span className="text-[10px] text-white/35">{t.chatVia}</span>
+        <span className="text-[10px] text-muted">{t.chatVia}</span>
       </div>
 
       <div className="space-y-3 px-4 py-4">
@@ -147,10 +147,10 @@ function OperatorChatMock() {
                 </div>
               ) : (
                 <div key={msg.id} className="flex justify-start">
-                  <div className="max-w-[90%] rounded-2xl rounded-bl-md border border-white/10 bg-white/[0.05] px-3 py-2">
-                    <p className="text-sm leading-relaxed text-white/80">{msg.text}</p>
+                  <div className="max-w-[90%] rounded-2xl rounded-bl-md border border-border-subtle bg-fill-subtle px-3 py-2">
+                    <p className="text-sm leading-relaxed text-muted-strong">{msg.text}</p>
                     {msg.attachment ? (
-                      <div className="mt-2 flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-2.5 py-1.5">
+                      <div className="mt-2 flex items-center gap-2 rounded-lg border border-border-subtle bg-fill-subtle px-2.5 py-1.5">
                         <span aria-hidden>📄</span>
                         <span className="truncate text-xs text-violet-200/90">
                           {msg.attachment}
@@ -164,13 +164,13 @@ function OperatorChatMock() {
           </motion.div>
         </AnimatePresence>
 
-        <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5">
-          <span className="text-xs text-white/35">{t.chatPlaceholder}</span>
-          <span className="ml-auto text-[10px] text-white/25">{t.chatHint}</span>
+        <div className="flex items-center gap-2 rounded-xl border border-border-subtle bg-surface-raised px-3 py-2.5">
+          <span className="text-xs text-muted">{t.chatPlaceholder}</span>
+          <span className="ml-auto text-[10px] text-muted">{t.chatHint}</span>
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 border-t border-white/10 px-4 py-3">
+      <div className="flex flex-wrap gap-2 border-t border-border-subtle px-4 py-3">
         {CHANNELS.map((ch, i) => (
           <ChannelPill
             key={ch.id}
@@ -190,7 +190,7 @@ export function TalkToOperatorSection() {
   return (
     <section
       id="talk-to-operator"
-      className="scroll-mt-20 border-t border-white/10 bg-[#08080f] py-16 sm:py-24 md:py-28"
+      className="scroll-mt-20 border-t border-border-subtle bg-surface py-16 sm:py-24 md:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
@@ -198,17 +198,17 @@ export function TalkToOperatorSection() {
             <p className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-teal-300/80 sm:text-xs">
               {t.eyebrow}
             </p>
-            <h2 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
               {t.titlePrefix}{" "}
               <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-violet-200 bg-clip-text text-transparent">
                 {t.titleHighlight}
               </span>
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-white/55 sm:text-lg">{t.subtitle}</p>
+            <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{t.subtitle}</p>
 
             <ul className="mt-8 space-y-3">
               {t.bullets.map((bullet) => (
-                <li key={bullet} className="flex items-start gap-3 text-sm text-white/70 sm:text-base">
+                <li key={bullet} className="flex items-start gap-3 text-sm text-muted-strong sm:text-base">
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-violet-500/20 text-[10px] text-violet-300">
                     ✓
                   </span>
@@ -218,7 +218,7 @@ export function TalkToOperatorSection() {
             </ul>
 
             <div className="mt-8">
-              <p className="text-xs font-medium uppercase tracking-wider text-white/40">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted">
                 {t.channelsLabel}
               </p>
               <div className="mt-3 flex flex-wrap gap-2">

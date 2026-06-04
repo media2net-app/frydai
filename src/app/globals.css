@@ -5,16 +5,70 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-surface: var(--theme-surface);
+  --color-surface-elevated: var(--theme-surface-elevated);
+  --color-foreground: var(--theme-foreground);
+  --color-muted: var(--theme-muted);
+  --color-muted-strong: var(--theme-muted-strong);
+  --color-border-subtle: var(--theme-border-subtle);
+  --color-glass: var(--theme-glass);
+  --color-glass-shadow: var(--theme-glass-shadow);
+  --color-header-bg: var(--theme-header-bg);
+  --color-notice-mid: var(--theme-notice-mid);
+  --color-inset: var(--theme-inset);
+  --color-fill-subtle: var(--theme-fill-subtle);
+  --color-surface-raised: var(--theme-surface-raised);
+  --color-surface-alt: var(--theme-surface-alt);
+  --color-fill-muted: var(--theme-fill-muted);
 }
 
-:root {
-  --background: #08080f;
-  --foreground: #ffffff;
+/* Donker — alleen bij data-theme=dark (niet :root, anders overschrijft het licht) */
+[data-theme="dark"] {
+  --theme-surface: #08080f;
+  --theme-surface-elevated: #0c0c14;
+  --theme-foreground: #ffffff;
+  --theme-muted: rgba(255, 255, 255, 0.55);
+  --theme-muted-strong: rgba(255, 255, 255, 0.75);
+  --theme-border-subtle: rgba(255, 255, 255, 0.1);
+  --theme-glass: rgba(255, 255, 255, 0.04);
+  --theme-glass-shadow: rgba(0, 0, 0, 0.45);
+  --theme-header-bg: #08080f;
+  --theme-notice-mid: #0d0d14;
+  --theme-notice-from: rgba(46, 16, 101, 0.95);
+  --theme-notice-to: rgba(30, 27, 75, 0.95);
+  --theme-header-shadow: rgba(0, 0, 0, 0.5);
+  --theme-surface-raised: rgba(255, 255, 255, 0.02);
+  --theme-surface-alt: #0c0c14;
+  --theme-inset: rgba(255, 255, 255, 0.03);
+  --theme-fill-subtle: rgba(255, 255, 255, 0.05);
+  --theme-fill-muted: rgba(255, 255, 255, 0.1);
+  --theme-elevated-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --theme-hover-subtle: rgba(255, 255, 255, 0.1);
+  --background: var(--theme-surface);
+  --foreground: var(--theme-foreground);
   --accent: #7c3aed;
   --accent-teal: #2dd4bf;
   --scrollbar-track: rgba(255, 255, 255, 0.06);
   --scrollbar-thumb: rgba(124, 58, 237, 0.55);
   --scrollbar-thumb-hover: rgba(167, 139, 250, 0.85);
+}
+
+.founding-notice-bar {
+  border-bottom: 1px solid rgba(139, 92, 246, 0.25);
+  background: linear-gradient(
+    90deg,
+    var(--theme-notice-from),
+    var(--theme-notice-mid),
+    var(--theme-notice-to)
+  );
+}
+
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 0.4s;
+  transition-timing-function: ease;
 }
 
 html {
@@ -110,3 +164,8 @@ body {
     transform: none !important;
   }
 }
+
+@import "./theme-light.css";
+@import "./hero-theme.css";
+@import "./command-center-theme.css";
+@import "./sections-theme.css";

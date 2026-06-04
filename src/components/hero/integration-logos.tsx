@@ -32,14 +32,14 @@ export function IntegrationLogoMark({
     <div
       className={cx(
         "flex shrink-0 items-center gap-2.5 px-1 py-1",
-        !plain && "rounded-lg border border-transparent transition-colors hover:border-white/10 hover:bg-white/[0.03]",
+        !plain && "rounded-lg border border-transparent transition-colors hover:border-border-subtle hover:bg-inset",
       )}
       title={logo.name}
     >
       <span
         className={cx(
           "relative flex shrink-0 items-center justify-center overflow-hidden",
-          !plain && "rounded-md bg-white/[0.06]",
+          !plain && "rounded-md bg-fill-subtle",
         )}
         style={{ width: size + 8, height: size + 8 }}
       >
@@ -52,7 +52,7 @@ export function IntegrationLogoMark({
           aria-hidden
         />
       </span>
-      <span className="whitespace-nowrap text-sm font-semibold tracking-tight text-white/55 sm:text-[15px]">
+      <span className="whitespace-nowrap text-sm font-semibold tracking-tight text-foreground/55 sm:text-[15px]">
         {logo.name}
       </span>
     </div>

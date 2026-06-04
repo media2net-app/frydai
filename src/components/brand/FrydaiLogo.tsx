@@ -1,22 +1,44 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
+import { useTheme } from "@/components/theme/ThemeProvider";
 import { cx } from "@/lib/cx";
+import { FRYDAI_MARK_PATHS, FRYDAI_MARK_VIEWBOX } from "@/components/brand/frydai-mark-paths";
+import type { FrydaiMarkVariant } from "@/components/brand/frydai-mark-types";
+
+export type { FrydaiMarkVariant } from "@/components/brand/frydai-mark-types";
 
 type FrydaiMarkProps = {
   className?: string;
+  variant?: FrydaiMarkVariant;
 };
 
-/** Brand mark from /public/frydai-mark-mask.png (white on transparent) */
-export function FrydaiMark({ className }: FrydaiMarkProps) {
+const MARK_FILL: Record<FrydaiMarkVariant, string> = {
+  white: "#FFFFFF",
+  black: "#000000",
+  purple: "#7C3AED",
+  current: "currentColor",
+};
+
+export function FrydaiMark({ className, variant }: FrydaiMarkProps) {
+  const { logoVariant } = useTheme();
+  const fill = MARK_FILL[variant ?? logoVariant];
+
   return (
-    <Image
-      src="/frydai-mark-mask.png"
-      alt=""
-      width={32}
-      height={32}
-      className={cx("shrink-0 object-contain", className)}
-      priority
-    />
+    <span
+      className={cx("inline-flex shrink-0 items-center justify-center", className)}
+      aria-hidden
+    >
+      <svg
+        viewBox={FRYDAI_MARK_VIEWBOX}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        shapeRendering="geometricPrecision"
+        className="h-full w-full"
+      >
+        <path fill={fill} d={FRYDAI_MARK_PATHS} />
+      </svg>
+    </span>
   );
 }
 
@@ -25,6 +47,7 @@ type FrydaiLogoProps = {
   wordmarkClassName?: string;
   markClassName?: string;
   showWordmark?: boolean;
+  markVariant?: FrydaiMarkVariant;
 };
 
 export function FrydaiLogo({
@@ -32,12 +55,13 @@ export function FrydaiLogo({
   wordmarkClassName,
   markClassName = "h-7 w-7 sm:h-8 sm:w-8",
   showWordmark = true,
+  markVariant,
 }: FrydaiLogoProps) {
   return (
     <span className={cx("inline-flex items-center gap-2.5", className)}>
-      <FrydaiMark className={markClassName} />
+      <FrydaiMark className={markClassName} variant={markVariant} />
       {showWordmark ? (
-        <span className={cx("font-bold leading-none tracking-tight", wordmarkClassName)}>
+        <span className={cx("font-bold leading-none tracking-tight text-foreground", wordmarkClassName)}>
           Frydai
         </span>
       ) : null}
@@ -57,13 +81,14 @@ export function FrydaiLogoLink({
   wordmarkClassName = "text-lg sm:text-xl",
   markClassName,
   showWordmark = true,
+  markVariant,
 }: FrydaiLogoLinkProps) {
   return (
     <Link
       href={href}
       onClick={onClick}
       className={cx(
-        "inline-flex items-center text-white transition-opacity hover:opacity-90",
+        "inline-flex items-center text-foreground transition-opacity hover:opacity-90",
         className,
       )}
       aria-label="Frydai home"
@@ -72,6 +97,7 @@ export function FrydaiLogoLink({
         wordmarkClassName={wordmarkClassName}
         markClassName={markClassName}
         showWordmark={showWordmark}
+        markVariant={markVariant}
       />
     </Link>
   );

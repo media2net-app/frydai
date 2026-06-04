@@ -1,0 +1,116 @@
+/**
+ * Marketing secties — licht: wit + glass. Donker: surface tokens (geen hardcoded #0a0a12).
+ */
+
+[data-theme="light"] .creatives-section,
+[data-theme="light"] .results-section,
+[data-theme="light"] .testimonials-section {
+  --section-fade-color: #ffffff;
+  background: #ffffff;
+}
+
+[data-theme="dark"] .creatives-section,
+[data-theme="dark"] .results-section,
+[data-theme="dark"] .testimonials-section {
+  --section-fade-color: var(--theme-surface-alt);
+}
+
+[data-theme="light"] .creatives-section {
+  background: linear-gradient(180deg, #ffffff 0%, #faf9ff 100%);
+}
+
+/* Marquee fade edges — volgen sectiekleur */
+.marquee-fade-left {
+  background: linear-gradient(to right, var(--section-fade-color, var(--theme-surface)), transparent);
+}
+
+.marquee-fade-right {
+  background: linear-gradient(to left, var(--section-fade-color, var(--theme-surface)), transparent);
+}
+
+/* Example creatives — glass cards */
+[data-theme="light"] .creatives-glass-card {
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  backdrop-filter: blur(20px) saturate(1.4);
+  background: rgba(255, 255, 255, 0.45) !important;
+  border-color: rgba(255, 255, 255, 0.75) !important;
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.1),
+    0 8px 28px rgba(91, 33, 182, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+}
+
+[data-theme="light"] .creatives-section .headline-accent {
+  background-image: linear-gradient(to right, #6d28d9, #a21caf, #7c3aed) !important;
+}
+
+/* Results — Replace the stack */
+[data-theme="light"] .results-comparison-before {
+  border-color: rgba(244, 63, 94, 0.22) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(254, 242, 242, 0.55) 0%,
+    rgba(255, 255, 255, 0.65) 48%
+  ) !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+[data-theme="light"] .results-comparison-after {
+  border-color: rgba(124, 58, 237, 0.28) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(237, 233, 254, 0.6) 0%,
+    rgba(255, 255, 255, 0.65) 50%
+  ) !important;
+  box-shadow: 0 0 36px rgba(124, 58, 237, 0.1) !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+[data-theme="light"] .results-kpi-card {
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  backdrop-filter: blur(18px) saturate(1.35);
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(124, 58, 237, 0.12) !important;
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.06),
+    0 6px 24px rgba(91, 33, 182, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-theme="light"] .results-vs-badge {
+  background: rgba(255, 255, 255, 0.72) !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-color: rgba(124, 58, 237, 0.18) !important;
+  box-shadow: 0 4px 16px rgba(91, 33, 182, 0.1);
+}
+
+[data-theme="light"] .results-section .line-through {
+  text-decoration-color: rgba(30, 27, 46, 0.25);
+}
+
+[data-theme="light"] .results-mobile-toggle-active-after {
+  color: #5b21b6 !important;
+  background: rgba(124, 58, 237, 0.12) !important;
+  border-color: rgba(124, 58, 237, 0.35) !important;
+}
+
+[data-theme="light"] .how-it-works-terminal {
+  background: rgba(255, 255, 255, 0.55) !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-color: rgba(124, 58, 237, 0.14) !important;
+}
+
+[data-theme="light"] .testimonials-glass-card {
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  backdrop-filter: blur(18px) saturate(1.35);
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(124, 58, 237, 0.12) !important;
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.06),
+    0 6px 24px rgba(91, 33, 182, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}

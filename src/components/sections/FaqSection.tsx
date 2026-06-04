@@ -18,20 +18,20 @@ function FaqItemRow({
   onToggle: () => void;
 }) {
   return (
-    <div className="border-b border-white/10 last:border-0">
+    <div className="border-b border-border-subtle last:border-0">
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
         className="flex w-full items-start justify-between gap-4 py-4 text-left sm:py-5"
       >
-        <span className="text-sm font-semibold text-white sm:text-base">{item.question}</span>
+        <span className="text-sm font-semibold text-foreground sm:text-base">{item.question}</span>
         <span
           className={cx(
             "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors",
             isOpen
-              ? "border-violet-500/40 bg-violet-500/20 text-violet-200"
-              : "border-white/15 bg-white/[0.04] text-white/50",
+              ? "faq-toggle-open border-violet-500/40 bg-violet-500/20 text-violet-200"
+              : "faq-toggle-closed border-border-subtle bg-fill-subtle text-muted",
           )}
           aria-hidden
         >
@@ -55,7 +55,7 @@ function FaqItemRow({
             transition={{ duration: 0.22, ease: "easeOut" }}
             className="overflow-hidden"
           >
-            <p className="pb-4 text-sm leading-relaxed text-white/55 sm:pb-5 sm:text-base">
+            <p className="pb-4 text-sm leading-relaxed text-muted sm:pb-5 sm:text-base">
               {item.answer}
             </p>
           </motion.div>
@@ -72,17 +72,17 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="scroll-mt-20 border-t border-white/10 bg-[#08080f] py-16 sm:py-24 md:py-28"
+      className="scroll-mt-20 border-t border-border-subtle bg-surface py-16 sm:py-24 md:py-28"
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <div className="text-center">
           <p className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-teal-300/80 sm:text-xs">
             {t.eyebrow}
           </p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
             {t.title}
           </h2>
-          <p className="mt-3 text-base text-white/55 sm:mt-4 sm:text-lg">{t.subtitle}</p>
+          <p className="mt-3 text-base text-muted sm:mt-4 sm:text-lg">{t.subtitle}</p>
         </div>
 
         <GlassCard className="mt-10 divide-y-0 px-4 sm:mt-14 sm:px-6">
@@ -97,7 +97,7 @@ export function FaqSection() {
         </GlassCard>
 
         <div className="mt-10 text-center">
-          <p className="text-sm text-white/45">{t.stillHaveQuestions}</p>
+          <p className="text-sm text-muted">{t.stillHaveQuestions}</p>
           <DeployFrydaiButton variant="compact" className="mt-4">
             {t.contactCta}
           </DeployFrydaiButton>

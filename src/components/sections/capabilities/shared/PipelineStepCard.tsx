@@ -30,11 +30,11 @@ export function PipelineStepCard({
         "relative rounded-xl border p-3 transition-colors duration-300",
         isActive && accent.activeCard,
         completed && !isActive && "border-emerald-500/25 bg-emerald-500/[0.06]",
-        !isActive && !completed && "border-white/10 bg-white/[0.03]",
+        !isActive && !completed && "border-border-subtle bg-inset",
       )}
     >
       <div className="mb-2 flex items-center justify-between gap-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{label}</p>
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">{label}</p>
         {isActive && (
           <span
             className={cx(

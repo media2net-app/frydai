@@ -103,18 +103,18 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
           if (step !== "processing") onClose();
         }}
         disabled={step === "processing"}
-        className="absolute inset-0 bg-[#08080f]/80 backdrop-blur-md disabled:cursor-wait"
+        className="absolute inset-0 bg-surface/80 backdrop-blur-md disabled:cursor-wait"
       />
 
       <div
         className={cx(
           "relative z-10 flex w-full max-w-md flex-col overflow-hidden",
-          "max-h-[92dvh] rounded-t-2xl border border-white/10 bg-[#0c0c14] shadow-[0_24px_80px_rgba(0,0,0,0.65)]",
+          "max-h-[92dvh] rounded-t-2xl border border-border-subtle bg-surface-elevated shadow-[0_24px_80px_rgba(0,0,0,0.65)]",
           "sm:max-h-[90vh] sm:rounded-2xl",
         )}
       >
-        <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-4 py-3.5">
-          <p id="demo-checkout-title" className="text-sm font-semibold text-white">
+        <div className="flex shrink-0 items-center justify-between border-b border-border-subtle px-4 py-3.5">
+          <p id="demo-checkout-title" className="text-sm font-semibold text-foreground">
             {t.title}
           </p>
           <button
@@ -122,7 +122,7 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
             onClick={onClose}
             disabled={step === "processing"}
             aria-label={t.close}
-            className="rounded-lg p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-40"
+            className="rounded-lg p-1.5 text-muted-strong transition-colors hover:bg-fill-muted hover:text-foreground disabled:opacity-40"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -136,18 +136,18 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/20 text-2xl text-emerald-400">
                 ✓
               </div>
-              <h3 className="mt-4 text-lg font-bold text-white">{t.successTitle}</h3>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/55">{t.successBody}</p>
+              <h3 className="mt-4 text-lg font-bold text-foreground">{t.successTitle}</h3>
+              <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted">{t.successBody}</p>
               <Link
                 href="/login"
-                className="mt-6 inline-flex w-full justify-center rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:brightness-110"
+                className="mt-6 inline-flex w-full justify-center rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-500 px-6 py-3 text-sm font-semibold text-foreground shadow-lg shadow-violet-500/25 transition-all hover:brightness-110"
               >
                 {t.successCta} →
               </Link>
               <button
                 type="button"
                 onClick={onClose}
-                className="mt-3 text-sm text-white/45 transition-colors hover:text-white/70"
+                className="mt-3 text-sm text-muted transition-colors hover:text-foreground/70"
               >
                 {t.successClose}
               </button>
@@ -161,20 +161,20 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
                 <p className="mt-1 text-xs leading-relaxed text-amber-100/70">{t.demoNote}</p>
               </div>
 
-              <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.03] p-4">
+              <div className="mt-4 rounded-xl border border-border-subtle bg-inset p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="font-semibold text-white">{t.planName}</p>
-                    <p className="mt-0.5 text-xs text-white/45">{t.planPeriod}</p>
+                    <p className="font-semibold text-foreground">{t.planName}</p>
+                    <p className="mt-0.5 text-xs text-muted">{t.planPeriod}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xl font-bold tabular-nums text-white">{FRYDAI_PRICE}</p>
-                    <p className="text-xs text-white/40">{FRYDAI_PERIOD}</p>
+                    <p className="text-xl font-bold tabular-nums text-foreground">{FRYDAI_PRICE}</p>
+                    <p className="text-xs text-muted">{FRYDAI_PERIOD}</p>
                   </div>
                 </div>
-                <ul className="mt-3 space-y-1.5 border-t border-white/[0.06] pt-3">
+                <ul className="mt-3 space-y-1.5 border-t border-border-subtle pt-3">
                   {FOUNDING_FEATURES.slice(0, 4).map((feature) => (
-                    <li key={feature} className="flex items-start gap-2 text-xs text-white/60">
+                    <li key={feature} className="flex items-start gap-2 text-xs text-muted">
                       <span className="text-emerald-400/90">✓</span>
                       {feature}
                     </li>
@@ -184,7 +184,7 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
 
               <form onSubmit={handleSubmit} className="mt-5 space-y-4">
                 <div>
-                  <label htmlFor="checkout-email" className="text-xs font-medium text-white/70">
+                  <label htmlFor="checkout-email" className="text-xs font-medium text-muted-strong">
                     {t.emailLabel}
                   </label>
                   <input
@@ -195,12 +195,12 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={t.emailPlaceholder}
                     disabled={step === "processing"}
-                    className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30 disabled:opacity-60"
+                    className="mt-1.5 w-full rounded-xl border border-border-subtle bg-fill-subtle px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30 disabled:opacity-60"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="checkout-name" className="text-xs font-medium text-white/70">
+                  <label htmlFor="checkout-name" className="text-xs font-medium text-muted-strong">
                     {t.nameLabel}
                   </label>
                   <input
@@ -211,13 +211,13 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
                     onChange={(e) => setName(e.target.value)}
                     placeholder={t.namePlaceholder}
                     disabled={step === "processing"}
-                    className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30 disabled:opacity-60"
+                    className="mt-1.5 w-full rounded-xl border border-border-subtle bg-fill-subtle px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30 disabled:opacity-60"
                   />
                 </div>
 
                 <div>
-                  <p className="text-xs font-medium text-white/70">{t.paymentTitle}</p>
-                  <div className="mt-1.5 space-y-2 rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                  <p className="text-xs font-medium text-muted-strong">{t.paymentTitle}</p>
+                  <div className="mt-1.5 space-y-2 rounded-xl border border-border-subtle bg-inset p-3">
                     <div>
                       <label htmlFor="checkout-card" className="sr-only">
                         {t.cardNumber}
@@ -226,23 +226,23 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
                         id="checkout-card"
                         readOnly
                         value={DEMO_CARD.number}
-                        className="w-full rounded-lg border border-white/8 bg-[#08080f] px-3 py-2 font-mono text-sm text-white/80 outline-none"
+                        className="w-full rounded-lg border border-border-subtle bg-surface px-3 py-2 font-mono text-sm text-muted-strong outline-none"
                         aria-readonly
                       />
-                      <p className="mt-1 text-[10px] text-white/35">{t.cardNumber}</p>
+                      <p className="mt-1 text-[10px] text-muted">{t.cardNumber}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-2">
                       <input
                         readOnly
                         value={DEMO_CARD.expiry}
                         aria-label={t.cardExpiry}
-                        className="rounded-lg border border-white/8 bg-[#08080f] px-3 py-2 font-mono text-sm text-white/80 outline-none"
+                        className="rounded-lg border border-border-subtle bg-surface px-3 py-2 font-mono text-sm text-muted-strong outline-none"
                       />
                       <input
                         readOnly
                         value={DEMO_CARD.cvc}
                         aria-label={t.cardCvc}
-                        className="rounded-lg border border-white/8 bg-[#08080f] px-3 py-2 font-mono text-sm text-white/80 outline-none"
+                        className="rounded-lg border border-border-subtle bg-surface px-3 py-2 font-mono text-sm text-muted-strong outline-none"
                       />
                     </div>
                   </div>
@@ -254,9 +254,9 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
                     checked={terms}
                     onChange={(e) => setTerms(e.target.checked)}
                     disabled={step === "processing"}
-                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/20 bg-white/5 accent-violet-600"
+                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-border-subtle bg-fill-subtle accent-violet-600"
                   />
-                  <span className="text-xs leading-relaxed text-white/50">{t.terms}</span>
+                  <span className="text-xs leading-relaxed text-muted">{t.terms}</span>
                 </label>
 
                 {error ? (
@@ -268,7 +268,7 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
                 <button
                   type="submit"
                   disabled={step === "processing"}
-                  className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:brightness-110 disabled:cursor-wait disabled:opacity-80"
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-500 px-6 py-3 text-sm font-semibold text-foreground shadow-lg shadow-violet-500/25 transition-all hover:brightness-110 disabled:cursor-wait disabled:opacity-80"
                 >
                   {step === "processing" ? (
                     <>
