@@ -179,30 +179,79 @@ function DesktopShowcase() {
   );
 }
 
+const MOBILE_SLIDES = [
+  { id: "telegram", label: "Operator update", render: () => <TelegramCard /> },
+  { id: "revenue", label: "Revenue", render: () => <RevenueChip /> },
+  { id: "queue", label: "Live queue", render: () => <TaskStack /> },
+] as const;
+
 function MobileShowcase() {
+  const [active, setActive] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollToIndex = (index: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const slide = el.children[index] as HTMLElement | undefined;
+    slide?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    setActive(index);
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const onScroll = () => {
+      const { scrollLeft, offsetWidth } = el;
+      const index = Math.round(scrollLeft / Math.max(offsetWidth * 0.85, 1));
+      setActive(Math.min(Math.max(index, 0), MOBILE_SLIDES.length - 1));
+    };
+
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <div className="relative min-h-[20rem]">
-      <motion.div
-        {...cardMotion}
-        transition={{ duration: 0.4 }}
-        className="absolute right-0 top-0 z-10 w-[58%]"
+    <div className="relative -mx-4 sm:mx-0">
+      <div
+        ref={scrollRef}
+        className="flex gap-3 overflow-x-auto overscroll-x-contain px-4 pb-1 [scrollbar-width:none] snap-x snap-mandatory [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        aria-roledescription="carousel"
+        aria-label="Frydai operator preview"
       >
-        <RevenueChip />
-      </motion.div>
-      <motion.div
-        {...cardMotion}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        className="absolute left-0 top-[28%] z-30 w-[88%]"
-      >
-        <TelegramCard />
-      </motion.div>
-      <motion.div
-        {...cardMotion}
-        transition={{ duration: 0.4, delay: 0.18 }}
-        className="absolute bottom-0 right-0 z-20 w-[72%] rotate-1"
-      >
-        <TaskStack />
-      </motion.div>
+        {MOBILE_SLIDES.map((slide, index) => (
+          <div
+            key={slide.id}
+            className="w-[min(100%,22rem)] shrink-0 snap-center sm:w-[20rem]"
+            aria-label={slide.label}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: index * 0.06 }}
+            >
+              {slide.render()}
+            </motion.div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-3 flex items-center justify-center gap-2">
+        {MOBILE_SLIDES.map((slide, index) => (
+          <button
+            key={slide.id}
+            type="button"
+            onClick={() => scrollToIndex(index)}
+            aria-label={slide.label}
+            aria-current={active === index ? "true" : undefined}
+            className={cx(
+              "h-1.5 rounded-full transition-all duration-300",
+              active === index ? "w-6 bg-violet-400" : "w-1.5 bg-white/25",
+            )}
+          />
+        ))}
+      </div>
+      <p className="mt-2 text-center text-[10px] text-white/35">Swipe for more</p>
     </div>
   );
 }

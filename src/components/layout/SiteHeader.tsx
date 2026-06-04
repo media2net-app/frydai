@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { FrydaiLogoLink } from "@/components/brand/FrydaiLogo";
 import { HeroMobileNav } from "@/components/layout/HeroMobileNav";
 import { FOUNDING_NOTICE_OFFSET } from "@/components/layout/FoundingNoticeBar";
 import { copy, site } from "@/lib/copy";
@@ -41,12 +42,7 @@ export function SiteHeader({ withNotice = false }: SiteHeaderProps) {
     >
       <div className="mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-6">
         <nav className="flex w-full items-center justify-between gap-3">
-          <Link
-            href="/"
-            className="inline-flex items-center text-lg font-bold leading-none tracking-tight text-white sm:text-xl"
-          >
-            Frydai
-          </Link>
+          <FrydaiLogoLink markClassName="h-7 w-7 sm:h-8 sm:w-8" />
 
           <div className="hidden h-full items-center gap-6 md:flex">
             <Link

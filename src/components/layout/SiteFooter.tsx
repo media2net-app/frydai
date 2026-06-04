@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FrydaiLogoLink } from "@/components/brand/FrydaiLogo";
 import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
 import { copy, site } from "@/lib/copy";
 
@@ -55,9 +56,10 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="text-xl font-bold tracking-tight text-white">
-              Frydai
-            </Link>
+            <FrydaiLogoLink
+              wordmarkClassName="text-xl"
+              markClassName="h-8 w-8"
+            />
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/50">{t.tagline}</p>
             <p className="mt-4 font-mono text-[10px] uppercase tracking-wider text-teal-300/70">
               {t.channels}

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { FrydaiLogoLink } from "@/components/brand/FrydaiLogo";
 import { DemoLoginForm } from "@/components/auth/DemoLoginForm";
 
 export default function LoginPage() {
@@ -9,9 +9,7 @@ export default function LoginPage() {
         aria-hidden
       />
       <header className="relative z-10 flex justify-center border-b border-white/10 px-4 py-4 sm:px-6">
-        <Link href="/" className="text-lg font-bold tracking-tight text-white sm:text-xl">
-          Frydai
-        </Link>
+        <FrydaiLogoLink />
       </header>
       <main className="relative z-10 flex flex-1 items-center justify-center px-4 py-12 sm:px-6">
         <DemoLoginForm />

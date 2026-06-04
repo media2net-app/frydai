@@ -1,16 +1,24 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cx } from "@/lib/cx";
+
+/** Hero h1 prefix — large on mobile, restrained from lg up */
+export const HERO_HEADLINE_PREFIX_TEXT =
+  "text-[clamp(2rem,9vw,2.75rem)] font-extrabold leading-[1.02] tracking-tight sm:text-[clamp(2.125rem,7vw,3rem)] lg:text-[clamp(1.5rem,2.35vw,2.35rem)] lg:font-bold lg:leading-[1.1] xl:text-[clamp(1.55rem,2.15vw,2.5rem)]";
+
+/** Hero cycling line — slightly smaller than prefix on desktop */
+export const HERO_HEADLINE_CYCLE_TEXT =
+  "text-[clamp(1.35rem,5.5vw,2.125rem)] font-bold leading-[1.08] sm:text-[clamp(1.5rem,4.8vw,2.35rem)] lg:text-[clamp(1.3rem,2.05vw,2rem)] xl:text-[clamp(1.35rem,2.1vw,2.1rem)]";
 
 interface AnimatedTextCycleProps {
   words: string[];
   interval?: number;
   className?: string;
   layout?: "inline" | "block";
-  maxFontSize?: number;
-  minFontSize?: number;
+  /** Override default cycle font scale (block layout) */
+  textClassName?: string;
 }
 
 const inlineVariants = {
@@ -30,20 +38,18 @@ const inlineVariants = {
 };
 
 const blockVariants = {
-  hidden: { y: 28, opacity: 0, scale: 0.94, filter: "blur(10px)" },
+  hidden: { y: 20, opacity: 0, filter: "blur(8px)" },
   visible: {
     y: 0,
     opacity: 1,
-    scale: 1,
     filter: "blur(0px)",
-    transition: { duration: 0.45, ease: "easeOut" as const },
+    transition: { duration: 0.4, ease: "easeOut" as const },
   },
   exit: {
-    y: -28,
+    y: -20,
     opacity: 0,
-    scale: 1.04,
-    filter: "blur(10px)",
-    transition: { duration: 0.35, ease: "easeIn" as const },
+    filter: "blur(8px)",
+    transition: { duration: 0.3, ease: "easeIn" as const },
   },
 };
 
@@ -52,51 +58,18 @@ export function AnimatedTextCycle({
   interval = 3000,
   className = "",
   layout = "inline",
-  maxFontSize = 76,
-  minFontSize = 28,
+  textClassName = HERO_HEADLINE_CYCLE_TEXT,
 }: AnimatedTextCycleProps) {
   const isBlock = layout === "block";
   const [currentIndex, setCurrentIndex] = useState(0);
   const [width, setWidth] = useState("auto");
-  const [fitFontSize, setFitFontSize] = useState(maxFontSize);
+  const [hasMounted, setHasMounted] = useState(false);
   const measureRef = useRef<HTMLDivElement>(null);
-  const fitRef = useRef<HTMLSpanElement>(null);
-  const containerRef = useRef<HTMLSpanElement>(null);
   const wordVariants = isBlock ? blockVariants : inlineVariants;
 
-  useLayoutEffect(() => {
-    if (!isBlock) return;
-
-    const fit = () => {
-      const el = fitRef.current;
-      const container = containerRef.current;
-      if (!el || !container) return;
-
-      const maxWidth = container.clientWidth;
-      if (!maxWidth) return;
-
-      let size = maxFontSize;
-      el.style.fontSize = `${size}px`;
-      el.style.whiteSpace = "nowrap";
-
-      while (el.scrollWidth > maxWidth && size > minFontSize) {
-        size -= 1;
-        el.style.fontSize = `${size}px`;
-      }
-
-      setFitFontSize(size);
-    };
-
-    fit();
-    const observer = new ResizeObserver(fit);
-    observer.observe(containerRef.current!);
-    window.addEventListener("resize", fit);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", fit);
-    };
-  }, [currentIndex, words, isBlock, maxFontSize, minFontSize]);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isBlock) return;
@@ -123,16 +96,16 @@ export function AnimatedTextCycle({
     <AnimatePresence mode="wait" initial={false}>
       <motion.span
         key={currentIndex}
-        ref={isBlock ? fitRef : undefined}
-        className={cx("inline-block max-w-full font-bold", className)}
+        className={cx(
+          "inline-block max-w-full font-bold",
+          isBlock && textClassName,
+          isBlock && "max-lg:whitespace-nowrap",
+          className,
+        )}
         variants={wordVariants}
-        initial="hidden"
+        initial={hasMounted ? "hidden" : false}
         animate="visible"
         exit="exit"
-        style={{
-          whiteSpace: "nowrap",
-          fontSize: isBlock ? `${fitFontSize}px` : undefined,
-        }}
       >
         {words[currentIndex]}
       </motion.span>
@@ -141,10 +114,7 @@ export function AnimatedTextCycle({
 
   if (isBlock) {
     return (
-      <span
-        ref={containerRef}
-        className="relative block w-full max-w-full text-left lg:inline-block lg:w-auto"
-      >
+      <span className="relative block w-full max-w-full text-left lg:inline-block lg:w-auto">
         {animatedWord}
       </span>
     );

@@ -1,29 +1,37 @@
 "use client";
 
-import { AnimatedTextCycle } from "@/components/ui/AnimatedTextCycle";
+import {
+  AnimatedTextCycle,
+  HERO_HEADLINE_CYCLE_TEXT,
+  HERO_HEADLINE_PREFIX_TEXT,
+} from "@/components/ui/AnimatedTextCycle";
 import { copy } from "@/lib/copy";
+import { cx } from "@/lib/cx";
 
 export function HeroHeadline() {
   const { hero } = copy;
   const suffix = hero.headlineSuffix?.trim();
 
   return (
-    <h1 className="mt-5 flex w-full max-w-full flex-col items-start gap-0 overflow-hidden text-left font-bold leading-[1.05] tracking-tight text-white sm:mt-6 lg:text-[clamp(1.65rem,3vw,3.25rem)] lg:leading-[1.12] xl:text-[clamp(1.75rem,3.4vw,3.5rem)]">
-      {/* Line 1: fixed prefix */}
-      <span className="block w-full text-white">{hero.headlinePrefix}</span>
+    <h1 className="mt-4 flex w-full max-w-full flex-col items-start gap-0 text-left sm:mt-6 lg:max-w-xl xl:max-w-2xl">
+      <span className={cx("block w-full text-white", HERO_HEADLINE_PREFIX_TEXT)}>
+        {hero.headlinePrefix}
+      </span>
 
-      {/* Line 2: cycling service (gradient) */}
-      <span className="mt-1 block w-full max-w-full py-0.5 lg:mt-2">
+      <span className="mt-2 block w-full max-w-full sm:mt-2.5 lg:mt-2">
         <AnimatedTextCycle
           words={hero.headlineWords}
           interval={3200}
           layout="block"
-          maxFontSize={72}
-          minFontSize={26}
+          textClassName={HERO_HEADLINE_CYCLE_TEXT}
           className="bg-gradient-to-r from-violet-300 via-teal-200 to-violet-200 bg-clip-text text-transparent"
         />
         {suffix ? (
-          <span className="ml-1 text-white lg:ml-2">{suffix}</span>
+          <span
+            className={cx("ml-1 text-white lg:ml-2", HERO_HEADLINE_CYCLE_TEXT)}
+          >
+            {suffix}
+          </span>
         ) : null}
       </span>
     </h1>

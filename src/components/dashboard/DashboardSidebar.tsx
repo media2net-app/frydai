@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { FrydaiLogoLink } from "@/components/brand/FrydaiLogo";
 import { DashboardNavIcon } from "@/components/dashboard/DashboardNavIcon";
 import { OperatorOsToggle } from "@/components/dashboard/OperatorOsToggle";
 import { copy } from "@/lib/copy";
@@ -37,13 +38,13 @@ export function DashboardSidebar({ onNavigate, className }: DashboardSidebarProp
       )}
     >
       <div className="flex h-14 shrink-0 items-center gap-2.5 border-b border-white/10 px-4">
-        <Link
+        <FrydaiLogoLink
           href="/dashboard"
           onClick={onNavigate}
-          className="text-lg font-bold tracking-tight text-white"
-        >
-          {t.productName}
-        </Link>
+          wordmarkClassName="text-lg"
+          markClassName="h-7 w-7"
+          className="min-w-0 shrink"
+        />
         <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-violet-300">
           {t.demoBadge}
         </span>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import { FrydaiLogo } from "@/components/brand/FrydaiLogo";
 
 type HeroMobileNavProps = {
   menuLabel: string;
@@ -76,7 +77,10 @@ export function HeroMobileNav({
             }`}
           >
             <div className="flex h-16 shrink-0 items-center justify-between border-b border-white/10 px-4">
-              <span className="text-base font-semibold text-white">Frydai</span>
+              <FrydaiLogo
+                markClassName="h-7 w-7"
+                wordmarkClassName="text-base font-semibold"
+              />
               <button
                 type="button"
                 onClick={() => setOpen(false)}

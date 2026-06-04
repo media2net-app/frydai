@@ -12,13 +12,13 @@ export function HeroBlock() {
   const { hero } = copy;
 
   return (
-    <div className="flex min-h-[100dvh] flex-col">
+    <div className="flex min-h-0 flex-col lg:min-h-[100dvh]">
       <HeroSection>
         <div className="relative z-10 flex min-h-0 flex-1 flex-col">
           <div className={`shrink-0 ${HERO_CHROME_TOP_SPACER}`} aria-hidden />
 
           {/* Scrollable hero body — USP bar stays pinned to viewport bottom */}
-          <div className="flex min-h-0 flex-1 flex-col justify-center overflow-y-auto py-6 sm:py-8 lg:py-10">
+          <div className="flex min-h-0 flex-1 flex-col justify-start overflow-y-auto py-5 sm:justify-center sm:py-8 lg:py-10">
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
               <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(380px,520px)] lg:gap-6 xl:grid-cols-[minmax(0,560px)_1fr] xl:gap-10">
                 <div className="relative z-10 min-w-0 text-left">
@@ -28,7 +28,7 @@ export function HeroBlock() {
 
                   <HeroHeadline />
 
-                  <p className="mt-4 max-w-xl text-base text-white/65 sm:mt-5 sm:text-lg md:max-w-lg lg:max-w-xl">
+                  <p className="mt-4 max-w-xl text-base text-white/65 sm:mt-5 lg:mt-4 lg:max-w-lg lg:text-[1.05rem] lg:leading-relaxed xl:max-w-xl">
                     {hero.descriptionLine1}
                     <br />
                     {hero.descriptionLine2}
@@ -48,7 +48,7 @@ export function HeroBlock() {
                     <HeroAvailabilityBadge label={hero.availabilityBadge} />
                   </div>
 
-                  <div className="mt-8 lg:hidden">
+                  <div className="mt-6 w-full lg:hidden">
                     <HeroOperatorShowcase variant="mobile" />
                   </div>
                 </div>
