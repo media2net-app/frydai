@@ -1,0 +1,393 @@
+{
+  "foundingNotice": {
+    "badge": "Founding access",
+    "limited": "Limited seats",
+    "priceLabel": "Temporary founding price",
+    "price": "$187 / 4 weeks",
+    "cta": "Claim your seat"
+  },
+  "scrollToTop": "Back to top",
+  "checkoutModal": {
+    "title": "Get access",
+    "close": "Close checkout",
+    "loading": "Loading checkout…"
+  },
+  "nav": {
+    "features": "Features",
+    "howItWorks": "How it works",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "login": "Log in",
+    "menu": "Menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "eyebrow": "LINE · 24/7 · TELEGRAM · WHATSAPP",
+    "headlinePrefix": "One system that:",
+    "headlineWords": [
+      "runs market research",
+      "creates ad creatives",
+      "builds landing pages",
+      "manages your store",
+      "scales your ads"
+    ],
+    "headlineSuffix": "",
+    "descriptionLine1": "One subscription. Twenty-four-seven.",
+    "descriptionLine2": "Frydai runs research, creatives, landing pages and store ops — and ships the work back in Telegram.",
+    "ctaPrimary": "Deploy Frydai",
+    "ctaSecondary": "See it work · 92s",
+    "availabilityBadge": "Founding access · limited seats",
+    "telegramSender": "Frydai",
+    "telegramRole": "operator",
+    "telegramTime": "just now",
+    "telegramPreview": "Done. Scraped 47 competitors while you slept. Winning angles, full report inside.",
+    "telegramAttachment": "ZenBlend_competitor_intel.pdf",
+    "revenueLabel": "Last 30 days",
+    "revenueValue": "€79,094",
+    "revenueTrend": "↑ 23% MoM",
+    "worksWith": "Works with"
+  },
+  "usp": {
+    "setup": "5 min",
+    "setupDesc": "Setup",
+    "skills": "50+",
+    "skillsDesc": "AI skills",
+    "autonomous": "24/7",
+    "autonomousDesc": "Autonomous",
+    "faster": "10x",
+    "fasterDesc": "Faster"
+  },
+  "commandCenter": {
+    "eyebrow": "Product proof",
+    "title": "Your AI Command Center",
+    "subtitle": "Watch agents research, create, and optimize in real time — all on autopilot.",
+    "live": "LIVE",
+    "boardTitle": "Frydai Command Center",
+    "stats": {
+      "agents": "Agents active",
+      "agentsValue": "36/36",
+      "tasksToday": "Tasks today",
+      "tasksTodayValue": "12",
+      "content": "Content",
+      "contentValue": "8",
+      "completed": "Completed",
+      "completedValue": "3"
+    },
+    "columns": {
+      "todo": "To do",
+      "inProgress": "In progress",
+      "done": "Done"
+    },
+    "progressQueued": "Queued",
+    "progressRunning": "Running",
+    "progressComplete": "Complete",
+    "activityTitle": "Activity feed",
+    "agentTeams": {
+      "research": "Research",
+      "content": "Content",
+      "ops": "Ops"
+    }
+  },
+  "capabilities": {
+    "eyebrow": "Capabilities",
+    "title": "Everything your store needs. Automated.",
+    "subtitle": "Research, creatives, landing pages, store ops and marketing — one operator, 50+ skills included."
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "Live in minutes. Runs for months.",
+    "subtitle": "Connect your stack, set guardrails once, and let Frydai ship work back in Telegram — 24/7.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Connect your stack",
+        "description": "Link Shopify, Meta Ads, and Telegram in under five minutes. OAuth-secure — no engineering team required.",
+        "tag": "5 min setup"
+      },
+      {
+        "number": "02",
+        "title": "Configure your operator",
+        "description": "Set goals, approval rules, and brand guardrails. Frydai knows when to act and when to ask you first.",
+        "tag": "Your rules"
+      },
+      {
+        "number": "03",
+        "title": "Let Frydai operate",
+        "description": "Research, creatives, listings, and ads run on autopilot. Reports and deliverables land in your chat — while you sleep.",
+        "tag": "24/7 autonomous"
+      }
+    ],
+    "ctaPrimary": "Deploy Frydai",
+    "ctaSecondary": "See command center",
+    "ctaNote": "Founding access · $187 / 4 weeks · cancel anytime"
+  },
+  "results": {
+    "eyebrow": "Results",
+    "title": "Replace the stack. Keep the output.",
+    "subtitle": "Founders swap a fragmented freelancer team and tool sprawl for one operator that actually ships work.",
+    "kpiFootnote": "Example metrics · illustrative comparison · results vary by store",
+    "beforeLabel": "Before",
+    "beforeTitle": "Freelancers + tool sprawl",
+    "afterLabel": "After",
+    "afterTitle": "One Frydai operator",
+    "vs": "vs",
+    "disclaimer": "Comparison based on typical e-com operator costs ($18,150/mo blended team + SaaS vs Frydai founding plan). ROAS example from a demo store · last 90 days. Your results vary."
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "One operator. One price.",
+    "subtitle": "Replace a $18,150/mo freelancer stack with a founding plan built for solo founders and small DTC teams.",
+    "teamLabel": "Traditional team",
+    "teamTitle": "What founders pay today",
+    "teamPeriod": "/ month",
+    "teamTotalLabel": "Total",
+    "planBadge": "Founding access",
+    "planTitle": "Frydai operator",
+    "planSubtitle": "Everything in one subscription",
+    "cta": "Deploy Frydai",
+    "ctaNote": "Limited founding seats · checkout on Whop",
+    "mathLabel": "You save",
+    "mathPer": "per month vs. a blended team",
+    "mathNote": "$187 billed every 4 weeks · illustrative team breakdown",
+    "disclaimer": "Team costs represent typical blended rates for e-com operators. Your stack may differ. Results vary."
+  },
+  "talkToOperator": {
+    "eyebrow": "Communication",
+    "titlePrefix": "Talk to your",
+    "titleHighlight": "AI Operator",
+    "subtitle": "Frydai doesn't just execute tasks — it communicates results, asks for approvals, and keeps you in the loop.",
+    "bullets": [
+      "Proactive performance updates",
+      "Autonomous decision-making with guardrails",
+      "Natural language commands",
+      "Real-time alerts on wins and issues"
+    ],
+    "channelsLabel": "Works with",
+    "chatStatus": "online · operator",
+    "chatVia": "Telegram",
+    "chatPlaceholder": "Message your operator…",
+    "chatHint": "Enter to send"
+  },
+  "creatives": {
+    "eyebrow": "Creative output",
+    "titlePrefix": "Example creatives by",
+    "titleHighlight": "Frydai",
+    "subtitle": "Static ads and UGC-style frames — generated, iterated, and shipped by your operator."
+  },
+  "testimonials": {
+    "eyebrow": "Social proof",
+    "title": "Founders who replaced the stack",
+    "subtitle": "Solo operators and small teams using Frydai as their research, creative, and ops layer.",
+    "integrationsTitle": "Powered by",
+    "footnote": "Founding member quotes · names abbreviated for privacy"
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions founders ask",
+    "subtitle": "Setup, models, skills, and billing — answered in plain language.",
+    "stillHaveQuestions": "Still have questions?",
+    "contactCta": "Deploy Frydai — 5 min setup"
+  },
+  "login": {
+    "eyebrow": "Demo access",
+    "title": "Log in to Frydai",
+    "subtitle": "Explore the operator dashboard with a pre-filled demo account.",
+    "demoHint": "Demo credentials are pre-filled — click Sign in to continue.",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "errorGeneric": "Could not sign in. Check your details and try again.",
+    "backHome": "← Back to homepage"
+  },
+  "dashboard": {
+    "productName": "Frydai",
+    "store": "ZenBlend Store",
+    "demoBadge": "Demo",
+    "logout": "Log out",
+    "loggingOut": "Logging out…",
+    "statusLive": "Operator live",
+    "statusPaused": "Operator paused",
+    "os": {
+      "label": "Operator OS",
+      "on": "ON",
+      "off": "OFF",
+      "onHint": "Running 24/7 — research, creatives, and store ops active",
+      "offHint": "Paused — no new tasks or automations"
+    },
+    "account": {
+      "label": "Account",
+      "subscription": "Subscription",
+      "plan": "Founding access · $187 / 4 weeks"
+    },
+    "navGroups": {
+      "workspace": "Workspace",
+      "operator": "Operator",
+      "capabilities": "Capabilities",
+      "output": "Output",
+      "system": "System"
+    },
+    "nav": {
+      "overview": "Dashboard",
+      "rules": "Rules",
+      "agents": "Agents",
+      "schedules": "Schedules",
+      "skills": "Skills",
+      "connectors": "Connectors",
+      "reports": "Reports",
+      "activity": "Activity",
+      "settings": "Settings"
+    },
+    "rules": {
+      "title": "Rules",
+      "subtitle": "Guardrails for spend, brand voice, approvals, and store changes — enforced on every run.",
+      "countLabel": "{count} rules active",
+      "enabled": "Active",
+      "disabled": "Off"
+    },
+    "agents": {
+      "title": "Agents",
+      "subtitle": "Your operator fleet — research, content, and ops agents working in parallel.",
+      "online": "Online",
+      "busy": "Busy",
+      "idle": "Idle"
+    },
+    "schedules": {
+      "title": "Schedules",
+      "subtitle": "Automated intel, reports, and checks — delivered to your channels on time.",
+      "enabled": "Scheduled",
+      "disabled": "Paused"
+    },
+    "reports": {
+      "title": "Reports",
+      "subtitle": "Intel, ads, and content outputs — ready to download or sent via Telegram.",
+      "ready": "Ready",
+      "generating": "Generating",
+      "scheduled": "Scheduled",
+      "open": "Open",
+      "download": "Download"
+    },
+    "overview": {
+      "title": "Dashboard",
+      "welcome": "Good morning",
+      "subtitle": "Operator processes across research, production, and delivery — updated in real time.",
+      "stats": {
+        "activeTasks": "In flight",
+        "skillsEnabled": "Skills enabled",
+        "connectors": "Connectors live",
+        "reportsWeek": "Shipped this week"
+      },
+      "commandCenter": {
+        "title": "Command center",
+        "live": "Live",
+        "processes": "Operator pipeline",
+        "workstreams": "Workstreams",
+        "queue": "Queue",
+        "running": "Running",
+        "shipped": "Shipped today",
+        "activity": "Activity",
+        "deliveries": "Outbox",
+        "agents": "Agent fleet",
+        "viewAllActivity": "View all activity",
+        "metrics": {
+          "agents": "Agents",
+          "tasksToday": "Tasks today",
+          "inProduction": "In production",
+          "completed": "Completed"
+        },
+        "stageCounts": {
+          "intake": "Queued",
+          "research": "Research",
+          "produce": "Producing",
+          "ship": "Ready to ship"
+        }
+      }
+    },
+    "activity": {
+      "title": "Activity",
+      "subtitle": "Everything your operator ships — tasks, reports, and alerts in one feed.",
+      "live": "Live feed"
+    },
+    "activitySidebar": {
+      "title": "Activity log",
+      "live": "Live",
+      "collapse": "Collapse activity log",
+      "expand": "Expand activity log"
+    },
+    "skills": {
+      "title": "Skills",
+      "subtitle": "Turn capabilities on or off. New skills ship weekly to your operator.",
+      "searchPlaceholder": "Search skills…",
+      "enabled": "Enabled",
+      "disabled": "Available",
+      "weeklyDrop": "New this week",
+      "countLabel": "{count} skills active"
+    },
+    "connectors": {
+      "title": "Connectors",
+      "subtitle": "Channels, store, ads, and AI models — OAuth-secure, no code required.",
+      "connected": "Connected",
+      "connect": "Connect",
+      "comingSoon": "Coming soon",
+      "manage": "Manage",
+      "sections": {
+        "channels": "Channels",
+        "store": "Store & catalog",
+        "ads": "Ads & email",
+        "ai": "AI models"
+      },
+      "connectModal": {
+        "title": "Connect {name}",
+        "subtitle": "Authorize Frydai to access this integration. Secure OAuth — no code required.",
+        "permissionsTitle": "This connection can",
+        "permissions": [
+          "Read and update data needed for operator tasks",
+          "Send completed work back to your channels",
+          "Run automations within your guardrails"
+        ],
+        "demoNote": "Demo environment — authorizing does not connect a real account.",
+        "cancel": "Cancel",
+        "authorize": "Authorize",
+        "connecting": "Connecting…",
+        "successTitle": "Connected",
+        "successBody": "{name} is now linked to your operator."
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Operator preferences, notifications, and billing.",
+      "operator": "Operator",
+      "operatorName": "Display name",
+      "operatorNameValue": "Frydai",
+      "timezone": "Timezone",
+      "timezoneValue": "Europe/Amsterdam",
+      "notifications": "Notifications",
+      "notifyTelegram": "Telegram updates",
+      "notifyEmail": "Email digests",
+      "notifyProactive": "Proactive alerts",
+      "billing": "Subscription",
+      "billingPlan": "Founding access · $187 / 4 weeks",
+      "billingCta": "Manage on Whop",
+      "demoNote": "Demo workspace — changes are not persisted."
+    }
+  },
+  "footer": {
+    "ctaTitle": "Ready to deploy your operator?",
+    "ctaSubtitle": "Founding access · $187 / 4 weeks · cancel anytime",
+    "ctaPrimary": "Deploy Frydai",
+    "ctaSecondary": "See it work · 92s",
+    "tagline": "One subscription. Research, creatives, landing pages and store ops — shipped to Telegram 24/7.",
+    "channels": "LINE · Telegram · WhatsApp",
+    "product": "Product",
+    "company": "Account",
+    "legal": "Legal",
+    "creatives": "Creatives",
+    "demo": "Command center",
+    "privacy": "Privacy policy",
+    "terms": "Terms of service",
+    "privacyUrl": "https://frydai.ai/privacy",
+    "termsUrl": "https://frydai.ai/terms",
+    "copyright": "© {year} Frydai. All rights reserved.",
+    "disclaimer": "Results vary. Illustrative comparisons on this site are not guarantees of performance."
+  }
+}

@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #08080f;
+  --foreground: #ffffff;
+  --accent: #7c3aed;
+  --accent-teal: #2dd4bf;
+  --scrollbar-track: rgba(255, 255, 255, 0.06);
+  --scrollbar-thumb: rgba(124, 58, 237, 0.55);
+  --scrollbar-thumb-hover: rgba(167, 139, 250, 0.85);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Site-wide modern purple scrollbars (page + overflow regions) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  margin: 2px;
+  border-radius: 999px;
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(167, 139, 250, 0.9),
+    rgba(124, 58, 237, 0.65) 45%,
+    rgba(99, 102, 241, 0.55)
+  );
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    var(--scrollbar-thumb-hover),
+    rgba(139, 92, 246, 0.85) 50%,
+    rgba(129, 140, 248, 0.75)
+  );
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@keyframes hero-logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-hero-logo-marquee {
+  animation: hero-logo-marquee 42s linear infinite;
+}
+
+@keyframes creatives-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-creatives-marquee {
+  animation: creatives-marquee 55s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-logo-marquee,
+  .animate-creatives-marquee {
+    animation: none;
+  }
+
+  .creatives-marquee-track {
+    width: 100%;
+    max-width: 72rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    transform: none !important;
+  }
+}
+
