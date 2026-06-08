@@ -1,26 +1,36 @@
-import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
-import { copy } from "@/lib/copy";
+"use client";
 
-/** Notice strip height — keep in sync with SiteHeader offset + hero spacer */
+import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
+import { useHomepageChrome } from "@/components/layout/HomepageChromeContext";
+import { copy } from "@/lib/copy";
+import { cx } from "@/lib/cx";
+
+/** Notice strip height — keep in sync with SiteHeader offset */
 export const FOUNDING_NOTICE_HEIGHT = "h-9 sm:h-12";
 
 /** Header flush under notice (no gap) */
 export const FOUNDING_NOTICE_OFFSET = "top-9 sm:top-12";
 
-/** Spacer: notice + compact header (h-14/h-16) */
-export const HERO_CHROME_TOP_SPACER = "h-[5.75rem] sm:h-[7rem]";
+/** Spacer below compact fixed header (no notice) */
+export const HERO_CHROME_TOP_SPACER = "h-14 sm:h-16";
 
-/** Spacer: notice + expanded hero logo header */
-export const HERO_CHROME_TOP_SPACER_EXPANDED = "h-[7.25rem] sm:h-[9rem]";
+/** Spacer below expanded hero logo header (no notice) */
+export const HERO_CHROME_TOP_SPACER_EXPANDED = "h-[4.75rem] sm:h-[5.5rem]";
 
 export function FoundingNoticeBar() {
   const t = copy.foundingNotice;
+  const { pastHero } = useHomepageChrome();
 
   return (
     <div
-      className={`founding-notice-bar founding-notice-glass fixed inset-x-0 top-0 z-[60] ${FOUNDING_NOTICE_HEIGHT}`}
+      className={cx(
+        `founding-notice-bar founding-notice-glass fixed inset-x-0 top-0 z-[60] ${FOUNDING_NOTICE_HEIGHT}`,
+        "transition-transform duration-300 ease-out",
+        pastHero ? "translate-y-0" : "-translate-y-full pointer-events-none",
+      )}
       role="region"
       aria-label={t.badge}
+      aria-hidden={!pastHero}
     >
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-2 px-3 sm:justify-center sm:gap-x-3 sm:px-6">
         <div className="flex min-w-0 flex-1 items-center gap-2 sm:flex-initial sm:justify-center">
@@ -37,10 +47,6 @@ export function FoundingNoticeBar() {
             <span className="font-medium text-muted-strong">{t.limited}</span>
             <span className="mx-1 text-muted">·</span>
             <span className="notice-price font-semibold text-violet-200">{t.price}</span>
-            <span className="hidden text-muted sm:inline">
-              <span className="mx-1.5">·</span>
-              {t.priceLabel}
-            </span>
           </p>
         </div>
 

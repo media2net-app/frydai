@@ -63,7 +63,7 @@ export function TestimonialsSection() {
           <p className="mt-3 text-base text-muted sm:mt-4 sm:text-lg">{t.subtitle}</p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
           {TESTIMONIALS.map((item) => (
             <TestimonialCard key={item.id} {...item} />
           ))}

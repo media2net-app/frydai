@@ -32,8 +32,8 @@ export function PricingSection() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:mt-14 lg:grid-cols-2 lg:gap-8">
-          <GlassCard className="border-border-subtle p-5 sm:p-8">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-rose-300/80">
+          <GlassCard className="pricing-team-card border-border-subtle p-5 sm:p-8">
+            <p className="pricing-team-eyebrow text-[10px] font-semibold uppercase tracking-wider">
               {t.teamLabel}
             </p>
             <h3 className="mt-2 text-xl font-bold text-foreground sm:text-2xl">{t.teamTitle}</h3>
@@ -52,7 +52,7 @@ export function PricingSection() {
               ))}
             </ul>
 
-            <div className="mt-6 flex items-end justify-between gap-4 rounded-xl border border-rose-500/15 bg-rose-500/[0.06] px-4 py-3">
+            <div className="pricing-team-total mt-6 flex items-end justify-between gap-4 rounded-xl border px-4 py-3">
               <span className="text-sm font-semibold text-foreground/60">{t.teamTotalLabel}</span>
               <div className="text-right">
                 <span className="text-2xl font-bold tabular-nums text-foreground sm:text-3xl">
@@ -63,22 +63,25 @@ export function PricingSection() {
             </div>
           </GlassCard>
 
-          <GlassCard className="pricing-featured-card relative overflow-hidden border-violet-500/30 p-5 shadow-[0_0_48px_rgba(124,58,237,0.18)] sm:p-8">
+          <GlassCard className="pricing-featured-card relative overflow-hidden p-5 sm:p-8">
             <div
-              className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-violet-600/20 blur-3xl"
+              className="pricing-featured-glow pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full blur-3xl"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-indigo/15 blur-3xl"
+              className="pricing-featured-glow-secondary pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full blur-3xl"
               aria-hidden
             />
 
             <div className="relative">
-              <span className="inline-flex rounded-full border border-violet-500/40 bg-violet-500/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-violet-200">
+              <span className="pricing-featured-badge inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-wide">
                 {t.planBadge}
               </span>
               <h3 className="mt-3 text-xl font-bold text-foreground sm:text-2xl">{t.planTitle}</h3>
               <p className="mt-1 text-sm text-muted">{t.planSubtitle}</p>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-muted-strong">
+                {t.planDifferentiator}
+              </p>
 
               <div className="mt-6 flex flex-wrap items-baseline gap-2">
                 <span className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
@@ -90,7 +93,7 @@ export function PricingSection() {
               <ul className="mt-6 space-y-2.5">
                 {FOUNDING_FEATURES.map((feature) => (
                   <li key={feature} className="flex items-start gap-2.5 text-sm text-muted-strong">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-[10px] text-emerald-400">
+                    <span className="pricing-featured-check mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px]">
                       ✓
                     </span>
                     {feature}
@@ -106,9 +109,9 @@ export function PricingSection() {
           </GlassCard>
         </div>
 
-        <GlassCard className="mx-auto mt-6 max-w-3xl border-violet-500/20 bg-violet-500/[0.06] p-5 text-center sm:mt-8 sm:p-6">
+        <GlassCard className="pricing-savings-card mx-auto mt-6 max-w-3xl p-5 text-center sm:mt-8 sm:p-6">
           <p className="text-sm text-muted">{t.mathLabel}</p>
-          <p className="mt-1 text-3xl font-bold tabular-nums text-emerald-400 sm:text-4xl">
+          <p className="pricing-savings-value mt-1 text-3xl font-bold tabular-nums sm:text-4xl">
             {MONTHLY_SAVINGS}
           </p>
           <p className="mt-1 text-sm text-muted">{t.mathPer}</p>

@@ -48,7 +48,7 @@ function PageBlockStrip({ active }: { active: boolean }) {
   const blocks = ["Hero", "Proof", "Offer", "FAQ"];
   return (
     <div className="mt-2 flex gap-1">
-      {blocks.map((label, i) => (
+      {blocks.map((label) => (
         <motion.div
           key={label}
           animate={{ opacity: active ? 1 : 0.45 }}
@@ -269,7 +269,7 @@ export function CapabilityDynamicPanel({
   const accentBar = `bg-gradient-to-r ${accent.progressBar}`;
 
   return (
-    <GlassCard className="overflow-hidden p-5 sm:p-8">
+    <GlassCard className="capability-panel-glass overflow-hidden p-5 sm:p-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
         <motion.div
           animate={isActive ? { scale: [1, 1.04, 1] } : {}}

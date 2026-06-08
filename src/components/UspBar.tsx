@@ -21,7 +21,7 @@ export function UspBar() {
 
   return (
     <>
-      <div className="hidden flex-wrap items-center justify-center gap-x-12 gap-y-6 text-center sm:flex">
+      <div className="hidden flex-wrap items-center justify-center gap-x-8 gap-y-4 text-center sm:flex lg:gap-x-10">
         <div>
           <p className="text-2xl font-bold text-foreground">{items[0].title}</p>
           <p className="text-sm text-muted">{items[0].desc}</p>

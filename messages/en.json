@@ -2,7 +2,6 @@
   "foundingNotice": {
     "badge": "Founding access",
     "limited": "Limited seats",
-    "priceLabel": "Temporary founding price",
     "price": "$187 / 4 weeks",
     "cta": "Claim your seat"
   },
@@ -26,37 +25,40 @@
     "submit": "Complete demo checkout",
     "processing": "Processing…",
     "successTitle": "You're in — demo complete",
-    "successBody": "In production this step confirms your Whop subscription. For now, explore the operator dashboard with the demo login.",
-    "successCta": "Open demo dashboard",
+    "successBody": "In production this step confirms your Whop subscription. For now, scroll to the command center demo below.",
+    "successCta": "See command center",
     "successClose": "Close",
     "errorEmail": "Enter a valid email address.",
     "errorTerms": "Accept the demo terms to continue."
   },
   "nav": {
     "features": "Features",
+    "integrations": "Integrations",
     "howItWorks": "How it works",
     "pricing": "Pricing",
     "faq": "FAQ",
+    "getStarted": "Get started",
     "login": "Log in",
     "menu": "Menu",
     "closeMenu": "Close menu"
   },
   "hero": {
+    "foundingPill": "Founding access · limited seats",
     "eyebrow": "LINE · 24/7 · TELEGRAM · WHATSAPP",
-    "headlinePrefix": "One system that:",
+    "headlinePrefix": "Your AI operator that",
     "headlineWords": [
       "runs market research",
       "creates ad creatives",
       "builds landing pages",
       "manages your store",
-      "scales your ads"
+      "scales profitable ads"
     ],
     "headlineSuffix": "",
-    "descriptionLine1": "One subscription. Twenty-four-seven.",
-    "descriptionLine2": "Frydai runs research, creatives, landing pages and store ops — and ships the work back in Telegram.",
-    "ctaPrimary": "Deploy Frydai",
+    "description": "You built the brand — but you're still the media buyer, researcher, and creative lead after midnight. Frydai is your 24/7 AI operator: competitor intel, ad creatives, landing pages, and store ops — finished and waiting in Telegram.",
+    "descriptionClosingLine1": "One subscription.",
+    "descriptionClosingLine2": "No extra hires.",
+    "ctaPrimary": "Claim your seat",
     "ctaSecondary": "See it work · 92s",
-    "availabilityBadge": "Founding access · limited seats",
     "telegramSender": "Frydai",
     "telegramRole": "operator",
     "telegramTime": "just now",
@@ -113,6 +115,124 @@
     "title": "Everything your store needs. Automated.",
     "subtitle": "Research, creatives, landing pages, store ops and marketing — one operator, 50+ skills included."
   },
+  "integrations": {
+    "eyebrow": "Integrations",
+    "title": "Your entire e-commerce stack. One operator.",
+    "subtitle": "Frydai connects to the tools you already use — Shopify, Meta Ads, Klaviyo, Telegram — and runs work across them in one thread. No tab switching. No CSV exports.",
+    "stat": "50+",
+    "statLabel": "skills & connectors",
+    "howItWorksTitle": "How it works",
+    "steps": [
+      {
+        "title": "Connect your stack",
+        "description": "Link Shopify, Meta Ads, and Telegram in under five minutes. Most connections are one-click OAuth — Frydai handles auth and starts working."
+      },
+      {
+        "title": "Message your operator",
+        "description": "Talk to Frydai like a colleague in Telegram or WhatsApp. \"Pull this week's ROAS.\" \"Scrape competitor angles.\" \"Pause ads above $40 CPA.\" Plain English."
+      },
+      {
+        "title": "Review what shipped",
+        "description": "Frydai runs the work and posts back deliverables — PDFs, creatives, reports. Sensitive actions wait for your approval before they go live."
+      }
+    ],
+    "tiersTitle": "If it's in your stack, Frydai connects to it.",
+    "tiers": [
+      {
+        "id": "native",
+        "badge": "Native e-commerce",
+        "title": "Deep store & ads integrations",
+        "description": "Purpose-built connections with full read/write access for Shopify, Meta Ads, Google Ads, Klaviyo, and Stripe.",
+        "examplesLabel": "Examples",
+        "examples": "Shopify, Meta Ads, Google Ads, Klaviyo, Stripe"
+      },
+      {
+        "id": "channels",
+        "badge": "Your channels",
+        "title": "Where work lands",
+        "description": "Telegram, WhatsApp, and LINE — Frydai delivers reports, creatives, and approvals where you already check your phone.",
+        "examplesLabel": "Examples",
+        "examples": "Telegram, WhatsApp, LINE, Slack"
+      },
+      {
+        "id": "ai",
+        "badge": "AI engine",
+        "title": "Models that power the operator",
+        "description": "Claude, Gemini, Hermes, and OpenAI — routed automatically for research, copy, and execution. You don't pick models; Frydai does.",
+        "examplesLabel": "Examples",
+        "examples": "Claude, Gemini, Hermes, OpenAI, Mistral"
+      }
+    ],
+    "useCasesTitle": "See it in action",
+    "useCases": [
+      {
+        "id": "ads",
+        "tab": "Ads & growth",
+        "story": "Monday morning. Frydai pulls Meta Ads and Google Ads, compares last week vs. this week, flags underperformers, and ships the standup summary to Telegram.",
+        "bullets": [
+          "Cross-channel reporting — spend, ROAS, and CPA in one thread",
+          "Budget shifts and creative sync wait for your approval",
+          "Scheduled repeats — same report every Monday at 8 AM",
+          "Klaviyo flows triggered from live ad performance data"
+        ]
+      },
+      {
+        "id": "store",
+        "tab": "Store ops",
+        "story": "Your operator watches Shopify and Stripe while you sleep — listing updates, inventory alerts, and revenue pulse delivered before your first coffee.",
+        "bullets": [
+          "Catalog and listing updates without opening admin",
+          "Revenue and order summaries in Telegram every morning",
+          "Multi-store support — separate connections per brand",
+          "Notion runbooks updated when ops change"
+        ]
+      },
+      {
+        "id": "research",
+        "tab": "Research & creative",
+        "story": "Frydai scrapes 47 competitors overnight, extracts winning angles, generates static ad frames, and drops the full intel pack in your chat.",
+        "bullets": [
+          "Competitor intel with PDFs your team can share",
+          "Ad creatives iterated and shipped — not just described",
+          "Landing page drafts built from research findings",
+          "Claude and Gemini routed for copy vs. multimodal analysis"
+        ]
+      }
+    ],
+    "directoryTitle": "Integration directory",
+    "directorySubtitle": "Search your stack. Don't see your tool? Frydai can still reach it through custom connectors — just ask.",
+    "searchPlaceholder": "Search integrations…",
+    "directoryEmpty": "No integrations match your search.",
+    "categories": {
+      "all": "All",
+      "channels": "Channels",
+      "store": "Store",
+      "ads": "Ads",
+      "ai": "AI"
+    },
+    "multiAccountTitle": "Multiple stores? Connect them all.",
+    "multiAccountBody": "Two Shopify stores? Separate Meta ad accounts? A US and EU Stripe? Connect them all. Frydai keeps each connection isolated with dedicated tools per account — no confusion, no crossed wires.",
+    "trustTitle": "Your tools. Your data. Your control.",
+    "trustItems": [
+      {
+        "title": "OAuth, not passwords",
+        "description": "Frydai authenticates through official OAuth flows. We never see or store your passwords."
+      },
+      {
+        "title": "Approval before action",
+        "description": "Budget changes, ad edits, and store updates wait for your explicit approval before going live."
+      },
+      {
+        "title": "Per-tool permissions",
+        "description": "Connect only what you need. Each integration has granular scopes — Frydai only accesses what you authorize."
+      },
+      {
+        "title": "Your data stays yours",
+        "description": "Your store data and chat context are never used to train external models. Disconnect any integration with one click."
+      }
+    ],
+    "ctaNote": "Founding access · $187 / 4 weeks · cancel anytime"
+  },
   "howItWorks": {
     "eyebrow": "How it works",
     "title": "Live in minutes. Runs for months.",
@@ -137,7 +257,7 @@
         "tag": "24/7 autonomous"
       }
     ],
-    "ctaPrimary": "Deploy Frydai",
+    "ctaPrimary": "Claim your seat",
     "ctaSecondary": "See command center",
     "ctaNote": "Founding access · $187 / 4 weeks · cancel anytime"
   },
@@ -181,7 +301,8 @@
     "planBadge": "Founding access",
     "planTitle": "Frydai operator",
     "planSubtitle": "Everything in one subscription",
-    "cta": "Deploy Frydai",
+    "planDifferentiator": "All-in-one operator with Telegram delivery — not just chat, but research, creatives, and store ops in one founding plan.",
+    "cta": "Claim your seat",
     "ctaNote": "Limited founding seats · demo checkout",
     "mathLabel": "You save",
     "mathPer": "per month vs. a blended team",
@@ -223,7 +344,7 @@
     "title": "Questions founders ask",
     "subtitle": "Setup, models, skills, and billing — answered in plain language.",
     "stillHaveQuestions": "Still have questions?",
-    "contactCta": "Deploy Frydai — 5 min setup"
+    "contactCta": "Claim your seat — 5 min setup"
   },
   "login": {
     "eyebrow": "Demo access",
@@ -411,7 +532,7 @@
   "footer": {
     "ctaTitle": "Ready to deploy your operator?",
     "ctaSubtitle": "Founding access · $187 / 4 weeks · cancel anytime",
-    "ctaPrimary": "Deploy Frydai",
+    "ctaPrimary": "Claim your seat",
     "ctaSecondary": "See it work · 92s",
     "tagline": "One subscription. Research, creatives, landing pages and store ops — shipped to Telegram 24/7.",
     "channels": "LINE · Telegram · WhatsApp",

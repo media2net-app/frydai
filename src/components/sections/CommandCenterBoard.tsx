@@ -1,23 +1,51 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { CommandCenterBoardChrome } from "@/components/sections/CommandCenterBoardChrome";
+import { CommandCenterPanelView } from "@/components/sections/CommandCenterPanelView";
+import { CommandCenterSidebar } from "@/components/sections/CommandCenterSidebar";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { cx } from "@/lib/cx";
 import type { CommandTask, TaskCategory } from "@/lib/command-center-data";
 import {
   ACTIVITY_SLOT_COUNT,
-  AGENT_ROSTER,
   KANBAN_LIST_HEIGHT_CLASS,
   KANBAN_SLOT_COUNT,
   KANBAN_SLOT_HEIGHT_CLASS,
 } from "@/lib/command-center-data";
 import { copy } from "@/lib/copy";
+import type { CommandCenterViewId } from "@/lib/command-center/nav";
 import {
   useCommandCenterLive,
   type HighlightTone,
   type InProgressTask,
 } from "@/hooks/use-command-center-live";
+import { useInView } from "@/hooks/use-in-view";
+
+function getViewHeader(view: CommandCenterViewId) {
+  const { commandCenter, dashboard: d } = copy;
+
+  if (view === "overview") {
+    return { title: commandCenter.boardTitle, subtitle: null as string | null };
+  }
+
+  const section = {
+    rules: d.rules,
+    agents: d.agents,
+    schedules: d.schedules,
+    skills: d.skills,
+    connectors: d.connectors,
+    reports: d.reports,
+    activity: d.activity,
+    settings: d.settings,
+  }[view];
+
+  return {
+    title: section.title,
+    subtitle: section.subtitle,
+  };
+}
 
 function isInProgressTask(task: CommandTask | InProgressTask): task is InProgressTask {
   return "progress" in task && typeof task.progress === "number";
@@ -319,25 +347,12 @@ function KanbanColumn({
   );
 }
 
-function AnimatedStat({ label, value }: { label: string; value: number | string }) {
-  return (
-    <div className="text-right">
-      <p className="text-[10px] text-muted">{label}</p>
-      <motion.p
-        key={String(value)}
-        initial={{ opacity: 0, y: -4 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-xs font-bold text-foreground"
-      >
-        {value}
-      </motion.p>
-    </div>
-  );
-}
-
 export function CommandCenterBoard() {
   const { commandCenter: t } = copy;
-  const live = useCommandCenterLive();
+  const { ref, inView } = useInView({ rootMargin: "160px 0px" });
+  const live = useCommandCenterLive(inView);
+  const [activeView, setActiveView] = useState<CommandCenterViewId>("overview");
+  const viewHeader = getViewHeader(activeView);
 
   const progressLabels = {
     queued: t.progressQueued,
@@ -351,136 +366,140 @@ export function CommandCenterBoard() {
   );
 
   return (
-    <GlassCard className="command-center-board overflow-hidden p-0">
-      <div className="command-center-board-header flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-border-subtle bg-surface-raised px-4 py-3 sm:px-5">
-        <div className="flex items-center gap-3">
-          <span className="text-sm font-semibold text-foreground">{t.boardTitle}</span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-300">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            </span>
-            {t.live}
-          </span>
-        </div>
-        <div className="flex flex-wrap gap-3 sm:gap-4">
-          <AnimatedStat label={t.stats.agents} value={t.stats.agentsValue} />
-          <AnimatedStat label={t.stats.tasksToday} value={live.stats.tasksToday} />
-          <AnimatedStat label={t.stats.content} value={live.stats.content} />
-          <AnimatedStat label={t.stats.completed} value={live.stats.completed} />
-        </div>
-      </div>
+    <div ref={ref}>
+      <GlassCard className="command-center-board overflow-hidden p-0">
+      <div className="flex min-h-[32rem]">
+        <CommandCenterSidebar activeId={activeView} onSelect={setActiveView} />
 
-      <div className="grid gap-0 lg:grid-cols-[1fr_minmax(0,220px)]">
-        <div className="border-b border-border-subtle p-4 sm:p-5 lg:border-b-0 lg:border-r">
-          <div className="flex flex-col gap-4 md:flex-row md:gap-3">
-            <KanbanColumn
-              title={t.columns.todo}
-              count={live.todo.length}
-              tasks={live.todo}
-              accent="bg-fill-muted text-muted-strong"
-              highlightId={live.highlightId}
-              highlightTone={live.highlightTone}
-              columnKind="todo"
-              progressLabels={progressLabels}
-            />
-            <KanbanColumn
-              title={t.columns.inProgress}
-              count={live.inProgress.length}
-              tasks={live.inProgress}
-              accent="bg-violet-500/25 text-violet-200"
-              highlightId={live.highlightId}
-              highlightTone={live.highlightTone}
-              columnKind="inProgress"
-              progressLabels={progressLabels}
-            />
-            <KanbanColumn
-              title={t.columns.done}
-              count={live.done.length}
-              tasks={live.done}
-              accent="bg-emerald-500/25 text-emerald-200"
-              highlightId={live.highlightId}
-              highlightTone={live.highlightTone}
-              columnKind="done"
-              progressLabels={progressLabels}
-              scrollable
-            />
-          </div>
+        <div className="flex min-w-0 flex-1 flex-col">
+          <CommandCenterBoardChrome
+            placement="header"
+            title={viewHeader.title}
+            subtitle={viewHeader.subtitle}
+            activeView={activeView}
+            stats={live.stats}
+          />
 
-          <div className="mt-5 shrink-0 space-y-2 border-t border-border-subtle pt-4">
-            {(
-              [
-                [t.agentTeams.research, AGENT_ROSTER.research],
-                [t.agentTeams.content, AGENT_ROSTER.content],
-                [t.agentTeams.ops, AGENT_ROSTER.ops],
-              ] as const
-            ).map(([team, agents]) => (
-              <div key={team} className="flex flex-wrap items-center gap-2">
-                <span className="w-16 shrink-0 text-[10px] font-semibold uppercase tracking-wider text-muted">
-                  {team}
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {agents.map((name) => (
-                    <span
-                      key={name}
-                      className="command-center-agent-chip rounded-md border border-border-subtle bg-fill-subtle px-2 py-0.5 text-[10px] font-medium text-muted"
-                    >
-                      {name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={activeView}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18 }}
+              className="min-h-0 flex-1"
+            >
+              {activeView === "overview" ? (
+                <div className="grid min-h-0 h-full gap-0 lg:grid-cols-[1fr_minmax(0,220px)]">
+                  <div className="border-b border-border-subtle p-4 sm:p-5 lg:border-b-0 lg:border-r">
+                    <div className="flex flex-col gap-4 md:flex-row md:gap-3">
+                      <KanbanColumn
+                        title={t.columns.todo}
+                        count={live.todo.length}
+                        tasks={live.todo}
+                        accent="bg-fill-muted text-muted-strong"
+                        highlightId={live.highlightId}
+                        highlightTone={live.highlightTone}
+                        columnKind="todo"
+                        progressLabels={progressLabels}
+                      />
+                      <KanbanColumn
+                        title={t.columns.inProgress}
+                        count={live.inProgress.length}
+                        tasks={live.inProgress}
+                        accent="bg-violet-500/25 text-violet-200"
+                        highlightId={live.highlightId}
+                        highlightTone={live.highlightTone}
+                        columnKind="inProgress"
+                        progressLabels={progressLabels}
+                      />
+                      <KanbanColumn
+                        title={t.columns.done}
+                        count={live.done.length}
+                        tasks={live.done}
+                        accent="bg-emerald-500/25 text-emerald-200"
+                        highlightId={live.highlightId}
+                        highlightTone={live.highlightTone}
+                        columnKind="done"
+                        progressLabels={progressLabels}
+                        scrollable
+                      />
+                    </div>
+                  </div>
 
-        <div className="command-center-activity-panel flex flex-col bg-surface-raised p-4 sm:p-5">
-          <h4 className="mb-3 shrink-0 text-xs font-semibold uppercase tracking-wider text-muted">
-            {t.activityTitle}
-          </h4>
-          <ul className={cx("flex shrink-0 flex-col gap-2 overflow-hidden", KANBAN_LIST_HEIGHT_CLASS)}>
-            {activitySlots.map((item, slotIndex) => (
-              <li key={`activity-slot-${slotIndex}`} className="h-[3.5rem] shrink-0 overflow-hidden">
-                <AnimatePresence mode="wait" initial={false}>
-                  {item ? (
-                    <motion.div
-                      key={item.id}
-                      initial={activityEnter.initial}
-                      animate={activityEnter.animate}
-                      transition={{ duration: 0.22 }}
+                  <div className="command-center-activity-panel flex flex-col bg-surface-raised p-4 sm:p-5">
+                    <h4 className="mb-3 shrink-0 text-xs font-semibold uppercase tracking-wider text-muted">
+                      {t.activityTitle}
+                    </h4>
+                    <ul
                       className={cx(
-                        "command-center-activity-item flex h-full flex-col justify-center rounded-lg border px-3 py-2",
-                        item.time === "Just now"
-                          ? "is-just-now border-emerald-500/25 bg-emerald-500/[0.06]"
-                          : "border-border-subtle bg-surface-raised",
+                        "flex shrink-0 flex-col gap-2 overflow-hidden",
+                        KANBAN_LIST_HEIGHT_CLASS,
                       )}
                     >
-                      <p className="line-clamp-1 text-[11px] leading-snug text-muted-strong">
-                        {item.message}
-                      </p>
-                      <p
-                        className={cx(
-                          "mt-0.5 text-[10px]",
-                          item.time === "Just now"
-                            ? "font-medium text-emerald-400/90"
-                            : "text-muted",
-                        )}
-                      >
-                        {item.time}
-                      </p>
-                    </motion.div>
-                  ) : (
-                    <div
-                      className="command-center-empty-slot h-full rounded-lg border border-dashed border-border-subtle bg-transparent"
-                      aria-hidden
-                    />
-                  )}
-                </AnimatePresence>
-              </li>
-            ))}
-          </ul>
+                      {activitySlots.map((item, slotIndex) => (
+                        <li
+                          key={`activity-slot-${slotIndex}`}
+                          className="h-[3.5rem] shrink-0 overflow-hidden"
+                        >
+                          <AnimatePresence mode="wait" initial={false}>
+                            {item ? (
+                              <motion.div
+                                key={item.id}
+                                initial={activityEnter.initial}
+                                animate={activityEnter.animate}
+                                transition={{ duration: 0.22 }}
+                                className={cx(
+                                  "command-center-activity-item flex h-full flex-col justify-center rounded-lg border px-3 py-2",
+                                  item.time === "Just now"
+                                    ? "is-just-now border-emerald-500/25 bg-emerald-500/[0.06]"
+                                    : "border-border-subtle bg-surface-raised",
+                                )}
+                              >
+                                <p className="line-clamp-1 text-[11px] leading-snug text-muted-strong">
+                                  {item.message}
+                                </p>
+                                <p
+                                  className={cx(
+                                    "mt-0.5 text-[10px]",
+                                    item.time === "Just now"
+                                      ? "font-medium text-emerald-400/90"
+                                      : "text-muted",
+                                  )}
+                                >
+                                  {item.time}
+                                </p>
+                              </motion.div>
+                            ) : (
+                              <div
+                                className="command-center-empty-slot h-full rounded-lg border border-dashed border-border-subtle bg-transparent"
+                                aria-hidden
+                              />
+                            )}
+                          </AnimatePresence>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <div className="command-center-panel-scroll max-h-[28rem] overflow-y-auto p-4 sm:max-h-none sm:p-5">
+                  <CommandCenterPanelView view={activeView} activity={live.activity} />
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          <CommandCenterBoardChrome
+            placement="footer"
+            title={viewHeader.title}
+            subtitle={viewHeader.subtitle}
+            activeView={activeView}
+            stats={live.stats}
+          />
         </div>
       </div>
-    </GlassCard>
+      </GlassCard>
+    </div>
   );
 }

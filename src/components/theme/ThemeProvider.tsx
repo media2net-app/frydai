@@ -1,16 +1,10 @@
 "use client";
 
-import {
-  DEFAULT_THEME,
-  isThemeId,
-  THEME_STORAGE_KEY,
-  type ThemeId,
-} from "@/lib/theme";
+import { DEFAULT_THEME, THEME_STORAGE_KEY, type ThemeId } from "@/lib/theme";
 import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -24,9 +18,7 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 function readStoredTheme(): ThemeId {
-  if (typeof window === "undefined") return DEFAULT_THEME;
-  const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
-  return stored && isThemeId(stored) ? stored : DEFAULT_THEME;
+  return DEFAULT_THEME;
 }
 
 function applyThemeToDocument(theme: ThemeId) {
@@ -35,13 +27,7 @@ function applyThemeToDocument(theme: ThemeId) {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeId>(DEFAULT_THEME);
-
-  useEffect(() => {
-    const initial = readStoredTheme();
-    setThemeState(initial);
-    applyThemeToDocument(initial);
-  }, []);
+  const [theme, setThemeState] = useState<ThemeId>(() => readStoredTheme());
 
   const setTheme = useCallback((id: ThemeId) => {
     setThemeState(id);

@@ -12,6 +12,8 @@ import {
   TRANSFORMATION_METRICS,
 } from "@/lib/transformation-data";
 
+const PANEL_TITLE_CLASS = "text-xl font-bold leading-7 text-foreground sm:text-xl";
+
 function MetricGrid({ variant }: { variant: "before" | "after" }) {
   return (
     <dl className="mt-6 grid grid-cols-2 gap-2 sm:gap-3">
@@ -91,7 +93,7 @@ function TransformationPanel({
         </span>
       </div>
 
-      <h3 className="mt-3 text-lg font-bold text-foreground sm:text-xl">{title}</h3>
+      <h3 className={cx("mt-3", PANEL_TITLE_CLASS)}>{title}</h3>
 
       <div className="mt-6 border-b border-border-subtle pb-6">
         <p

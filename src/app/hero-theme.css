@@ -7,6 +7,80 @@
   pointer-events: none;
   position: absolute;
   inset: 0;
+  z-index: 1;
+}
+
+/* ——— Cobe globe (Shopify live analytics style) ——— */
+.hero-globe {
+  z-index: 0;
+}
+
+.hero-globe-stage {
+  position: absolute;
+  left: 50%;
+  top: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(200vw, 2160px);
+  height: min(200vw, 2160px);
+  transform: translate(-50%, -50%);
+  opacity: 0.95;
+}
+
+.hero-globe-canvas-wrap {
+  position: relative;
+  aspect-ratio: 1;
+  width: min(184vw, 120vh, 1840px);
+  height: auto;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.hero-globe-canvas-wrap > div:has(canvas) {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: 1;
+}
+
+.hero-globe-canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.hero-globe-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 78% 68% at 50% 88%, transparent 18%, rgba(245, 243, 252, 0.32) 52%, rgba(245, 243, 252, 0.92) 82%),
+    linear-gradient(180deg, rgba(245, 243, 252, 0.72) 0%, transparent 28%, transparent 62%, rgba(245, 243, 252, 0.45) 100%);
+  z-index: 1;
+}
+
+[data-theme="dark"] .hero-globe-vignette {
+  background:
+    radial-gradient(ellipse 78% 68% at 50% 88%, transparent 18%, rgba(8, 8, 15, 0.38) 52%, rgba(8, 8, 15, 0.94) 82%),
+    linear-gradient(180deg, rgba(8, 8, 15, 0.75) 0%, transparent 28%, transparent 62%, rgba(8, 8, 15, 0.5) 100%);
+}
+
+@media (max-width: 1023px) {
+  .hero-globe-stage {
+    left: 50%;
+    top: 90%;
+    width: min(220vw, 1520px);
+    height: min(220vw, 1520px);
+    opacity: 0.45;
+  }
+
+  .hero-globe-canvas-wrap {
+    width: min(196vw, 96vh, 1280px);
+  }
 }
 
 [data-theme="dark"] .hero-glow-primary {
@@ -68,10 +142,195 @@
   );
 }
 
-[data-theme="light"] .hero-usp-strip {
+/* Hero = 1 viewport + 100px extra onderaan */
+.hero-viewport {
+  display: flex;
+  flex-direction: column;
+  box-sizing: content-box;
+  height: 100svh;
+  height: 100dvh;
+  padding-bottom: 100px;
+  min-height: 0;
+}
+
+.hero-viewport-main {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Demo-sectie overlapt hero/globe — zichtbaar in eerste viewport */
+.hero-demo-overlap {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(clamp(-16rem, -26vh, -10rem) + 20px);
+  padding-top: 0;
+}
+
+@media (min-width: 1024px) {
+  .hero-demo-overlap {
+    margin-top: calc(clamp(-22rem, -36vh, -17rem) + 20px);
+    padding-top: 2.25rem;
+  }
+}
+
+/* Mobiel: 3 cards onder intro-tekst in hero-viewport-main */
+.hero-mobile-showcase-below {
+  margin-top: 0.25rem;
+}
+
+/* USP-pill bovenaan #demo — desktop absoluut op naad */
+.hero-demo-usp-slot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  transform: translateY(-50%);
+  isolation: isolate;
+  pointer-events: none;
+}
+
+@media (max-width: 1023px) {
+  .hero-demo-overlap {
+    padding-top: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-demo-overlap {
+    padding-top: 2.25rem;
+  }
+}
+
+.hero-usp-rail {
+  position: relative;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.hero-usp-pill {
+  pointer-events: auto;
+}
+
+[data-theme="light"] .hero-usp-pill {
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  background: rgba(255, 255, 255, 0.65) !important;
+  border-color: rgba(124, 58, 237, 0.14) !important;
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.06),
+    0 8px 28px rgba(91, 33, 182, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .hero-usp-pill {
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  backdrop-filter: blur(14px) saturate(1.25);
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* #demo — één glass-paneel loopt door achter intro + Command Center board */
+[data-theme="light"] #demo.command-center-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 60px;
+  bottom: 2rem;
+  left: 60px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.82);
   background: rgba(255, 255, 255, 0.72);
-  border-top-color: rgba(124, 58, 237, 0.12);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(24px) saturate(1.45);
+  backdrop-filter: blur(24px) saturate(1.45);
+  box-shadow:
+    0 -4px 24px rgba(10, 10, 18, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+@media (min-width: 640px) {
+  [data-theme="light"] #demo.command-center-section::before {
+    border-radius: 2rem;
+  }
+}
+
+[data-theme="dark"] #demo.command-center-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 60px;
+  bottom: 2rem;
+  left: 60px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 1.75rem;
+  background: #0c0c14;
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.06) inset;
+}
+
+@media (min-width: 640px) {
+  [data-theme="dark"] #demo.command-center-section::before {
+    border-radius: 2rem;
+  }
+}
+
+[data-theme="light"] #demo.command-center-section .hero-next-section-cap,
+[data-theme="dark"] #demo.command-center-section .hero-next-section-cap {
+  margin-bottom: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Hero → volgende sectie: USP op de naad + lichte glass cap */
+[data-theme="light"] .hero-next-section-cap {
+  -webkit-backdrop-filter: blur(24px) saturate(1.45);
+  backdrop-filter: blur(24px) saturate(1.45);
+  background: rgba(255, 255, 255, 0.72);
+  border-top: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 -4px 24px rgba(10, 10, 18, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+[data-theme="dark"] .hero-next-section-cap {
+  background: #0c0c14;
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.06) inset;
+}
+
+[data-theme="light"] .hero-next-section-eyebrow {
+  color: #0f766e;
+}
+
+[data-theme="light"] .hero-next-section-title {
+  color: #1e1b2e;
+}
+
+[data-theme="light"] .hero-next-section-subtitle {
+  color: rgba(30, 27, 46, 0.68);
+}
+
+[data-theme="dark"] .hero-next-section-eyebrow {
+  color: rgba(45, 212, 191, 0.85);
+}
+
+[data-theme="dark"] .hero-next-section-title {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .hero-next-section-subtitle {
+  color: rgba(255, 255, 255, 0.65);
 }
 
 /* Hero showcase — frosted glass (licht) */
@@ -204,6 +463,41 @@
   color: #0f766e;
 }
 
+[data-theme="dark"] .hero-eyebrow {
+  color: rgba(45, 212, 191, 0.9);
+}
+
+[data-theme="light"] .hero-cta-price {
+  color: #5b21b6;
+}
+
+[data-theme="dark"] .hero-cta-price {
+  color: #c4b5fd;
+}
+
+[data-theme="light"] .hero-founding-pill {
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  backdrop-filter: blur(24px) saturate(1.6);
+  background: rgba(255, 255, 255, 0.32) !important;
+  border-color: rgba(255, 255, 255, 0.78) !important;
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.12),
+    0 6px 24px rgba(91, 33, 182, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    inset 0 -1px 0 rgba(124, 58, 237, 0.04);
+}
+
+[data-theme="dark"] .hero-founding-pill {
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  backdrop-filter: blur(20px) saturate(1.4);
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 8px 28px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
 [data-theme="light"] .site-header--light-top {
   /* transparant bovenaan hero */
 }
@@ -213,3 +507,27 @@
   border-bottom-color: rgba(124, 58, 237, 0.12);
   box-shadow: 0 4px 24px rgba(91, 33, 182, 0.08);
 }
+
+/* Header — centered nav pill + CTA (Astrum-style) */
+[data-theme="light"] .header-nav-glass {
+  -webkit-backdrop-filter: blur(22px) saturate(1.45);
+  backdrop-filter: blur(22px) saturate(1.45);
+  background: rgba(255, 255, 255, 0.52) !important;
+  border-color: rgba(255, 255, 255, 0.78) !important;
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.08),
+    0 4px 20px rgba(91, 33, 182, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+}
+
+[data-theme="dark"] .header-nav-glass {
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  backdrop-filter: blur(20px) saturate(1.3);
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Header Get started — styles live on DeployFrydaiButton variant="header" (Tailwind) */

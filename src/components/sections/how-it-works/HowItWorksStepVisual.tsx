@@ -4,18 +4,15 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { cx } from "@/lib/cx";
+import { platformLogos } from "@/lib/platform-logos";
 
 const VISUAL_AREA = "flex h-full min-h-[11rem] w-full flex-col";
 
 function ConnectVisual({ active }: { active: boolean }) {
   const nodes = [
-    { id: "shopify", label: "Shopify", letter: "S", letterClass: "text-[#96bf48]" },
-    { id: "meta", label: "Meta Ads", letter: "M", letterClass: "text-[#6eb0ff]" },
-    {
-      id: "telegram",
-      label: "Telegram",
-      icon: "/platforms/telegram.svg",
-    },
+    { id: "shopify", label: "Shopify", icon: platformLogos.shopify },
+    { id: "meta", label: "Meta Ads", icon: platformLogos.meta },
+    { id: "telegram", label: "Telegram", icon: platformLogos.telegram },
   ];
 
   return (
@@ -34,18 +31,14 @@ function ConnectVisual({ active }: { active: boolean }) {
             transition={{ duration: 1.8, repeat: active && i === 1 ? Infinity : 0 }}
             className="relative z-[1] flex flex-col items-center gap-2"
           >
-            {node.icon ? (
-              <Image src={node.icon} alt="" width={28} height={28} className="object-contain" />
-            ) : (
-              <span
-                className={cx(
-                  "text-lg font-bold leading-none",
-                  "letterClass" in node ? node.letterClass : "",
-                )}
-              >
-                {node.letter}
-              </span>
-            )}
+            <Image
+              src={node.icon}
+              alt=""
+              width={28}
+              height={28}
+              className="object-contain"
+              unoptimized
+            />
             <span className="text-[9px] font-medium text-muted">{node.label}</span>
           </motion.div>
         ))}

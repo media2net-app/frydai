@@ -6,11 +6,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { cx } from "@/lib/cx";
 import { copy } from "@/lib/copy";
+import { platformLogos } from "@/lib/platform-logos";
 
 const CHANNELS = [
-  { id: "telegram", label: "Telegram", icon: "/platforms/telegram.svg" },
+  { id: "telegram", label: "Telegram", icon: platformLogos.telegram },
   { id: "line", label: "LINE" },
-  { id: "whatsapp", label: "WhatsApp", icon: "/platforms/whatsapp.svg" },
+  { id: "whatsapp", label: "WhatsApp", icon: platformLogos.whatsapp },
 ] as const;
 
 type ChatMessage = {

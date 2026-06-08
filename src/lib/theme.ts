@@ -7,7 +7,7 @@ export const THEMES = [
 
 export type ThemeId = (typeof THEMES)[number]["id"];
 
-export const DEFAULT_THEME: ThemeId = "dark";
+export const DEFAULT_THEME: ThemeId = "light";
 
 export function isThemeId(value: string): value is ThemeId {
   return THEMES.some((t) => t.id === value);

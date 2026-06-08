@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cx } from "@/lib/cx";
+import { platformLogos } from "@/lib/platform-logos";
 
 export type IntegrationLogo = {
   id: string;
@@ -11,11 +12,11 @@ export type IntegrationLogo = {
 
 /** Frydai stack: frydai.ai + channel partners (icons styled like ecomclaw.co) */
 export const HERO_INTEGRATION_LOGOS: IntegrationLogo[] = [
-  { id: "claude", name: "Claude", src: "/platforms/claude.svg", iconSize: 24 },
+  { id: "claude", name: "Claude", src: platformLogos.claude, iconSize: 24 },
   { id: "hermes", name: "Hermes", src: "/platforms/hermes.png", iconSize: 24 },
-  { id: "gemini", name: "Gemini", src: "/platforms/gemini.png", iconSize: 24 },
-  { id: "telegram", name: "Telegram", src: "/platforms/telegram.svg", iconSize: 24 },
-  { id: "whatsapp", name: "WhatsApp", src: "/platforms/whatsapp.svg", iconSize: 24 },
+  { id: "gemini", name: "Gemini", src: platformLogos.gemini, iconSize: 24 },
+  { id: "telegram", name: "Telegram", src: platformLogos.telegram, iconSize: 24 },
+  { id: "whatsapp", name: "WhatsApp", src: platformLogos.whatsapp, iconSize: 24 },
 ];
 
 export function IntegrationLogoMark({

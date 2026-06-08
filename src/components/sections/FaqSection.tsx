@@ -19,13 +19,14 @@ function FaqItemRow({
 }) {
   return (
     <div className="border-b border-border-subtle last:border-0">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        className="flex w-full items-start justify-between gap-4 py-4 text-left sm:py-5"
-      >
-        <span className="text-sm font-semibold text-foreground sm:text-base">{item.question}</span>
+      <h3 className="text-xl font-bold leading-7 text-foreground">
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          className="flex w-full items-start justify-between gap-4 py-4 text-left sm:py-5"
+        >
+          <span>{item.question}</span>
         <span
           className={cx(
             "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors",
@@ -45,7 +46,8 @@ function FaqItemRow({
             <path strokeLinecap="round" d="M12 6v12M6 12h12" />
           </svg>
         </span>
-      </button>
+        </button>
+      </h3>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div

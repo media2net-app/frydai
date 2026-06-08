@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useInView } from "@/hooks/use-in-view";
 import { AnimatePresence, motion } from "framer-motion";
 import { cx } from "@/lib/cx";
 import {
@@ -35,9 +36,11 @@ export function CapabilitiesSection() {
   const { capabilities: t } = copy;
   const [active, setActive] = useState<CapabilityId>("research");
   const activeItem = CAPABILITIES.find((c) => c.id === active) ?? CAPABILITIES[0];
+  const { ref, inView } = useInView({ rootMargin: "120px 0px" });
 
   return (
     <section
+      ref={ref}
       id="capabilities"
       className="scroll-mt-20 border-t border-border-subtle bg-surface py-16 sm:py-24 md:py-28"
     >
@@ -64,8 +67,8 @@ export function CapabilitiesSection() {
                   className={cx(
                     "shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
                     isActive
-                      ? "border-violet-500/50 bg-violet-500/20 text-white shadow-[0_0_20px_rgba(124,58,237,0.25)]"
-                      : "border-border-subtle bg-inset text-muted hover:border-border-subtle hover:text-muted-strong",
+                      ? "border-violet-600 bg-violet-600 text-white shadow-[0_4px_24px_rgba(124,58,237,0.4)]"
+                      : "capability-tab-inactive border-border-subtle text-muted hover:border-violet-500/25 hover:text-muted-strong",
                   )}
                 >
                   {cap.label}
@@ -76,7 +79,7 @@ export function CapabilitiesSection() {
 
           <div className="mt-6 sm:mt-8">
             <AnimatePresence mode="wait">
-              <CapabilityPanel item={activeItem} tabActive={active === activeItem.id} />
+              <CapabilityPanel item={activeItem} tabActive={inView && active === activeItem.id} />
             </AnimatePresence>
           </div>
         </div>

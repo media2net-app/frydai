@@ -5,23 +5,26 @@ import type { CapabilityId } from "@/lib/capabilities-data";
 import { getDemoConfig } from "@/lib/capability-demo/configs";
 import type { DemoState } from "@/lib/capability-demo/types";
 
+function getInitialDemoState(capabilityId: CapabilityId): DemoState {
+  const cfg = getDemoConfig(capabilityId);
+  if (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return cfg.reducedMotion;
+  }
+  return cfg.initial;
+}
+
 export function useCapabilityPipelineDemo(capabilityId: CapabilityId, enabled: boolean) {
   const config = getDemoConfig(capabilityId);
-  const [state, setState] = useState<DemoState>(() => getDemoConfig(capabilityId).initial);
-
-  useEffect(() => {
-    setState(getDemoConfig(capabilityId).initial);
-  }, [capabilityId]);
+  const [state, setState] = useState<DemoState>(() => getInitialDemoState(capabilityId));
 
   useEffect(() => {
     if (!enabled) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const cfg = getDemoConfig(capabilityId);
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setState(cfg.reducedMotion);
-      return;
-    }
 
     const interval = setInterval(() => {
       setState((prev) => cfg.tick(prev));

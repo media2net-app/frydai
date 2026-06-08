@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useIsClient } from "@/hooks/use-is-client";
 import { copy } from "@/lib/copy";
 import { cx } from "@/lib/cx";
 import {
@@ -9,8 +10,6 @@ import {
   FRYDAI_PERIOD,
   FRYDAI_PRICE,
 } from "@/lib/pricing-data";
-import Link from "next/link";
-
 type DemoCheckoutModalProps = {
   open: boolean;
   onClose: () => void;
@@ -30,7 +29,7 @@ function isValidEmail(value: string) {
 
 export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
   const t = copy.checkoutModal;
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsClient();
   const [step, setStep] = useState<Step>("form");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -45,9 +44,10 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
     setError(null);
   }, []);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const handleClose = useCallback(() => {
+    reset();
+    onClose();
+  }, [reset, onClose]);
 
   useEffect(() => {
     if (!open) {
@@ -57,7 +57,7 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
 
     document.body.style.overflow = "hidden";
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && step !== "processing") onClose();
+      if (e.key === "Escape" && step !== "processing") handleClose();
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -65,11 +65,7 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open, onClose, step]);
-
-  useEffect(() => {
-    if (!open) reset();
-  }, [open, reset]);
+  }, [open, handleClose, step]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,7 +96,7 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
         type="button"
         aria-label={t.close}
         onClick={() => {
-          if (step !== "processing") onClose();
+          if (step !== "processing") handleClose();
         }}
         disabled={step === "processing"}
         className="absolute inset-0 bg-surface/80 backdrop-blur-md disabled:cursor-wait"
@@ -119,7 +115,7 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
           </p>
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             disabled={step === "processing"}
             aria-label={t.close}
             className="rounded-lg p-1.5 text-muted-strong transition-colors hover:bg-fill-muted hover:text-foreground disabled:opacity-40"
@@ -138,15 +134,16 @@ export function DemoCheckoutModal({ open, onClose }: DemoCheckoutModalProps) {
               </div>
               <h3 className="mt-4 text-lg font-bold text-foreground">{t.successTitle}</h3>
               <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted">{t.successBody}</p>
-              <Link
-                href="/login"
+              <a
+                href="#demo"
+                onClick={handleClose}
                 className="mt-6 inline-flex w-full justify-center rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-500 px-6 py-3 text-sm font-semibold text-foreground shadow-lg shadow-violet-500/25 transition-all hover:brightness-110"
               >
                 {t.successCta} →
-              </Link>
+              </a>
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleClose}
                 className="mt-3 text-sm text-muted transition-colors hover:text-foreground/70"
               >
                 {t.successClose}

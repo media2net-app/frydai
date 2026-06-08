@@ -3,8 +3,8 @@
 @plugin "tailwindcss-animate";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-ubuntu);
+  --font-mono: var(--font-ubuntu-mono);
   --color-surface: var(--theme-surface);
   --color-surface-elevated: var(--theme-surface-elevated);
   --color-foreground: var(--theme-foreground);
@@ -80,7 +80,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-ubuntu), system-ui, sans-serif;
 }
 
 /* Site-wide modern purple scrollbars (page + overflow regions) */
@@ -162,6 +162,27 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     transform: none !important;
+  }
+}
+
+/* Gelijk aan #demo sectie / USP-bar (1.75rem → 2rem) */
+.radius-section {
+  border-radius: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .radius-section {
+    border-radius: 2rem;
+  }
+}
+
+.radius-section-inner {
+  border-radius: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .radius-section-inner {
+    border-radius: 1.5rem;
   }
 }
 

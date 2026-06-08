@@ -32,12 +32,12 @@
 [data-theme="light"] .creatives-glass-card {
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
   backdrop-filter: blur(20px) saturate(1.4);
-  background: rgba(255, 255, 255, 0.45) !important;
-  border-color: rgba(255, 255, 255, 0.75) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(124, 58, 237, 0.22) !important;
   box-shadow:
-    0 0 0 1px rgba(124, 58, 237, 0.1),
-    0 8px 28px rgba(91, 33, 182, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+    0 0 0 1px rgba(124, 58, 237, 0.14),
+    0 8px 28px rgba(91, 33, 182, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
 }
 
 [data-theme="light"] .creatives-section .headline-accent {
@@ -107,10 +107,163 @@
 [data-theme="light"] .testimonials-glass-card {
   -webkit-backdrop-filter: blur(18px) saturate(1.35);
   backdrop-filter: blur(18px) saturate(1.35);
-  background: rgba(255, 255, 255, 0.5) !important;
-  border-color: rgba(124, 58, 237, 0.12) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(124, 58, 237, 0.18) !important;
   box-shadow:
-    0 0 0 1px rgba(124, 58, 237, 0.06),
-    0 6px 24px rgba(91, 33, 182, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+    0 0 0 1px rgba(124, 58, 237, 0.08),
+    0 8px 28px rgba(91, 33, 182, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88) !important;
+}
+
+[data-theme="light"] .results-kpi-label {
+  color: rgba(30, 27, 46, 0.72) !important;
+}
+
+[data-theme="light"] .results-kpi-after {
+  color: #1e1b2e !important;
+}
+
+[data-theme="light"] .results-kpi-trend {
+  color: #047857 !important;
+}
+
+/* Pricing — donker: rood (team) / groen (Frydai) */
+[data-theme="dark"] .pricing-team-card {
+  border-color: rgba(244, 63, 94, 0.22) !important;
+  background: linear-gradient(
+    165deg,
+    rgba(244, 63, 94, 0.08) 0%,
+    rgba(12, 12, 20, 0.95) 55%
+  ) !important;
+}
+
+[data-theme="dark"] .pricing-team-eyebrow {
+  color: rgba(251, 113, 133, 0.85);
+}
+
+[data-theme="dark"] .pricing-team-total {
+  border-color: rgba(244, 63, 94, 0.2) !important;
+  background: rgba(244, 63, 94, 0.08) !important;
+}
+
+[data-theme="dark"] .pricing-featured-card {
+  border-color: rgba(16, 185, 129, 0.28) !important;
+  background: linear-gradient(
+    165deg,
+    rgba(16, 185, 129, 0.1) 0%,
+    rgba(12, 12, 20, 0.96) 52%
+  ) !important;
+  box-shadow: 0 0 48px rgba(16, 185, 129, 0.12) !important;
+}
+
+[data-theme="dark"] .pricing-featured-glow {
+  background: rgba(16, 185, 129, 0.18);
+}
+
+[data-theme="dark"] .pricing-featured-glow-secondary {
+  background: rgba(52, 211, 153, 0.1);
+}
+
+[data-theme="dark"] .pricing-featured-badge {
+  border-color: rgba(16, 185, 129, 0.35) !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  color: rgba(110, 231, 183, 0.95) !important;
+}
+
+[data-theme="dark"] .pricing-featured-check {
+  background: rgba(16, 185, 129, 0.2) !important;
+  color: #6ee7b7 !important;
+}
+
+[data-theme="dark"] .pricing-savings-card {
+  border-color: rgba(16, 185, 129, 0.22) !important;
+  background: rgba(16, 185, 129, 0.08) !important;
+}
+
+[data-theme="dark"] .pricing-savings-value {
+  color: #6ee7b7 !important;
+}
+
+/* Capabilities — glass panel + step cards */
+[data-theme="light"] .capability-tab-inactive {
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
+  background: rgba(255, 255, 255, 0.55) !important;
+}
+
+[data-theme="light"] .capability-panel-glass {
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  backdrop-filter: blur(28px) saturate(1.5);
+  background: rgba(255, 255, 255, 0.58) !important;
+  border-color: rgba(124, 58, 237, 0.16) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.75),
+    0 12px 48px rgba(91, 33, 182, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92) !important;
+}
+
+[data-theme="light"] .capability-step-card--idle {
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  backdrop-filter: blur(18px) saturate(1.35);
+  background: rgba(255, 255, 255, 0.42) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+[data-theme="light"] .capability-step-card--done {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background: rgba(236, 253, 245, 0.45) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="light"] .capability-step-card--active {
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.88),
+    0 4px 20px rgba(124, 58, 237, 0.12) !important;
+}
+
+[data-theme="dark"] .capability-tab-inactive {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+[data-theme="dark"] .capability-panel-glass {
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  backdrop-filter: blur(24px) saturate(1.3);
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(124, 58, 237, 0.22) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme="dark"] .capability-step-card--idle {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+[data-theme="dark"] .capability-step-card--done {
+  background: rgba(16, 185, 129, 0.08) !important;
+}
+
+[data-theme="dark"] .capability-step-card--active {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Integrations — Viktor-style directory */
+[data-theme="light"] .integrations-section {
+  --section-fade-color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f6ff 100%);
+}
+
+[data-theme="light"] .integration-directory-tile {
+  background: rgba(255, 255, 255, 0.72) !important;
+}
+
+[data-theme="light"] .integration-tier-card {
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  backdrop-filter: blur(20px) saturate(1.4);
 }

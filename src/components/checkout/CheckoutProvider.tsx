@@ -1,7 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
-import { DemoCheckoutModal } from "@/components/checkout/DemoCheckoutModal";
+
+const DemoCheckoutModal = dynamic(
+  () =>
+    import("@/components/checkout/DemoCheckoutModal").then((m) => ({
+      default: m.DemoCheckoutModal,
+    })),
+  { ssr: false },
+);
 
 type CheckoutContextValue = {
   openCheckout: () => void;
@@ -25,7 +33,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
   return (
     <CheckoutContext.Provider value={value}>
       {children}
-      <DemoCheckoutModal open={open} onClose={closeCheckout} />
+      {open ? <DemoCheckoutModal open onClose={closeCheckout} /> : null}
     </CheckoutContext.Provider>
   );
 }

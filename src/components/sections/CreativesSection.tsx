@@ -5,8 +5,8 @@ import { cx } from "@/lib/cx";
 import { copy } from "@/lib/copy";
 import { FRYDAI_CREATIVES } from "@/lib/creatives-data";
 
-const CREATIVES_PER_HALF = [...FRYDAI_CREATIVES, ...FRYDAI_CREATIVES];
-const MARQUEE_TRACK = [...CREATIVES_PER_HALF, ...CREATIVES_PER_HALF];
+const FEATURED_CREATIVES = FRYDAI_CREATIVES.slice(0, 6);
+const MARQUEE_TRACK = [...FEATURED_CREATIVES, ...FEATURED_CREATIVES];
 
 function CreativeCard({ src, alt }: { src: string; alt: string }) {
   return (
@@ -18,7 +18,7 @@ function CreativeCard({ src, alt }: { src: string; alt: string }) {
           fill
           sizes="(max-width: 640px) 168px, 220px"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          quality={80}
+          quality={75}
           draggable={false}
         />
       </div>
@@ -68,7 +68,7 @@ export function CreativesSection() {
               {MARQUEE_TRACK.map((creative, index) => (
                 <div
                   key={`${creative.id}-${index}`}
-                  aria-hidden={index >= CREATIVES_PER_HALF.length}
+                  aria-hidden={index >= FEATURED_CREATIVES.length}
                 >
                   <CreativeCard src={creative.src} alt={creative.alt} />
                 </div>

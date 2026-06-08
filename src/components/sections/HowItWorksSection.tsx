@@ -112,7 +112,7 @@ export function HowItWorksSection() {
             <DeployFrydaiButton className="w-full sm:w-auto" />
             <a
               href={site.demoUrl}
-              className="inline-flex w-full justify-center rounded-full border border-border-subtle bg-fill-subtle px-8 py-3.5 text-base font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-fill-muted sm:w-auto"
+              className="radius-section inline-flex w-full justify-center border border-border-subtle bg-fill-subtle px-8 py-3.5 text-base font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-fill-muted sm:w-auto"
             >
               {t.ctaSecondary}
             </a>

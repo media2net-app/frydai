@@ -20,16 +20,18 @@ const cardMotion = {
 
 type HeroOperatorShowcaseProps = {
   variant?: "desktop" | "mobile";
+  /** column = rechterhelft hero op mobiel (compact) */
+  mobileLayout?: "full" | "column";
 };
 
 function TelegramCard({ className }: { className?: string }) {
   const { hero } = copy;
 
   return (
-    <GlassCard className={cx("hero-showcase-card p-4", className)}>
-      <div className="flex items-start gap-3">
+    <GlassCard className={cx("hero-showcase-card h-full p-4", className)}>
+      <div className="flex h-full items-start gap-3">
         <FrydaiMark className="h-10 w-10 shrink-0" variant="purple" />
-        <div className="min-w-0 flex-1">
+        <div className="flex min-w-0 flex-1 flex-col">
           <p className="text-sm font-semibold text-foreground">{hero.telegramSender}</p>
           <p className="mt-0.5 text-xs text-muted">
             {hero.telegramRole} · {hero.telegramTime}
@@ -55,14 +57,16 @@ function RevenueChip({ className }: { className?: string }) {
   const { hero } = copy;
 
   return (
-    <GlassCard className={cx("hero-showcase-card p-3", className)}>
-      <p className="text-[10px] font-medium uppercase tracking-wider text-muted">
-        {hero.revenueLabel}
-      </p>
-      <p className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-        {hero.revenueValue}
-      </p>
-      <p className="mt-0.5 text-xs font-medium text-emerald-400">{hero.revenueTrend}</p>
+    <GlassCard className={cx("hero-showcase-card h-full p-3", className)}>
+      <div className="flex h-full flex-col justify-center">
+        <p className="text-[10px] font-medium uppercase tracking-wider text-muted">
+          {hero.revenueLabel}
+        </p>
+        <p className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+          {hero.revenueValue}
+        </p>
+        <p className="mt-0.5 text-xs font-medium text-emerald-400">{hero.revenueTrend}</p>
+      </div>
     </GlassCard>
   );
 }
@@ -99,7 +103,7 @@ function ResearchProgressBar() {
 
 function TaskStack({ className }: { className?: string }) {
   return (
-    <GlassCard className={cx("hero-showcase-card p-3", className)}>
+    <GlassCard className={cx("hero-showcase-card h-full p-3", className)}>
       <div className="mb-2 flex items-center justify-between">
         <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
           Live queue
@@ -136,7 +140,7 @@ function TaskStack({ className }: { className?: string }) {
 
 function DesktopShowcase() {
   return (
-    <div className="relative mx-auto w-full max-w-[500px] min-h-[22rem] sm:min-h-[24rem] xl:max-w-[520px]">
+    <div className="relative mx-auto aspect-[5/4] w-full max-w-[30rem]">
       <div
         className="pointer-events-none absolute -right-4 top-1/2 h-56 w-56 -translate-y-1/2 rounded-full bg-violet-600/25 blur-3xl"
         aria-hidden
@@ -149,7 +153,7 @@ function DesktopShowcase() {
       <motion.div
         {...cardMotion}
         transition={{ duration: 0.45, delay: 0 }}
-        className="absolute left-0 top-0 z-10 w-[46%] -rotate-3"
+        className="absolute left-0 top-0 z-10 w-[44%] -rotate-3"
       >
         <RevenueChip />
       </motion.div>
@@ -157,7 +161,7 @@ function DesktopShowcase() {
       <motion.div
         {...cardMotion}
         transition={{ duration: 0.45, delay: 0.08 }}
-        className="absolute left-[6%] top-[42%] z-20 w-[52%] rotate-2"
+        className="absolute left-[4%] top-[40%] z-20 w-[48%] rotate-2"
       >
         <TaskStack />
       </motion.div>
@@ -165,7 +169,7 @@ function DesktopShowcase() {
       <motion.div
         {...cardMotion}
         transition={{ duration: 0.5, delay: 0.16 }}
-        className="absolute right-0 top-[10%] z-30 w-[58%] -rotate-1"
+        className="absolute right-0 top-[8%] z-30 w-[54%] -rotate-1"
       >
         <motion.div
           animate={{ y: [0, -6, 0] }}
@@ -178,13 +182,41 @@ function DesktopShowcase() {
   );
 }
 
+const MOBILE_CARD_CLASS = "flex h-full w-full flex-col";
+
 const MOBILE_SLIDES = [
-  { id: "telegram", label: "Operator update", render: () => <TelegramCard /> },
-  { id: "revenue", label: "Revenue", render: () => <RevenueChip /> },
-  { id: "queue", label: "Live queue", render: () => <TaskStack /> },
+  {
+    id: "telegram",
+    label: "Operator update",
+    render: () => <TelegramCard className={MOBILE_CARD_CLASS} />,
+  },
+  {
+    id: "revenue",
+    label: "Revenue",
+    render: () => <RevenueChip className={MOBILE_CARD_CLASS} />,
+  },
+  {
+    id: "queue",
+    label: "Live queue",
+    render: () => <TaskStack className={MOBILE_CARD_CLASS} />,
+  },
 ] as const;
 
-function MobileShowcase() {
+/** Card body height — fits tallest card (live queue) */
+const MOBILE_CARD_HEIGHT_FULL = "h-[17rem] sm:h-[17.5rem]";
+const MOBILE_CARD_HEIGHT_COLUMN = "h-[12.5rem] sm:h-[13.5rem]";
+/** Space for stacked cards peeking below the front card */
+const MOBILE_STACK_PEEK_FULL = "pb-11";
+const MOBILE_STACK_PEEK_COLUMN = "pb-7";
+
+function stackDepth(cardIndex: number, frontIndex: number) {
+  return (cardIndex - frontIndex + MOBILE_SLIDES.length) % MOBILE_SLIDES.length;
+}
+
+function MobileShowcase({ layout = "full" }: { layout?: "full" | "column" }) {
+  const isColumn = layout === "column";
+  const cardHeight = isColumn ? MOBILE_CARD_HEIGHT_COLUMN : MOBILE_CARD_HEIGHT_FULL;
+  const stackPeek = isColumn ? MOBILE_STACK_PEEK_COLUMN : MOBILE_STACK_PEEK_FULL;
   const [active, setActive] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -202,7 +234,7 @@ function MobileShowcase() {
 
     const onScroll = () => {
       const { scrollLeft, offsetWidth } = el;
-      const index = Math.round(scrollLeft / Math.max(offsetWidth * 0.85, 1));
+      const index = Math.round(scrollLeft / Math.max(offsetWidth, 1));
       setActive(Math.min(Math.max(index, 0), MOBILE_SLIDES.length - 1));
     };
 
@@ -211,26 +243,40 @@ function MobileShowcase() {
   }, []);
 
   return (
-    <div className="relative -mx-4 sm:mx-0">
+    <div className={cx("relative overflow-visible", isColumn ? "mx-0" : "-mx-4 sm:mx-0", stackPeek)}>
       <div
         ref={scrollRef}
-        className="flex gap-3 overflow-x-auto overscroll-x-contain px-4 pb-1 [scrollbar-width:none] snap-x snap-mandatory [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="flex overflow-x-auto overflow-y-visible overscroll-x-contain [scrollbar-width:none] snap-x snap-mandatory [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         aria-roledescription="carousel"
         aria-label="Frydai operator preview"
       >
-        {MOBILE_SLIDES.map((slide, index) => (
+        {MOBILE_SLIDES.map((frontSlide, frontIndex) => (
           <div
-            key={slide.id}
-            className="w-[min(100%,22rem)] shrink-0 snap-center sm:w-[20rem]"
-            aria-label={slide.label}
+            key={frontSlide.id}
+            className={cx("w-full shrink-0 snap-center", isColumn ? "px-0" : "px-4")}
+            aria-label={frontSlide.label}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: index * 0.06 }}
-            >
-              {slide.render()}
-            </motion.div>
+            <div className={cx("relative mx-auto w-full overflow-visible", isColumn ? "max-w-full" : "max-w-[22rem]")}>
+              <div className={cx("relative overflow-visible", cardHeight)}>
+                {MOBILE_SLIDES.map((slide, cardIndex) => {
+                  const depth = stackDepth(cardIndex, frontIndex);
+
+                  return (
+                    <div
+                      key={slide.id}
+                      className="absolute inset-0 overflow-visible transition-[transform,opacity] duration-300 ease-out"
+                      style={{
+                        zIndex: 30 - depth,
+                        transform: `scale(${1 - depth * 0.05}) translateY(${depth * 12}px)`,
+                        opacity: 1 - depth * 0.07,
+                      }}
+                    >
+                      {slide.render()}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -250,14 +296,19 @@ function MobileShowcase() {
           />
         ))}
       </div>
-      <p className="mt-2 text-center text-[10px] text-muted">Swipe for more</p>
+      <p className={cx("text-center text-muted", isColumn ? "mt-1 text-[9px]" : "mt-2 text-[10px]")}>
+        Swipe the stack
+      </p>
     </div>
   );
 }
 
-export function HeroOperatorShowcase({ variant = "desktop" }: HeroOperatorShowcaseProps) {
+export function HeroOperatorShowcase({
+  variant = "desktop",
+  mobileLayout = "full",
+}: HeroOperatorShowcaseProps) {
   if (variant === "mobile") {
-    return <MobileShowcase />;
+    return <MobileShowcase layout={mobileLayout} />;
   }
   return <DesktopShowcase />;
 }

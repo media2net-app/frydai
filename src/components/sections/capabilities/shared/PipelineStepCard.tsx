@@ -27,10 +27,10 @@ export function PipelineStepCard({
     <motion.div
       layout
       className={cx(
-        "relative rounded-xl border p-3 transition-colors duration-300",
-        isActive && accent.activeCard,
-        completed && !isActive && "border-emerald-500/25 bg-emerald-500/[0.06]",
-        !isActive && !completed && "border-border-subtle bg-inset",
+        "capability-step-card relative rounded-xl border p-3 backdrop-blur-md transition-colors duration-300",
+        isActive && cx("capability-step-card--active", accent.activeCard),
+        completed && !isActive && "capability-step-card--done border-emerald-500/30",
+        !isActive && !completed && "capability-step-card--idle border-border-subtle",
       )}
     >
       <div className="mb-2 flex items-center justify-between gap-2">

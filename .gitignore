@@ -41,6 +41,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# UI/UX audit local database (dev)
+/data/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

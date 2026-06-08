@@ -13,25 +13,26 @@ export function HeroHeadline() {
   const suffix = hero.headlineSuffix?.trim();
 
   return (
-    <h1 className="mt-4 flex w-full max-w-full flex-col items-start gap-0 text-left sm:mt-6 lg:max-w-xl xl:max-w-2xl">
-      <span className={cx("block w-full text-foreground", HERO_HEADLINE_PREFIX_TEXT)}>
+    <h1 className="flex w-full flex-col items-start text-left">
+      <span
+        className={cx(
+          "block w-full text-foreground",
+          HERO_HEADLINE_PREFIX_TEXT,
+        )}
+      >
         {hero.headlinePrefix}
       </span>
 
-      <span className="mt-2 block w-full max-w-full sm:mt-2.5 lg:mt-2">
+      <span className="mt-1 block w-full sm:mt-1.5">
         <AnimatedTextCycle
           words={hero.headlineWords}
           interval={3200}
           layout="block"
           textClassName={HERO_HEADLINE_CYCLE_TEXT}
-          className="headline-gradient bg-gradient-to-r from-violet-300 via-teal-200 to-violet-200 bg-clip-text text-transparent"
+          className="headline-gradient bg-gradient-to-r from-violet-400 via-violet-800 to-violet-600 bg-clip-text text-transparent"
         />
         {suffix ? (
-          <span
-            className={cx("ml-1 text-foreground lg:ml-2", HERO_HEADLINE_CYCLE_TEXT)}
-          >
-            {suffix}
-          </span>
+          <span className="ml-1 text-foreground">{suffix}</span>
         ) : null}
       </span>
     </h1>

@@ -2,15 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useIsClient } from "@/hooks/use-is-client";
 import { cx } from "@/lib/cx";
 
-/** Hero h1 prefix — large on mobile, restrained from lg up */
+/** Hero h1 — large display scale (reference: full-width headline) */
 export const HERO_HEADLINE_PREFIX_TEXT =
-  "text-[clamp(2rem,9vw,2.75rem)] font-extrabold leading-[1.02] tracking-tight sm:text-[clamp(2.125rem,7vw,3rem)] lg:text-[clamp(1.5rem,2.35vw,2.35rem)] lg:font-bold lg:leading-[1.1] xl:text-[clamp(1.55rem,2.15vw,2.5rem)]";
+  "text-[clamp(2.5rem,9vw,4.25rem)] font-bold leading-[1.04] tracking-tight sm:text-[clamp(3rem,8vw,4.75rem)] lg:text-[clamp(2.75rem,4.2vw,4rem)] xl:text-[clamp(2.85rem,3.8vw,4.25rem)]";
 
-/** Hero cycling line — slightly smaller than prefix on desktop */
+/** Hero cycling line — same scale as prefix */
 export const HERO_HEADLINE_CYCLE_TEXT =
-  "text-[clamp(1.35rem,5.5vw,2.125rem)] font-bold leading-[1.08] sm:text-[clamp(1.5rem,4.8vw,2.35rem)] lg:text-[clamp(1.3rem,2.05vw,2rem)] xl:text-[clamp(1.35rem,2.1vw,2.1rem)]";
+  "text-[clamp(2.5rem,9vw,4.25rem)] font-bold leading-[1.04] tracking-tight sm:text-[clamp(3rem,8vw,4.75rem)] lg:text-[clamp(2.75rem,4.2vw,4rem)] xl:text-[clamp(2.85rem,3.8vw,4.25rem)]";
 
 interface AnimatedTextCycleProps {
   words: string[];
@@ -36,6 +37,11 @@ const inlineVariants = {
     transition: { duration: 0.3, ease: "easeIn" as const },
   },
 };
+
+function capitalizeFirstWord(text: string) {
+  if (!text) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
 
 const blockVariants = {
   hidden: { y: 20, opacity: 0, filter: "blur(8px)" },
@@ -63,13 +69,9 @@ export function AnimatedTextCycle({
   const isBlock = layout === "block";
   const [currentIndex, setCurrentIndex] = useState(0);
   const [width, setWidth] = useState("auto");
-  const [hasMounted, setHasMounted] = useState(false);
+  const hasMounted = useIsClient();
   const measureRef = useRef<HTMLDivElement>(null);
   const wordVariants = isBlock ? blockVariants : inlineVariants;
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   useEffect(() => {
     if (isBlock) return;
@@ -97,9 +99,9 @@ export function AnimatedTextCycle({
       <motion.span
         key={currentIndex}
         className={cx(
-          "inline-block max-w-full font-bold",
+          "max-w-full font-bold",
+          isBlock ? "block w-full" : "inline-block",
           isBlock && textClassName,
-          isBlock && "max-lg:whitespace-nowrap",
           className,
         )}
         variants={wordVariants}
@@ -107,14 +109,14 @@ export function AnimatedTextCycle({
         animate="visible"
         exit="exit"
       >
-        {words[currentIndex]}
+        {capitalizeFirstWord(words[currentIndex])}
       </motion.span>
     </AnimatePresence>
   );
 
   if (isBlock) {
     return (
-      <span className="relative block w-full max-w-full text-left lg:inline-block lg:w-auto">
+      <span className="relative block w-full max-w-full text-left">
         {animatedWord}
       </span>
     );
@@ -130,7 +132,7 @@ export function AnimatedTextCycle({
       >
         {words.map((word, i) => (
           <span key={i} className={cx("font-bold", className)}>
-            {word}
+            {capitalizeFirstWord(word)}
           </span>
         ))}
       </div>

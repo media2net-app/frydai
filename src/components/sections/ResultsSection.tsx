@@ -107,16 +107,20 @@ export function ResultsSection() {
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4">
           {RESULTS_KPIS.map((kpi) => (
             <GlassCard key={kpi.label} className="results-kpi-card p-4 sm:p-5">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+              <p className="results-kpi-label text-[10px] font-semibold uppercase tracking-wider text-muted">
                 {kpi.label}
               </p>
               <div className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <span className="text-sm text-muted line-through">
+                <span className="results-kpi-before text-sm text-muted line-through">
                   {kpi.before}
                 </span>
-                <span className="text-lg font-bold tabular-nums text-foreground">{kpi.after}</span>
+                <span className="results-kpi-after text-lg font-bold tabular-nums text-foreground">
+                  {kpi.after}
+                </span>
               </div>
-              <p className="mt-1.5 text-xs font-semibold text-emerald-400">{kpi.trend}</p>
+              <p className="results-kpi-trend mt-1.5 text-xs font-semibold text-emerald-400">
+                {kpi.trend}
+              </p>
             </GlassCard>
           ))}
         </div>

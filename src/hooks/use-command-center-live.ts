@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useOperatorOsEnabled } from "@/components/dashboard/DashboardOperatorProvider";
 import {
   ACTIVITY_TEMPLATES,
   COMMAND_CENTER_ACTIVITY,
@@ -152,21 +151,24 @@ function completeFront(s: LiveState, tick: number, activityIndex: number, todoPo
   };
 }
 
-export function useCommandCenterLive() {
-  const osEnabled = useOperatorOsEnabled();
+export function useCommandCenterLive(active = true) {
+  const osEnabled = true;
   const [state, setState] = useState<LiveState>(() => cloneInitial(0));
   const todoPoolIndex = useRef(0);
   const activityIndex = useRef(0);
   const tick = useRef(0);
   const loopGeneration = useRef(0);
-  const loopStartedAt = useRef(Date.now());
+  const loopStartedAt = useRef(0);
   const cooldownTicks = useRef(0);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (!osEnabled) return;
+    if (!osEnabled || !active) return;
+
+    loopStartedAt.current = Date.now();
 
     const interval = setInterval(() => {
+      if (document.visibilityState === "hidden") return;
       if (Date.now() - loopStartedAt.current >= SIMULATION_LOOP_MS) {
         loopStartedAt.current = Date.now();
         todoPoolIndex.current = 0;
@@ -226,7 +228,7 @@ export function useCommandCenterLive() {
     }, PROGRESS_INTERVAL_MS);
 
     return () => clearInterval(interval);
-  }, [osEnabled]);
+  }, [osEnabled, active]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;

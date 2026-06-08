@@ -32,7 +32,7 @@
 }
 
 [data-theme="light"] .headline-gradient {
-  background-image: linear-gradient(to right, #6d28d9, #0d9488, #7c3aed) !important;
+  background-image: linear-gradient(to right, #a78bfa, #5b21b6, #7c3aed) !important;
 }
 
 [data-theme="light"] .text-violet-200,
@@ -145,6 +145,19 @@
   background-color: var(--theme-fill-subtle) !important;
 }
 
+/* Header Get started — zwart, witte tekst */
+.header-get-started-cta {
+  background-color: #12101c !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+}
+
+[data-theme="light"] .site-header .header-get-started-cta:hover {
+  background-color: #ffffff !important;
+  color: #12101c !important;
+  box-shadow: 0 2px 12px rgba(18, 16, 28, 0.12) !important;
+}
+
 /* Footer / overige secondary CTA — glass (niet hero-glass-cta) */
 [data-theme="light"] .btn-secondary-hero:not(.hero-glass-cta) {
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
@@ -162,7 +175,7 @@
   border-color: rgba(124, 58, 237, 0.12);
 }
 
-[data-theme="light"] .glass-card:not(.hero-showcase-card):not(.command-center-board):not(.creatives-glass-card):not(.results-kpi-card):not(.results-comparison-before):not(.results-comparison-after):not(.testimonials-glass-card) {
+[data-theme="light"] .glass-card:not(.hero-showcase-card):not(.command-center-board):not(.creatives-glass-card):not(.results-kpi-card):not(.results-comparison-before):not(.results-comparison-after):not(.testimonials-glass-card):not(.capability-panel-glass) {
   background: #ffffff;
   box-shadow: var(--theme-elevated-shadow);
 }
@@ -186,8 +199,68 @@
   box-shadow: 0 0 40px rgba(124, 58, 237, 0.12) !important;
 }
 
+/* Pricing — subtiel rood (team) vs groen (Frydai) */
+[data-theme="light"] .pricing-team-card {
+  border-color: rgba(225, 29, 72, 0.16) !important;
+  background: linear-gradient(
+    165deg,
+    rgba(255, 241, 242, 0.72) 0%,
+    rgba(255, 255, 255, 0.88) 55%,
+    #ffffff 100%
+  ) !important;
+  box-shadow:
+    0 0 0 1px rgba(225, 29, 72, 0.06),
+    0 8px 32px rgba(225, 29, 72, 0.08) !important;
+}
+
+[data-theme="light"] .pricing-team-eyebrow {
+  color: #be123c;
+}
+
+[data-theme="light"] .pricing-team-total {
+  border-color: rgba(225, 29, 72, 0.18) !important;
+  background: rgba(255, 228, 230, 0.55) !important;
+}
+
 [data-theme="light"] .pricing-featured-card {
-  box-shadow: 0 0 40px rgba(124, 58, 237, 0.14) !important;
+  border-color: rgba(5, 150, 105, 0.22) !important;
+  background: linear-gradient(
+    165deg,
+    rgba(236, 253, 245, 0.75) 0%,
+    rgba(255, 255, 255, 0.92) 52%,
+    #ffffff 100%
+  ) !important;
+  box-shadow:
+    0 0 0 1px rgba(5, 150, 105, 0.08),
+    0 0 40px rgba(16, 185, 129, 0.12) !important;
+}
+
+[data-theme="light"] .pricing-featured-glow {
+  background: rgba(16, 185, 129, 0.16);
+}
+
+[data-theme="light"] .pricing-featured-glow-secondary {
+  background: rgba(52, 211, 153, 0.12);
+}
+
+[data-theme="light"] .pricing-featured-badge {
+  border-color: rgba(5, 150, 105, 0.28) !important;
+  background: rgba(209, 250, 229, 0.65) !important;
+  color: #047857 !important;
+}
+
+[data-theme="light"] .pricing-featured-check {
+  background: rgba(209, 250, 229, 0.85) !important;
+  color: #047857 !important;
+}
+
+[data-theme="light"] .pricing-savings-card {
+  border-color: rgba(5, 150, 105, 0.18) !important;
+  background: rgba(236, 253, 245, 0.55) !important;
+}
+
+[data-theme="light"] .pricing-savings-value {
+  color: #047857 !important;
 }
 
 [data-theme="light"] .metric-before {

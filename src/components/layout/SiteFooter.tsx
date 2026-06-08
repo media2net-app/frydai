@@ -5,16 +5,10 @@ import { copy, site } from "@/lib/copy";
 
 const PRODUCT_LINKS = [
   { href: "#capabilities", labelKey: "features" as const },
-  { href: "#creatives", labelKey: "creatives" as const },
   { href: "#demo", labelKey: "demo" as const },
-  { href: "#how-it-works", labelKey: "howItWorks" as const },
 ];
 
-const COMPANY_LINKS = [
-  { href: "#pricing", labelKey: "pricing" as const },
-  { href: "#faq", labelKey: "faq" as const },
-  { href: site.loginUrl, labelKey: "login" as const, external: false },
-];
+const COMPANY_LINKS = [{ href: "#pricing", labelKey: "pricing" as const }];
 
 export function SiteFooter() {
   const { nav, footer: t } = copy;
@@ -22,19 +16,15 @@ export function SiteFooter() {
 
   const productLabels: Record<(typeof PRODUCT_LINKS)[number]["labelKey"], string> = {
     features: nav.features,
-    creatives: t.creatives,
     demo: t.demo,
-    howItWorks: nav.howItWorks,
   };
 
   const companyLabels: Record<(typeof COMPANY_LINKS)[number]["labelKey"], string> = {
     pricing: nav.pricing,
-    faq: nav.faq,
-    login: nav.login,
   };
 
   return (
-    <footer className="border-t border-border-subtle bg-surface">
+    <footer id="footer" className="border-t border-border-subtle bg-surface">
       <div className="footer-cta-band border-b border-border-subtle bg-gradient-to-b from-violet-950/30 to-transparent">
         <div className="mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 sm:py-16 md:py-20">
           <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
@@ -45,7 +35,7 @@ export function SiteFooter() {
             <DeployFrydaiButton className="w-full sm:w-auto" />
             <a
               href={site.demoUrl}
-              className="btn-secondary-hero inline-flex w-full justify-center rounded-full border border-border-subtle bg-fill-subtle px-8 py-3.5 text-base font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-fill-muted sm:w-auto"
+              className="btn-secondary-hero radius-section inline-flex w-full justify-center border border-border-subtle bg-fill-subtle px-8 py-3.5 text-base font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-fill-muted sm:w-auto"
             >
               {t.ctaSecondary}
             </a>
@@ -91,21 +81,12 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5">
               {COMPANY_LINKS.map((link) => (
                 <li key={link.href}>
-                  {link.external ? (
-                    <a
-                      href={link.href}
-                      className="text-sm text-muted transition-colors hover:text-foreground"
-                    >
-                      {companyLabels[link.labelKey]}
-                    </a>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted transition-colors hover:text-foreground"
-                    >
-                      {companyLabels[link.labelKey]}
-                    </Link>
-                  )}
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted transition-colors hover:text-foreground"
+                  >
+                    {companyLabels[link.labelKey]}
+                  </Link>
                 </li>
               ))}
             </ul>

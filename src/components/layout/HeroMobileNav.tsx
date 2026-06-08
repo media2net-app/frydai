@@ -2,35 +2,34 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useIsClient } from "@/hooks/use-is-client";
 import Link from "next/link";
+import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
 import { FrydaiLogo } from "@/components/brand/FrydaiLogo";
+
 type HeroMobileNavProps = {
   menuLabel: string;
   closeLabel: string;
   features: string;
+  integrations: string;
   howItWorks: string;
   pricing: string;
   faq: string;
-  login: string;
-  loginUrl: string;
+  getStarted: string;
 };
 
 export function HeroMobileNav({
   menuLabel,
   closeLabel,
   features,
+  integrations,
   howItWorks,
   pricing,
   faq,
-  login,
-  loginUrl,
+  getStarted,
 }: HeroMobileNavProps) {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useIsClient();
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -49,6 +48,7 @@ export function HeroMobileNav({
 
   const links = [
     { href: "#capabilities", label: features },
+    { href: "#integrations", label: integrations },
     { href: "#how-it-works", label: howItWorks },
     { href: "#pricing", label: pricing },
     { href: "#faq", label: faq },
@@ -61,7 +61,7 @@ export function HeroMobileNav({
             type="button"
             aria-label={closeLabel}
             onClick={() => setOpen(false)}
-            className={`fixed inset-0 z-[200] bg-[#101828]/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+            className={`fixed inset-0 z-[200] bg-[#101828]/40 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
               open ? "opacity-100" : "pointer-events-none opacity-0"
             }`}
           />
@@ -71,12 +71,13 @@ export function HeroMobileNav({
             aria-modal="true"
             aria-label={menuLabel}
             aria-hidden={!open}
-            className={`fixed right-0 top-0 z-[201] flex h-full w-[min(100vw,20rem)] flex-col border-l border-border-subtle bg-[#12101f] shadow-2xl transition-transform duration-300 ease-out md:hidden ${
+            className={`fixed right-0 top-0 z-[201] flex h-full w-[min(100vw,20rem)] flex-col border-l border-border-subtle bg-surface-elevated shadow-2xl transition-transform duration-300 ease-out md:hidden ${
               open ? "translate-x-0" : "pointer-events-none translate-x-full"
             }`}
           >
             <div className="flex h-16 shrink-0 items-center justify-between border-b border-border-subtle px-4">
               <FrydaiLogo
+                markVariant="purple"
                 markClassName="h-7 w-7"
                 wordmarkClassName="text-base font-semibold"
               />
@@ -98,17 +99,18 @@ export function HeroMobileNav({
                   key={href}
                   href={href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-fill-muted hover:text-foreground"
+                  className="rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-fill-muted"
                 >
                   {label}
                 </Link>
               ))}
-              <a
-                href={loginUrl}
-                className="mt-4 rounded-full border border-border-subtle px-4 py-3 text-center text-base font-medium text-foreground transition-colors hover:bg-fill-muted"
+              <DeployFrydaiButton
+                variant="header"
+                showArrow={false}
+                className="mt-4 w-full px-4 py-3 text-base"
               >
-                {login}
-              </a>
+                {getStarted}
+              </DeployFrydaiButton>
             </nav>
           </aside>
         </>,
@@ -121,7 +123,7 @@ export function HeroMobileNav({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="relative z-20 inline-flex items-center rounded-lg border border-border-subtle bg-fill-muted px-3 py-2 text-sm font-medium leading-none text-foreground transition-colors hover:bg-fill-subtle md:hidden"
+        className="header-nav-glass radius-section relative z-20 inline-flex items-center border border-border-subtle px-3.5 py-2 text-sm font-medium leading-none text-foreground transition-colors hover:bg-fill-muted md:hidden"
         aria-expanded={open}
         aria-controls="hero-mobile-nav"
       >
