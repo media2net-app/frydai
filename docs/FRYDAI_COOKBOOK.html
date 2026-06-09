@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Frydai Cookbook</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #161b26;
+      --surface-2: #1c2333;
+      --border: #2a3348;
+      --text: #e8ecf4;
+      --muted: #9aa5be;
+      --accent: #c026d3;
+      --accent-soft: rgba(192, 38, 211, 0.12);
+      --accent-border: rgba(192, 38, 211, 0.35);
+      --green: #34d399;
+      --amber: #fbbf24;
+      --code-bg: #0b0e14;
+      --radius: 10px;
+      --sidebar-w: 280px;
+      --content-max: 780px;
+      --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --mono: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+      padding: 1.5rem 1rem 2rem;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-brand .logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #c026d3, #7c3aed);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .sidebar-brand h1 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .sidebar-brand p {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .toc-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .toc {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .toc a {
+      display: block;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      line-height: 1.35;
+    }
+
+    .toc a:hover,
+    .toc a.active {
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    .toc a .num {
+      color: var(--accent);
+      font-weight: 600;
+      margin-right: 0.3rem;
+    }
+
+    /* ── Main ── */
+    .main {
+      padding: 2.5rem 3rem 4rem;
+      max-width: calc(var(--content-max) + 6rem);
+    }
+
+    .hero {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #f0abfc, #c026d3 50%, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .meta-cards {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .meta-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-card strong {
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      font-size: 0.78rem;
+      color: #f0abfc;
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    section > h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      color: #f4f6fb;
+    }
+
+    section h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.6rem;
+      color: #dce3f0;
+    }
+
+    p { margin-bottom: 0.9rem; color: #d0d8ea; }
+
+    strong { color: #f0f4fc; font-weight: 600; }
+
+    em { color: #c4cfe6; }
+
+    ul, ol {
+      margin: 0.75rem 0 1rem 1.4rem;
+      color: #d0d8ea;
+    }
+
+    li { margin-bottom: 0.4rem; }
+
+    li::marker { color: var(--accent); }
+
+    blockquote {
+      margin: 1.25rem 0;
+      padding: 1rem 1.15rem;
+      border-left: 3px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 0.92rem;
+      color: #dce3f0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    .callout {
+      margin: 1.25rem 0;
+      padding: 1rem 1.15rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      font-size: 0.92rem;
+    }
+
+    .callout.warn {
+      border-color: rgba(251, 191, 36, 0.35);
+      background: rgba(251, 191, 36, 0.06);
+    }
+
+    .callout.warn strong { color: var(--amber); }
+
+    .callout.done {
+      border-color: rgba(52, 211, 153, 0.35);
+      background: rgba(52, 211, 153, 0.06);
+    }
+
+    .callout.done strong { color: var(--green); }
+
+    .callout-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ── Code ── */
+    pre {
+      margin: 1rem 0;
+      padding: 1.1rem 1.2rem;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: #b8c5e0;
+    }
+
+    code {
+      font-family: var(--mono);
+      font-size: 0.84em;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1em 0.35em;
+      color: #f0abfc;
+    }
+
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    /* ── Tables ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+
+    thead { background: var(--surface-2); }
+
+    th {
+      text-align: left;
+      padding: 0.65rem 0.85rem;
+      font-weight: 600;
+      color: #e8ecf4;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.6rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      color: #c4cfe6;
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .tag {
+      display: inline-block;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .tag.required {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--green);
+    }
+
+    .tag.optional {
+      background: rgba(154, 165, 190, 0.15);
+      color: var(--muted);
+    }
+
+    /* ── Diagram ── */
+    .diagram {
+      margin: 1.25rem 0;
+      padding: 1.2rem 1.4rem;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      line-height: 1.5;
+      color: #9aa5be;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* ── Lists with badges ── */
+    .check-list { list-style: none; margin-left: 0; }
+    .check-list li {
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .warn-list { list-style: none; margin-left: 0; }
+    .warn-list li {
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .warn-list li::before {
+      content: "⚠";
+      position: absolute;
+      left: 0;
+    }
+
+    .step-list { counter-reset: step; list-style: none; margin-left: 0; }
+    .step-list > li {
+      counter-increment: step;
+      padding: 0.85rem 0 0.85rem 2.5rem;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-list > li:last-child { border-bottom: none; }
+    .step-list > li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.85rem;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      color: #f0abfc;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+
+    .step-list ol { margin-top: 0.5rem; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative;
+        height: auto;
+        max-height: none;
+      }
+      .main { padding: 1.5rem 1.25rem 3rem; }
+      .hero h1 { font-size: 1.8rem; }
+    }
+
+    @media print {
+      .sidebar { display: none; }
+      .layout { display: block; }
+      body { background: #fff; color: #111; }
+      .hero h1 { -webkit-text-fill-color: #111; color: #111; }
+      pre, .diagram { border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="logo">F</div>
+        <div>
+          <h1>Frydai Cookbook</h1>
+          <p>Developer onboarding</p>
+        </div>
+      </div>
+      <p class="toc-label">Contents</p>
+      <nav>
+        <ul class="toc" id="toc">
+          <li><a href="#s1"><span class="num">1</span>What Frydai is</a></li>
+          <li><a href="#s2"><span class="num">2</span>Mental model</a></li>
+          <li><a href="#s3"><span class="num">3</span>Repo layout</a></li>
+          <li><a href="#s4"><span class="num">4</span>Customer lifecycle</a></li>
+          <li><a href="#s5"><span class="num">5</span>Data model</a></li>
+          <li><a href="#s6"><span class="num">6</span>Operator container</a></li>
+          <li><a href="#s7"><span class="num">7</span>API routes</a></li>
+          <li><a href="#s8"><span class="num">8</span>Platform credentials</a></li>
+          <li><a href="#s9"><span class="num">9</span>Skills system</a></li>
+          <li><a href="#s10"><span class="num">10</span>Local development</a></li>
+          <li><a href="#s11"><span class="num">11</span>Infrastructure</a></li>
+          <li><a href="#s12"><span class="num">12</span>What's done</a></li>
+          <li><a href="#s13"><span class="num">13</span>What's left</a></li>
+          <li><a href="#s14"><span class="num">14</span>Who's who</a></li>
+          <li><a href="#s15"><span class="num">15</span>Glossary</a></li>
+          <li><a href="#s16"><span class="num">16</span>Your first week</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="hero">
+        <h1>The Frydai Cookbook</h1>
+        <div class="meta-cards">
+          <div class="meta-card">
+            <strong>Audience</strong>
+            A developer who just joined the Frydai team and has never seen this codebase.
+          </div>
+          <div class="meta-card">
+            <strong>Goal</strong>
+            By the end you understand <em>what Frydai is</em>, <em>how every piece fits together</em>, <em>what's built and proven</em>, <em>what's still open</em>, and <em>how to get productive in your first week</em>.
+          </div>
+        </div>
+        <span class="status-badge">Written 2026-06-04 · main @ 87b64a7</span>
+        <p style="margin-top:1rem;font-size:0.88rem;color:var(--muted)">
+          Narrative companion to reference docs in <code>docs/</code> and <code>operator/</code>.
+          When this doc and a reference doc disagree, the reference doc wins.
+        </p>
+      </header>
+
+      <!-- §1 -->
+      <section id="s1">
+        <h2>1. What Frydai is</h2>
+        <p>
+          Frydai is an <strong>AI e-commerce operator sold as a subscription</strong>.
+          A store owner pays once (<strong>€149 / 4 weeks</strong>, single plan) and gets a private AI agent
+          that lives in <em>their own Telegram bot</em> and runs real work: competitor research,
+          ad creative generation, ad launches, landing pages, Shopify store ops, review responses,
+          abandoned-cart recovery, and more.
+        </p>
+        <p>
+          The pitch: <em>"not a SaaS dashboard you operate — an operator you delegate to."</em>
+          The customer talks to it in Telegram like a team member
+          ("Frydai, scrape my competitors", "Frydai, run my ads") and it ships the work back.
+        </p>
+
+        <h3>Two distinctive architecture choices</h3>
+        <ol>
+          <li>
+            <strong>One container per customer.</strong> Every paying customer gets their
+            <em>own isolated Docker container</em> running the
+            <a href="https://github.com/NousResearch/hermes-agent" style="color:#f0abfc">Hermes Agent</a>
+            (NousResearch) wired to their own Telegram bot and API keys. No shared multi-tenant agent runtime.
+          </li>
+          <li>
+            <strong>The product is two halves that barely share code.</strong>
+            A <strong>Next.js marketing site + customer dashboard</strong> (<code>app/</code>, <code>lib/</code>)
+            handles signup, billing, the setup wizard, and settings.
+            A <strong>per-customer operator image</strong> (<code>operator/</code>) is the actual agent.
+            The dashboard provisions and configures operator containers; the operator does the work.
+          </li>
+        </ol>
+
+        <div class="callout">
+          This repo is a <strong>port</strong>: Frydai was built by porting an older product
+          ("The AI Operator", <code>theaioperator.nl</code>, owned by Leon) onto a new, cleaner stack.
+          The port is essentially complete; current work is hardening, polish, and production cutover.
+        </div>
+      </section>
+
+      <!-- §2 -->
+      <section id="s2">
+        <h2>2. The mental model</h2>
+        <div class="diagram">                          ┌─────────────────────────────────────────────┐
+   Customer's browser ──▶ │  Next.js app  (app/, lib/)   — on Vercel     │
+                          │                                              │
+   marketing site         │  • marketing landing page (app/page.tsx)     │
+   signup + Whop billing  │  • Whop OAuth login + billing                │
+   setup wizard           │  • setup wizard (app/setup/page.tsx)         │
+   dashboard + settings   │  • dashboard + settings                      │
+                          │  • API routes that PROVISION containers      │
+                          └───────────────┬──────────────────────────────┘
+                                          │ Coolify REST API
+                                          │ (create app, set env, start)
+                                          ▼
+                          ┌─────────────────────────────────────────────┐
+   Customer's Telegram ──▶│  ONE operator container per customer         │
+                          │  (operator/ image, on Hetzner via Coolify)   │
+                          │                                              │
+                          │  • Hermes Agent gateway (Telegram bot)       │
+                          │  • 43 skills  → /slash-commands              │
+                          │  • tools/*.sh → real executables             │
+                          │  • Meta Ads MCP server (when connected)      │
+                          │  • SOUL.md + AGENTS.md  = brand voice +      │
+                          │    business facts                            │
+                          └─────────────────────────────────────────────┘
+
+   Supabase  = source of truth for customers (billing status, profile, keys).
+   Coolify   = deploy control plane on Hetzner that runs the containers.
+   GHCR      = where the operator Docker image is published by CI.</div>
+
+        <blockquote>
+          <p>
+            <strong>The single most important sentence:</strong>
+            the Next.js app stores the source of truth in <strong>Supabase</strong>,
+            compiles per-customer config, pushes it to <strong>Coolify as container env vars</strong>,
+            and Coolify boots/restarts the <strong>operator container</strong>, whose
+            <code>entrypoint.sh</code> turns those env vars into files on disk that
+            <strong>Hermes</strong> reads at startup. Almost every feature is a variation on that pipeline.
+          </p>
+        </blockquote>
+      </section>
+
+      <!-- §3 -->
+      <section id="s3">
+        <h2>3. Repo layout</h2>
+        <pre><code>frydai/
+  app/                     Next.js 16 App Router — marketing, auth, dashboard, API
+    page.tsx               Marketing landing page
+    (auth)/                login / signup / forgot-password / verify-email
+    setup/page.tsx         Post-purchase setup WIZARD → /api/activate
+    dashboard/             Logged-in area: status, settings, billing
+    api/                   Server route handlers (see §7)
+    components/            Wordmark.tsx, LoadingScreen.tsx
+  lib/
+    whop/                  Auth + billing: session JWT, OAuth, webhook verify
+    supabase/              Supabase client/server/middleware helpers
+    platforms/             registry.ts — source of truth for connectable credentials
+    hermes/                compile-context.ts — builds SOUL.md / AGENTS.md strings
+    auth/                  small auth utils
+  operator/                Per-customer agent image
+    Dockerfile             Clones hermes-agent, installs runtimes
+    entrypoint.sh          Boot: validate env → write config → run Hermes
+    skills/                40+ *.md skill files → /slash-commands
+    tools/                 *.sh executables (+ tools/lib/preflight.sh)
+    mcp/                   meta_ads_server.py — Meta Ads MCP server
+    migrations/            001..010 *.sql — Supabase customers schema
+    SKILL_STANDARD.md      "Bulletproof" quality bar for skills
+    SKILL_PLATFORM_MATRIX.md  What each of 21 core skills needs
+  docs/                    Reference docs (hermes-context-lifecycle, design brief)
+  plans/                   Living planning docs
+  scripts/                 validate-skills, check-entrypoint-sync, etc.
+  tests/                   unit/ (vitest) + e2e/ (playwright)
+  .github/workflows/       build-operator.yml, validate-skills.yml</code></pre>
+
+        <div class="callout warn">
+          <p class="callout-label">Naming trap</p>
+          <code>operator/</code> used to be called <code>legacy-ai-operator/backend/</code>.
+          The word "legacy" was misleading — it is the <strong>live</strong> image every customer runs.
+          Renamed in PR #64. Any doc still saying "legacy-ai-operator" is stale.
+        </div>
+      </section>
+
+      <!-- §4 -->
+      <section id="s4">
+        <h2>4. The customer lifecycle</h2>
+        <p>The spine of the product — follow it end to end.</p>
+
+        <ol class="step-list">
+          <li>
+            <strong>Marketing site</strong> (<code>app/page.tsx</code>) → "Deploy Frydai" → <strong>Whop checkout</strong> (external, single plan).
+          </li>
+          <li>
+            <strong>Whop billing.</strong> On purchase:
+            <ul>
+              <li>Webhook → <code>/api/webhooks/whop</code> → verify signature → upsert <code>customers</code> in Supabase (<code>active</code>/<code>trialing</code>).</li>
+              <li>Whop OAuth (<code>/api/auth/whop/start</code> → callback) → mint <strong>Frydai session JWT</strong> (HS256) in httpOnly <code>frydai_session</code> cookie.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Setup wizard</strong> (<code>app/setup/page.tsx</code>). Customer enters:
+            <ul>
+              <li><strong>Required:</strong> Telegram bot token + OpenAI API key.</li>
+              <li><strong>Optional:</strong> Shopify, Meta, Airtable, Apify, Gemini, HiggsField, Email, WhatsApp.</li>
+              <li><strong>Business profile</strong> → becomes SOUL.md / AGENTS.md.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Provisioning</strong> — wizard POSTs to <code>/api/activate</code>:
+            <ol>
+              <li>Re-check session + live membership (fails closed).</li>
+              <li>Validate bot token via Telegram <code>getMe</code>.</li>
+              <li>Create/reuse Coolify application from operator image.</li>
+              <li>Set per-customer env vars (incl. base64 <code>SOUL_MD_CONTENT</code> / <code>AGENTS_MD_CONTENT</code>).</li>
+              <li>Start container.</li>
+              <li>Write <code>coolify_app_uuid</code>, <code>bot_username</code>, <code>status=active</code> to Supabase.</li>
+            </ol>
+          </li>
+          <li>
+            <strong>Container boots</strong> — <code>entrypoint.sh</code>: validate env, write config files, restructure skills, <code>exec hermes gateway run</code>.
+          </li>
+          <li>
+            <strong>Live.</strong> Customer DMs their Telegram bot. Hermes has full business context from SOUL.md/AGENTS.md.
+          </li>
+        </ol>
+
+        <p>
+          After setup, dashboard settings (<code>app/dashboard/settings/</code>) use
+          <code>/api/dashboard/update-keys</code> and <code>/api/dashboard/update-profile</code> —
+          recompile context, push env to Coolify, restart container (5–15s blip).
+        </p>
+      </section>
+
+      <!-- §5 -->
+      <section id="s5">
+        <h2>5. The data model</h2>
+        <p>Four layers of state. <strong>Supabase is the only source of truth</strong>; everything else is derived.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>What lives there</th>
+                <th>Written by</th>
+                <th>Read by</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Supabase customers</strong></td>
+                <td>Billing status, profile, platform_keys, social_handles, telegram, coolify_app_uuid, bot_username, higgsfield_connected, restart timestamps</td>
+                <td>webhook, save-setup, activate, update-profile, update-keys</td>
+                <td>middleware, dashboard, activate</td>
+              </tr>
+              <tr>
+                <td><strong>Coolify env vars</strong></td>
+                <td>Flattened config + base64 SOUL_MD / AGENTS_MD content</td>
+                <td>activate, update-profile, update-keys</td>
+                <td>entrypoint.sh at boot</td>
+              </tr>
+              <tr>
+                <td><strong>Container disk</strong></td>
+                <td>/opt/data/SOUL.md, /opt/hermes/AGENTS.md, .env, config.yaml, skills</td>
+                <td>entrypoint.sh on every boot</td>
+                <td>Hermes at startup</td>
+              </tr>
+              <tr>
+                <td><strong>Hermes runtime</strong></td>
+                <td>Loaded context + registered slash-commands</td>
+                <td>—</td>
+                <td>the agent, per message</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Migrations</h3>
+        <p>Numbered migrations in <code>operator/migrations/</code>:</p>
+        <ul>
+          <li><code>001</code> base table · <code>002</code> membership_id nullable · <code>003</code> platform_keys</li>
+          <li><code>004</code>/<code>005</code> restart timestamps · <code>006</code> whop_user_id</li>
+          <li><code>007</code> whop_webhook_events · <code>008</code> telegram_users · <code>009</code> social_handles · <code>010</code> higgsfield_connected</li>
+        </ul>
+
+        <div class="callout warn">
+          Migrations are <strong>run manually</strong> against the Frydai Supabase project.
+          Adding a profile field touches ~8 places — follow the checklist in
+          <code>docs/hermes-context-lifecycle.md</code> ("Adding a New Profile Field").
+        </div>
+      </section>
+
+      <!-- §6 -->
+      <section id="s6">
+        <h2>6. The operator container</h2>
+        <p>The heart of the product. Source: <code>operator/</code>.</p>
+
+        <h3>Build (Dockerfile)</h3>
+        <p>Clones <code>hermes-agent</code>, installs Python 3.13 + uv + Node 20, copies skills/tools/mcp/entrypoint.
+        CI builds and pushes to <strong>GHCR</strong> on every <code>operator/</code> change to <code>main</code>.</p>
+
+        <h3>Boot (entrypoint.sh)</h3>
+        <ol>
+          <li><strong>Fail-fast</strong> — exit 1 without <code>TELEGRAM_BOT_TOKEN</code> or <code>OPENAI_API_KEY</code>.</li>
+          <li><strong>Install skills</strong> — flat <code>skills/*.md</code> → <code>$HERMES_HOME/skills/&lt;stem&gt;/SKILL.md</code>. Slash command == filename stem == <code>name:</code> frontmatter.</li>
+          <li><strong>Write config.yaml</strong> — model + OpenAI provider. Meta Ads MCP block only if Meta creds present.</li>
+          <li><strong>Write .env</strong> — all platform credentials (keep in sync with <code>registry.ts</code>; <code>check-entrypoint-sync.mjs</code> enforces).</li>
+          <li><strong>Write context files</strong> — base64-decode SOUL → <code>/opt/data/SOUL.md</code>, AGENTS → <code>/opt/hermes/AGENTS.md</code>.</li>
+          <li><code>exec hermes gateway run</code></li>
+        </ol>
+
+        <h3>Why base64?</h3>
+        <p>Coolify serializes env to a <code>.env</code> file without quoting. Docker's parser breaks on newlines; compiled Markdown is always multi-line. Base64 makes each value single-line.</p>
+
+        <h3>Why restart on profile change?</h3>
+        <p>Hermes reads SOUL.md/AGENTS.md <strong>once at session init</strong> — no hot reload. Deliberate design choice, not a bug.</p>
+      </section>
+
+      <!-- §7 -->
+      <section id="s7">
+        <h2>7. API routes</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Route</th><th>Purpose</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>auth/whop/start</code> + <code>callback</code></td><td>Whop OAuth → mint <code>frydai_session</code> JWT</td></tr>
+              <tr><td><code>auth/signup</code>, <code>auth/me</code>, <code>auth/logout</code></td><td>Account endpoints</td></tr>
+              <tr><td><code>webhooks/whop</code></td><td>Membership webhook → upsert customers (signature-verified, idempotent)</td></tr>
+              <tr><td><code>verify-membership</code></td><td>Live membership re-check</td></tr>
+              <tr><td><code>save-setup</code></td><td>Persist wizard input to Supabase</td></tr>
+              <tr><td><code><strong>activate</strong></code></td><td><strong>The provisioning route</strong> — creates/starts Coolify container</td></tr>
+              <tr><td><code>dashboard/status</code></td><td>Live container status</td></tr>
+              <tr><td><code>dashboard/update-keys</code></td><td>Change platforms/keys → recompile → push env → restart</td></tr>
+              <tr><td><code>dashboard/update-profile</code></td><td>Change profile → recompile SOUL+AGENTS → restart</td></tr>
+              <tr><td><code>dashboard/restart</code></td><td>Manual container restart</td></tr>
+              <tr><td><code>dashboard/verify-credential</code></td><td>Live connectivity probe for one credential</td></tr>
+              <tr><td><code>dev/mock-setup</code>, <code>dev/set-session</code></td><td>Dev-only bypasses (see §10)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Auth gating: <code>middleware.ts</code> guards pages (<code>/setup</code>, <code>/dashboard</code>);
+          each sensitive API route re-checks session + live membership itself.
+          <code>FRYDAI_AUTH_MODE</code>: <code>whop</code> (production) vs <code>legacy</code> (old Supabase-auth).
+        </p>
+      </section>
+
+      <!-- §8 -->
+      <section id="s8">
+        <h2>8. Platform / credential system</h2>
+        <p>
+          <code>lib/platforms/registry.ts</code> is the <strong>single source of truth</strong>
+          for every credential a customer can connect. Drives wizard, dashboard settings,
+          Coolify env mapping, and the entrypoint sync linter.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Platform</th><th>Env var(s)</th><th>Powers</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr><td>OpenAI</td><td><code>OPENAI_API_KEY</code></td><td>all skills</td><td><span class="tag required">required</span></td></tr>
+              <tr><td>Telegram</td><td>bot token + allowed users</td><td>all skills</td><td><span class="tag required">required</span></td></tr>
+              <tr><td>HiggsField</td><td><code>HIGGSFIELD_API_KEY</code> + secret</td><td>generate-ad-statics, static-to-video</td><td><span class="tag optional">optional</span></td></tr>
+              <tr><td>Shopify</td><td>domain + access token</td><td>5 store skills</td><td><span class="tag optional">optional</span></td></tr>
+              <tr><td>Meta Ads</td><td>token + ad account ID</td><td>launch-ads, ROAS overlay</td><td><span class="tag optional">optional</span></td></tr>
+              <tr><td>Airtable</td><td><code>AIRTABLE_API_KEY</code></td><td>scrape-ads, competitor-research, ad-order, onboard</td><td><span class="tag optional">optional</span></td></tr>
+              <tr><td>Apify</td><td><code>APIFY_TOKEN</code></td><td>scrape-ads, competitor-research</td><td><span class="tag optional">optional</span></td></tr>
+              <tr><td>Gemini</td><td><code>GEMINI_API_KEY</code></td><td>video-analyzer</td><td><span class="tag optional">optional</span></td></tr>
+              <tr><td>Email</td><td>provider + API key</td><td>abandoned-cart, order-status</td><td><span class="tag optional">optional</span></td></tr>
+              <tr><td>WhatsApp</td><td>phone ID + token</td><td>order-status</td><td><span class="tag optional">optional</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Two credential flavors</h3>
+        <ul>
+          <li><strong>Generic (<code>platform_keys</code>)</strong> — most platforms. Stored in jsonb column, mapped to env vars.</li>
+          <li><strong><code>custom: true</code></strong> — OpenAI, Telegram, HiggsField. Bespoke save paths; HiggsField keys live only in Coolify env.</li>
+        </ul>
+      </section>
+
+      <!-- §9 -->
+      <section id="s9">
+        <h2>9. The skills system</h2>
+        <p>
+          Skills are <strong>Markdown instruction files</strong> in <code>operator/skills/</code> —
+          prose procedures the LLM follows. 40+ files in repo; <strong>21 hardened customer-facing</strong> skills.
+        </p>
+
+        <h3>How a skill becomes a command</h3>
+        <p>
+          <code>skills/&lt;name&gt;.md</code> → Dockerfile → entrypoint restructures →
+          <code>$HERMES_HOME/skills/&lt;name&gt;/SKILL.md</code> → Hermes registers <code>/&lt;name&gt;</code>.
+        </p>
+
+        <h3>21 core skills by family</h3>
+        <ul>
+          <li><strong>A. Ad pipeline</strong> — scrape-ads, competitor-research, script-ads, image-prompt-architect, generate-ad-statics, static-to-video, ad-order, launch-ads, orchestrated by <code>ad-machine</code></li>
+          <li><strong>B. Shopify ops</strong> — store-health-monitor, abandoned-cart-rescuer, listing-optimizer, review-responder, order-status-updater</li>
+          <li><strong>C. Setup/config</strong> — onboard, my-business</li>
+          <li><strong>D. Standalone</strong> — build-page, video-analyzer, summarize</li>
+          <li><strong>E. Meta-skills</strong> — skill-builder, skill-creator</li>
+        </ul>
+
+        <h3>Bulletproof Skill Standard (12 criteria)</h3>
+        <ul>
+          <li><strong>Credential preflight</strong> — check env vars before work; friendly "not connected" messages via <code>preflight.sh</code></li>
+          <li><strong>Tool contract</strong> — external work via <code>tools/*.sh</code>, one machine-readable line (<code>OK</code>/<code>FALLBACK</code>/<code>SKIP</code>/<code>ERROR</code>). Never inline multi-line curl/jq in skill body.</li>
+          <li><strong>Confirm-gating</strong> — spending money or publishing externally requires customer confirmation</li>
+          <li><strong>Graceful degradation</strong> — optional integrations degrade cleanly; partial success continues the batch</li>
+        </ul>
+
+        <p>Gold-standard references: <code>generate-ad-statics.md</code> and <code>store-health-monitor.md</code>.</p>
+
+        <div class="callout">
+          <p class="callout-label">Dual-vendor creative path</p>
+          HiggsField connected → HiggsField REST (Soul 2.0 / FLUX) + DoP video.
+          Otherwise → confirm-gated fallback to OpenAI <code>gpt-image-1</code> + ffmpeg Ken Burns.
+          HiggsField auth is static REST key+secret — no OAuth/MCP (headless containers can't do browser redirect).
+        </div>
+      </section>
+
+      <!-- §10 -->
+      <section id="s10">
+        <h2>10. Local development</h2>
+        <pre><code>npm install
+npm run dev              # http://localhost:3000
+npm test                 # vitest unit tests
+npm run test:e2e         # playwright e2e
+npm run lint             # eslint + check:entrypoint-sync
+npm run validate:skills  # skill validator
+npm run lint:tools       # shellcheck on operator/tools</code></pre>
+
+        <h3>Dev without real billing/infra</h3>
+        <p>
+          Set <code>NODE_ENV != production</code> and <code>FRYDAI_DEV_MOCK=1</code>.
+          <code>/api/activate</code> and <code>/api/verify-membership</code> short-circuit —
+          no Telegram validation, no Coolify call. DevMockButton + <code>/api/dev/set-session</code> seed a mock customer.
+          Dev uses mock Supabase project <code>vmkvqtrjiizniavjktkp</code>.
+        </p>
+
+        <h3>Operator locally (WSL, from operator/)</h3>
+        <pre><code>docker build -t frydai-operator .
+docker run --rm frydai-operator   # exits 1: TELEGRAM_BOT_TOKEN not set
+docker run --rm -e TELEGRAM_BOT_TOKEN=... -e OPENAI_API_KEY=... frydai-operator</code></pre>
+
+        <div class="callout warn">
+          <strong>Next.js 16 caveat:</strong> breaking changes from what you may know.
+          Read guides in <code>node_modules/next/dist/docs/</code> before writing Next code.
+        </div>
+      </section>
+
+      <!-- §11 -->
+      <section id="s11">
+        <h2>11. Infrastructure &amp; deploy</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Piece</th><th>Where</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Next.js app</td><td><strong>Vercel</strong></td><td>Coolify/Supabase/Whop env vars drive provisioning</td></tr>
+              <tr><td>Operator image</td><td><strong>GHCR</strong></td><td>CI on operator/ changes to main</td></tr>
+              <tr><td>Customer containers</td><td><strong>Coolify on Hetzner</strong></td><td>One app per customer</td></tr>
+              <tr><td>Customer data</td><td><strong>Supabase</strong></td><td>customers table = source of truth</td></tr>
+              <tr><td>Billing</td><td><strong>Whop</strong></td><td>Single plan, webhooks → Supabase</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Key Vercel env vars: <code>COOLIFY_URL</code>, <code>COOLIFY_TOKEN</code>,
+          <code>COOLIFY_SERVER_UUID</code>, <code>COOLIFY_PROJECT_UUID</code>,
+          <code>COOLIFY_OPERATOR_IMAGE</code>, Supabase + session + Whop creds.
+        </p>
+
+        <div class="callout warn">
+          <strong>Image pinning open lever:</strong> <code>COOLIFY_OPERATOR_IMAGE</code> is currently <code>:latest</code> —
+          no staging gate. SHA-tag mechanism exists; plan is to pin to <code>sha-&lt;full&gt;</code> deliberately.
+        </div>
+      </section>
+
+      <!-- §12 -->
+      <section id="s12">
+        <h2>12. What's done ✅</h2>
+        <ul class="check-list">
+          <li>Phases 1–4 Hermes migration complete — operator on GHCR, Coolify live, full provisioning chain verified end-to-end</li>
+          <li>Auth + billing: Whop OAuth, session JWT, idempotent webhooks, middleware + API gating — tested</li>
+          <li>Context lifecycle: SOUL/AGENTS compilation, base64 transport, all three injection moments implemented</li>
+          <li>Platform registry + credentials UX in wizard and settings</li>
+          <li>Meta Ads via bundled MCP server (system-user token, headless-safe)</li>
+          <li>HiggsField REST key+secret auth with confirm-gated OpenAI/ffmpeg fallback</li>
+          <li>Repo restructure (operator/ rename, archive porting docs)</li>
+          <li>"Bulletproof 21" skill hardening — standard, validator, preflight.sh, CI gating in place</li>
+        </ul>
+      </section>
+
+      <!-- §13 -->
+      <section id="s13">
+        <h2>13. What's left ⚠️</h2>
+        <ul class="warn-list">
+          <li><strong>Production cutover</strong> — dev still uses mock Supabase. Needs real project, Whop plan IDs (Trevor), real Hetzner/Coolify UUIDs.</li>
+          <li><strong>Hermes cron not wired</strong> — tier-based cron TODO in entrypoint.sh; scheduling uses "run once now" stub.</li>
+          <li><strong>Image pinning</strong> — <code>:latest</code> with no staging gate.</li>
+          <li><strong>23 non-core skills</strong> — not audited to Bulletproof standard.</li>
+          <li><strong>Deferred observability</strong> — no LLM eval harness, per-skill metrics, structured logging dashboards.</li>
+          <li><strong>Front-end visual polish</strong> — magenta/wordmark rebrand (8 PRs in design brief). Front-end only — never touch backend from that brief.</li>
+          <li><strong>Perf TODO</strong> — middleware Supabase check on every /dashboard request; edge-cache deferred.</li>
+        </ul>
+      </section>
+
+      <!-- §14 -->
+      <section id="s14">
+        <h2>14. Who's who</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Person</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Hilal (Helal)</strong></td><td>Owns the whole Frydai port end-to-end — your main contact</td></tr>
+              <tr><td><strong>Trevor</strong> (<code>trevoronueseke</code>)</td><td>Business owner; external account provisioning + Whop plan_id</td></tr>
+              <tr><td><strong>Leon Ghatas</strong></td><td>Owns legacy stack (theaioperator.nl / LIO_OS) ported from</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Team working rules</h3>
+        <ul>
+          <li><strong>No auto-commit/amend/push.</strong> Propose commit message + branch + PR body; owner pushes. No "Co-Authored-By: Claude" trailer.</li>
+          <li>One PR per logical step; each skill family / restructure step is its own atomic PR.</li>
+          <li>For infra steps, walk sub-points sequentially with targeted questions per blocker.</li>
+        </ul>
+      </section>
+
+      <!-- §15 -->
+      <section id="s15">
+        <h2>15. Glossary</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Hermes</strong></td><td>NousResearch agent runtime. Reads SKILL.md, SOUL.md, AGENTS.md; Telegram gateway.</td></tr>
+              <tr><td><strong>Operator</strong></td><td>Per-customer container image (<code>operator/</code>). One instance = one customer's bot.</td></tr>
+              <tr><td><strong>Skill</strong></td><td>Markdown procedure → <code>/slash-command</code>.</td></tr>
+              <tr><td><strong>Tool</strong></td><td>Shell executable (<code>tools/*.sh</code>) with strict one-line contract.</td></tr>
+              <tr><td><strong>SOUL.md</strong></td><td>Agent brand voice / persona (from profile fields).</td></tr>
+              <tr><td><strong>AGENTS.md</strong></td><td>Business facts (store, niche, platforms). Not repo-root AGENTS.md.</td></tr>
+              <tr><td><strong>Coolify</strong></td><td>Self-hosted PaaS on Hetzner; container control plane via REST.</td></tr>
+              <tr><td><strong>Whop</strong></td><td>Billing + membership; purchase events + OAuth identity.</td></tr>
+              <tr><td><strong>Bulletproof</strong></td><td>Skill quality standard — 12 criteria in SKILL_STANDARD.md.</td></tr>
+              <tr><td><strong>Dual-vendor path</strong></td><td>HiggsField if connected, else confirm-gated OpenAI + ffmpeg fallback.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- §16 -->
+      <section id="s16">
+        <h2>16. Your first week</h2>
+        <ol class="step-list">
+          <li><strong>Read</strong> (in order): this doc → <code>operator/README.md</code> → <code>docs/hermes-context-lifecycle.md</code> → <code>SKILL_STANDARD.md</code> → <code>SKILL_PLATFORM_MATRIX.md</code></li>
+          <li><strong>Trace one request</strong>: <code>app/setup/page.tsx</code> → <code>app/api/activate/route.ts</code> → <code>operator/entrypoint.sh</code></li>
+          <li><strong>Run locally</strong>: <code>npm install && npm run dev</code>, set <code>FRYDAI_DEV_MOCK=1</code>, click through wizard with dev mock. Build operator image in WSL.</li>
+          <li><strong>Read one gold-standard skill</strong>: <code>generate-ad-statics.md</code> + <code>tools/generate_static.sh</code></li>
+          <li><strong>Make a tiny safe change</strong>: add a field to <code>registry.ts</code>, run <code>npm run lint</code> — watch entrypoint-sync catch missing env var.</li>
+          <li><strong>Before any backend change</strong>, run <code>npm test</code> and <code>npm run validate:skills</code>.</li>
+        </ol>
+      </section>
+
+      <footer>
+        <p>
+          Welcome aboard. When in doubt, the source of truth is the code and reference docs in
+          <code>docs/</code> + <code>operator/</code> — this cookbook is the map, not the territory.
+        </p>
+        <p style="margin-top:0.5rem">Generated from FRYDAI_COOKBOOK.md · Frydai team</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Highlight active TOC link on scroll
+    const sections = document.querySelectorAll("section[id]");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach((a) => a.classList.remove("active"));
+            const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+            if (active) active.classList.add("active");
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+  </script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 "use client";
 
 import { GlassCard } from "@/components/ui/GlassCard";
+import { IllustrativeDisclaimer } from "@/components/ui/IllustrativeDisclaimer";
 import { copy } from "@/lib/copy";
 import { TESTIMONIALS } from "@/lib/testimonials-data";
 import { IntegrationLogoMarquee } from "@/components/hero/IntegrationLogoMarquee";
@@ -69,7 +70,9 @@ export function TestimonialsSection() {
           ))}
         </div>
 
-        <p className="mt-6 text-center text-[10px] text-muted">{t.footnote}</p>
+        <IllustrativeDisclaimer className="mx-auto mt-6 max-w-md">
+          {t.footnote}
+        </IllustrativeDisclaimer>
 
         <div className="mt-12 border-t border-border-subtle pt-10 sm:mt-14">
           <p className="text-center text-xs font-medium uppercase tracking-wider text-muted">

@@ -6,6 +6,7 @@ import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { copy } from "@/lib/copy";
 import { cx } from "@/lib/cx";
+import { IllustrativeDisclaimer } from "@/components/ui/IllustrativeDisclaimer";
 import {
   TRANSFORMATION_AFTER_HERO,
   TRANSFORMATION_BEFORE_HERO,
@@ -205,9 +206,9 @@ export function TransformationSection() {
 
         <div className="mt-8 flex flex-col items-center gap-3">
           <DeployFrydaiButton>{t.cta}</DeployFrydaiButton>
-          <p className="max-w-xl text-center text-[11px] leading-relaxed text-muted">
+          <IllustrativeDisclaimer className="max-w-xl">
             {t.disclaimer}
-          </p>
+          </IllustrativeDisclaimer>
         </div>
       </div>
     </section>

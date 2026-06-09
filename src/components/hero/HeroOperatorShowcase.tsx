@@ -8,9 +8,9 @@ import { copy } from "@/lib/copy";
 import { cx } from "@/lib/cx";
 
 const TASKS = [
-  { label: "Competitor pricing scan", status: "Research", tone: "violet" },
-  { label: "UGC script: Day in My Life", status: "Brief ready", tone: "teal" },
-  { label: "Scale winning ad sets +20%", status: "Ads", tone: "emerald" },
+  { label: "/competitor-research running", status: "Research", tone: "violet" },
+  { label: "/script-ads · Day in My Life", status: "Brief ready", tone: "teal" },
+  { label: "/launch-ads · scale +20%", status: "Ads", tone: "emerald" },
 ] as const;
 
 const cardMotion = {
@@ -66,6 +66,7 @@ function RevenueChip({ className }: { className?: string }) {
           {hero.revenueValue}
         </p>
         <p className="mt-0.5 text-xs font-medium text-emerald-400">{hero.revenueTrend}</p>
+        <p className="mt-1.5 text-[9px] leading-snug text-muted">{hero.revenueExampleNote}</p>
       </div>
     </GlassCard>
   );

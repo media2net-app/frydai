@@ -8,11 +8,36 @@ import { platformLogos } from "@/lib/platform-logos";
 
 const VISUAL_AREA = "flex h-full min-h-[11rem] w-full flex-col";
 
+function SubscribeVisual({ active }: { active: boolean }) {
+  return (
+    <div className={cx(VISUAL_AREA, "items-center justify-center")}>
+      <motion.div
+        animate={active ? { scale: [1, 1.02, 1] } : {}}
+        transition={{ duration: 2, repeat: active ? Infinity : 0 }}
+        className="w-full max-w-[220px] rounded-xl border border-border-subtle bg-inset p-4 text-center"
+      >
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-violet-300">Founding access</p>
+        <p className="mt-2 text-2xl font-bold text-foreground">€149</p>
+        <p className="text-[10px] text-muted">every 4 weeks · via Whop</p>
+        {active && (
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-3 inline-block text-[9px] font-medium text-emerald-400/90"
+          >
+            EU VAT included
+          </motion.span>
+        )}
+      </motion.div>
+    </div>
+  );
+}
+
 function ConnectVisual({ active }: { active: boolean }) {
   const nodes = [
-    { id: "shopify", label: "Shopify", icon: platformLogos.shopify },
-    { id: "meta", label: "Meta Ads", icon: platformLogos.meta },
     { id: "telegram", label: "Telegram", icon: platformLogos.telegram },
+    { id: "openai", label: "OpenAI", icon: platformLogos.openai },
+    { id: "shopify", label: "Shopify", icon: platformLogos.shopify },
   ];
 
   return (
@@ -49,7 +74,7 @@ function ConnectVisual({ active }: { active: boolean }) {
           animate={{ opacity: 1 }}
           className="mt-3 text-[9px] font-medium text-emerald-400/90"
         >
-          Connected
+          API keys connected
         </motion.span>
       )}
     </div>
@@ -150,10 +175,12 @@ export function HowItWorksStepVisual({
 }) {
   switch (stepIndex) {
     case 0:
-      return <ConnectVisual active={active} />;
+      return <SubscribeVisual active={active} />;
     case 1:
-      return <ConfigureVisual active={active} />;
+      return <ConnectVisual active={active} />;
     case 2:
+      return <ConfigureVisual active={active} />;
+    case 3:
       return <OperateVisual active={active} />;
     default:
       return null;
