@@ -1,57 +1,60 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import createGlobe from "cobe";
+import { useEffect, useRef } from "react";
 
 const GLOBE_THETA = 0.22;
 
 function globeSize(container: HTMLElement): number {
   const w = container.clientWidth;
   const h = container.clientHeight;
-  const size = Math.min(w, h, 1200);
-  return Math.max(Math.round(size), 320);
-}
-
-function shouldRenderGlobe(): boolean {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  if (window.matchMedia("(max-width: 767px)").matches) return false;
-  return true;
+  const size = Math.min(w, h, 1840);
+  return Math.max(Math.round(size), 360);
 }
 
 export function HeroGlobeBackground() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [active, setActive] = useState(false);
 
   useEffect(() => {
-    if (!shouldRenderGlobe()) return;
-
-    const start = () => setActive(true);
-    const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1));
-    const cancel = window.cancelIdleCallback ?? window.clearTimeout;
-    const idleId = idle(start, { timeout: 1200 });
-
-    return () => cancel(idleId);
-  }, []);
-
-  useEffect(() => {
-    if (!active) return;
-
     const wrap = wrapRef.current;
     const canvas = canvasRef.current;
     if (!wrap || !canvas) return;
 
-    let width = globeSize(wrap);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let width = 0;
     let phi = 0;
     let raf = 0;
+    let globe: ReturnType<typeof createGlobe> | null = null;
     let disposed = false;
-    let cleanup: (() => void) | null = null;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const mapSamples = isMobile ? 8000 : 16000;
 
-    void import("cobe").then(({ default: createGlobe }) => {
-      if (disposed) return;
+    const tick = () => {
+      if (!globe || disposed) return;
+      phi += 0.004;
+      globe.update({
+        width: width * dpr,
+        height: width * dpr,
+        phi,
+        markers: [],
+      });
+      raf = requestAnimationFrame(tick);
+    };
 
-      const globe = createGlobe(canvas, {
+    const mountGlobe = () => {
+      if (disposed || globe) return;
+
+      width = globeSize(wrap);
+      if (width < 120) {
+        raf = requestAnimationFrame(mountGlobe);
+        return;
+      }
+
+      globe = createGlobe(canvas, {
         devicePixelRatio: dpr,
         width: width * dpr,
         height: width * dpr,
@@ -59,7 +62,7 @@ export function HeroGlobeBackground() {
         theta: GLOBE_THETA,
         dark: 0,
         diffuse: 1.15,
-        mapSamples: 10000,
+        mapSamples,
         mapBrightness: 6.2,
         baseColor: [0.94, 0.95, 0.99],
         glowColor: [0.97, 0.98, 1],
@@ -67,35 +70,25 @@ export function HeroGlobeBackground() {
         markers: [],
       });
 
-      const tick = () => {
-        phi += 0.004;
-        globe.update({
-          width: width * dpr,
-          height: width * dpr,
-          phi,
-          markers: [],
-        });
-        raf = requestAnimationFrame(tick);
-      };
       raf = requestAnimationFrame(tick);
+    };
 
-      const ro = new ResizeObserver(() => {
-        width = globeSize(wrap);
-      });
-      ro.observe(wrap);
+    mountGlobe();
 
-      cleanup = () => {
-        cancelAnimationFrame(raf);
-        ro.disconnect();
-        globe.destroy();
-      };
+    const ro = new ResizeObserver(() => {
+      if (!globe || disposed) return;
+      width = globeSize(wrap);
     });
+    ro.observe(wrap);
 
     return () => {
       disposed = true;
-      cleanup?.();
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      globe?.destroy();
+      globe = null;
     };
-  }, [active]);
+  }, []);
 
   return (
     <div
@@ -104,7 +97,7 @@ export function HeroGlobeBackground() {
     >
       <div className="hero-globe-stage">
         <div ref={wrapRef} className="hero-globe-canvas-wrap">
-          {active ? <canvas ref={canvasRef} className="hero-globe-canvas" /> : null}
+          <canvas ref={canvasRef} className="hero-globe-canvas" />
         </div>
       </div>
       <div className="hero-globe-vignette" />

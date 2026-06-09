@@ -44,7 +44,7 @@ export function HowItWorksSection() {
             aria-hidden
           />
 
-          <ol className="grid gap-4 lg:grid-cols-3 lg:items-stretch lg:gap-6">
+          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-stretch lg:gap-5">
             {t.steps.map((step, index) => {
               const isActive = activeStep === index;
               return (

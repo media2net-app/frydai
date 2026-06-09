@@ -10,7 +10,6 @@ import { platformLogos } from "@/lib/platform-logos";
 
 const CHANNELS = [
   { id: "telegram", label: "Telegram", icon: platformLogos.telegram },
-  { id: "line", label: "LINE" },
   { id: "whatsapp", label: "WhatsApp", icon: platformLogos.whatsapp },
 ] as const;
 
@@ -31,7 +30,7 @@ const CHAT_THREADS: ChatMessage[][] = [
     {
       id: "2",
       role: "operator",
-      text: "Scheduled. I'll ship angles + pricing changes by 07:00.",
+      text: "On it. I'll ship angles + pricing changes to Telegram when ready.",
       attachment: "competitor_intel.pdf",
     },
   ],

@@ -82,6 +82,9 @@ export function CapabilitiesSection() {
               <CapabilityPanel item={activeItem} tabActive={inView && active === activeItem.id} />
             </AnimatePresence>
           </div>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-muted sm:text-sm">
+            {t.footnote}
+          </p>
         </div>
       </div>
     </section>

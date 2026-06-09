@@ -3,6 +3,7 @@
 import { GlassCard } from "@/components/ui/GlassCard";
 import { DeployFrydaiButton } from "@/components/checkout/DeployFrydaiButton";
 import { copy } from "@/lib/copy";
+import { IllustrativeDisclaimer } from "@/components/ui/IllustrativeDisclaimer";
 import {
   FOUNDING_FEATURES,
   FRYDAI_PERIOD,
@@ -118,9 +119,9 @@ export function PricingSection() {
           <p className="mt-3 text-[10px] text-muted">{t.mathNote}</p>
         </GlassCard>
 
-        <p className="mx-auto mt-6 max-w-2xl text-center text-xs leading-relaxed text-muted">
+        <IllustrativeDisclaimer className="mx-auto mt-6 max-w-2xl">
           {t.disclaimer}
-        </p>
+        </IllustrativeDisclaimer>
       </div>
     </section>
   );

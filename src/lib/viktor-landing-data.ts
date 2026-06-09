@@ -18,7 +18,7 @@ export const VIKTOR_LANDING = {
     ctaPrimary: "Claim your seat",
     ctaSecondary: "See it work · 92s",
     trust: [
-      "Founding access · $187 / 4 weeks",
+      "Founding access · €149 / 4 weeks",
       "5 min setup",
       "Cancel anytime",
     ],
@@ -91,7 +91,7 @@ export const VIKTOR_LANDING = {
         number: "01",
         title: "Connect",
         description:
-          "Link Shopify, Meta Ads, and Telegram in under five minutes. OAuth-secure — Frydai handles auth and starts working.",
+          "Add your Telegram bot token and OpenAI API key, then optionally connect Shopify and Meta Ads — setup takes about five minutes.",
         cards: [
           {
             id: "shopify",
@@ -272,9 +272,9 @@ export const VIKTOR_LANDING = {
   finalCta: {
     title: "Ready to deploy your operator?",
     subtitle:
-      "Founding access · $187 every 4 weeks. All skills and integrations included. EU VAT included where applicable — cancel anytime from Whop, no lock-in, no sales call.",
+      "Founding access · €149 every 4 weeks. All skills and integrations included. EU VAT included where applicable — cancel anytime from Whop, no lock-in, no sales call.",
     features: [
-      "50+ e-commerce skills",
+      "40+ e-commerce skills · 21 core workflows",
       "Telegram & WhatsApp",
       "Research, creatives, store ops",
       "Approval guardrails",

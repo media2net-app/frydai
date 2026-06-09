@@ -84,6 +84,9 @@ export function HeroBlock() {
                           <span className="hero-cta-price font-semibold">{foundingNotice.price}</span>
                         </span>
                       </p>
+                      {hero.checkoutNote ? (
+                        <p className="max-w-md text-xs leading-relaxed text-muted">{hero.checkoutNote}</p>
+                      ) : null}
 
                       <div
                         className="hero-mobile-showcase-below relative w-full shrink-0 overflow-visible lg:hidden"
