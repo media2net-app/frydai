@@ -1,6 +1,7 @@
 "use client";
 
 import { HeroLogoSlider } from "@/components/hero/HeroLogoSlider";
+import { IllustrativeDisclaimer } from "@/components/ui/IllustrativeDisclaimer";
 import { copy } from "@/lib/copy";
 
 /** Glass cap: PRODUCT PROOF + Command Center titel */
@@ -21,6 +22,9 @@ export function CommandCenterIntro() {
         <p className="hero-next-section-subtitle mt-2 text-base sm:mt-3 sm:text-lg">
           {t.subtitle}
         </p>
+        <IllustrativeDisclaimer className="mx-auto mt-3 max-w-xl">
+          {t.demoDisclaimer}
+        </IllustrativeDisclaimer>
         <HeroLogoSlider />
       </div>
     </div>

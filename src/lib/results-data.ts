@@ -15,9 +15,9 @@ export type ResultsKpi = {
 export const RESULTS_KPIS: ResultsKpi[] = [
   {
     label: "Monthly ops cost",
-    before: "$18,150",
-    after: "$187 / 4 wks",
-    trend: "97% less",
+    before: "€18,150",
+    after: "€149 / 4 wks",
+    trend: "99% less",
   },
   {
     label: "Creatives / month",
@@ -42,8 +42,8 @@ export const RESULTS_KPIS: ResultsKpi[] = [
 export const COMPARISON_METRICS: ComparisonMetric[] = [
   {
     label: "Monthly team & tools",
-    before: "$18,150 · 9 freelancers + 8 SaaS",
-    after: "$187 / 4 weeks · one operator",
+    before: "€18,150 · 9 freelancers + 8 SaaS",
+    after: "€149 / 4 weeks · one operator",
     improved: true,
   },
   {

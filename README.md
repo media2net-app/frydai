@@ -18,7 +18,6 @@ Open [http://localhost:3000](http://localhost:3000).
 |----------|---------|
 | `NEXT_PUBLIC_WHOP_CHECKOUT_URL` | Whop product page (fallback checkout link) |
 | `NEXT_PUBLIC_WHOP_PLAN_ID` | Embedded Whop checkout plan ID |
-| `NEXT_PUBLIC_LOGIN_URL` | Nav login link |
 | `NEXT_PUBLIC_DEMO_URL` | Secondary CTA (default `#demo`) |
 | `OPENAI_API_KEY` | UI/UX audit skill (development only) |
 | `UI_UX_AUDIT_MODEL` | Optional OpenAI model (default `gpt-4o-mini`) |

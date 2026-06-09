@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { cx } from "@/lib/cx";
 import { copy } from "@/lib/copy";
+import { IllustrativeDisclaimer } from "@/components/ui/IllustrativeDisclaimer";
 import { COMPARISON_METRICS, RESULTS_KPIS } from "@/lib/results-data";
 
 function MetricRow({
@@ -124,7 +125,9 @@ export function ResultsSection() {
             </GlassCard>
           ))}
         </div>
-        <p className="mt-3 text-center text-[10px] text-muted">{t.kpiFootnote}</p>
+        <IllustrativeDisclaimer className="mx-auto mt-3 max-w-lg">
+          {t.kpiFootnote}
+        </IllustrativeDisclaimer>
 
         <div className="mt-8 flex justify-center gap-2 lg:hidden">
           {(["before", "after"] as const).map((view) => (
@@ -178,9 +181,9 @@ export function ResultsSection() {
           </div>
         </div>
 
-        <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-muted">
+        <IllustrativeDisclaimer className="mx-auto mt-8 max-w-2xl">
           {t.disclaimer}
-        </p>
+        </IllustrativeDisclaimer>
       </div>
     </section>
   );

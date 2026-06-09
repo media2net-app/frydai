@@ -299,6 +299,23 @@ export function IntegrationsSection() {
           </p>
         </GlassCard>
 
+        {/* Architecture */}
+        <div className="mt-12 sm:mt-16">
+          <h3 className="text-center text-lg font-bold text-foreground sm:text-xl">
+            {t.architectureTitle}
+          </h3>
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {t.architectureItems.map((item) => (
+              <li key={item.title}>
+                <GlassCard className="h-full border-violet-500/15 bg-violet-500/[0.04] p-4 sm:p-5">
+                  <h4 className="text-sm font-bold text-foreground">{item.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
+                </GlassCard>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* Trust */}
         <div className="mt-12 sm:mt-16">
           <h3 className="text-center text-lg font-bold text-foreground sm:text-xl">{t.trustTitle}</h3>

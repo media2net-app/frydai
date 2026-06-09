@@ -20,7 +20,7 @@
 |----------|-----------|
 | **Producttype** | Subscription “operator” — één agent, vele skills |
 | **Doelgroep** | Shopify / WooCommerce / Amazon-operators, DTC brands, solo founders & kleine teams |
-| **Belofte** | Vervangt een verspreid freelancer-team (research, ads, creatives, listings, LP’s) voor **$187 / 4 weken** |
+| **Belofte** | Vervangt een verspreid freelancer-team (research, ads, creatives, listings, LP’s) voor **€149 / 4 weken** |
 | **Werkwijze** | Autonoom met guardrails; proactieve updates; goedkeuringen via chat |
 | **Differentiator** | **Uitvoerend** (ships work) vs. tools die alleen “inzicht” geven |
 | **Kanalen** | Telegram-first; LINE / WhatsApp genoemd op huidige site |
@@ -68,7 +68,7 @@
 | 6 | Creative gallery | Marquee + 18 creatives |
 | 7 | Talk to operator | Chat + kanalen |
 | 8 | Before / After | ROI-vergelijking |
-| 9 | Team vs Frydai pricing | $18.150 vs $187 |
+| 9 | Team vs Frydai pricing | $18.150 vs €149 |
 | 10 | How it works | 3 stappen |
 | 11 | Founding plan | Pricing + bullets + math |
 | 12 | Testimonials | 3 quotes |

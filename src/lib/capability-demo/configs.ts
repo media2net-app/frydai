@@ -16,10 +16,10 @@ function advanceCycles(prev: DemoState, cycles: Record<string, string[]>): Recor
 const RESEARCH_CYCLES = {
   sources: ["X · trending posts", "Reddit · 47 threads", "Meta Ads Library", "Competitor stores"],
   reports: [
-    "Next intel report · 07:00",
+    "Next intel report · on request",
     "Report drafting — 84% complete",
     "Shipping to Telegram when ready",
-    "Morning brief scheduled",
+    "Morning brief on request",
   ],
 };
 
@@ -317,7 +317,7 @@ export const CAPABILITY_DEMO_CONFIGS: CapabilityDemoRegistry = {
     feed: [
       "Scaling winning ad set +15% budget…",
       "Cart abandon email triggered",
-      "Organic post scheduled for 18:00",
+      "Organic post draft ready for review",
       "CPA spike detected — rule applied",
       "Weekly performance digest drafting",
       "Creative refresh recommended in Telegram",

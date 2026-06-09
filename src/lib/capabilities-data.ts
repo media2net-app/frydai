@@ -26,13 +26,18 @@ export const CAPABILITIES: CapabilityItem[] = [
     label: "Research",
     title: "AI-powered research",
     description:
-      "Deep market analysis, competitor tracking, and trend discovery — fully autonomous. Frydai scans hundreds of sources and delivers actionable intel.",
-    skills: ["Competitor analysis", "Reddit scraping", "Trend detection", "Price monitoring"],
+      "Deep market analysis, competitor tracking, and trend discovery — fully autonomous. Frydai scans sources via Apify and Airtable and delivers actionable intel.",
+    skills: [
+      "/competitor-research",
+      "/scrape-ads",
+      "/summarize",
+      "/video-analyzer",
+    ],
     pipeline: [
-      { label: "Data ingestion", value: "X · Reddit · Meta Ads" },
+      { label: "Data ingestion", value: "Apify · Airtable · Meta Ads Library" },
       { label: "Signal processing", value: "452 signals detected" },
       { label: "Pattern match", value: "92/100 confidence" },
-      { label: "Intel report", value: "Auto-send 07:00 via Telegram" },
+      { label: "Intel report", value: "Delivered to Telegram when ready" },
     ],
   },
   {
@@ -40,39 +45,51 @@ export const CAPABILITIES: CapabilityItem[] = [
     label: "Ad creative",
     title: "Ad creative on autopilot",
     description:
-      "From creative strategy to UGC scripts, static ads, and video briefs. Your entire creative pipeline — from insight to ready-to-run assets.",
-    skills: ["Creative strategy", "UGC scripts", "Static ads", "Hook variants", "TikTok UGC angles"],
+      "From competitor angles to scripts, static ads, and video — the full ad pipeline orchestrated by /ad-machine.",
+    skills: [
+      "/script-ads",
+      "/generate-ad-statics",
+      "/static-to-video",
+      "/image-prompt-architect",
+      "/ad-machine",
+    ],
   },
   {
     id: "landingPages",
     label: "Landing pages",
     title: "Landing pages that convert",
     description:
-      "Generate landing pages that match your ad angles for full funnel congruency. Listicles, advertorials, and product pages built to convert.",
-    skills: ["Listicles", "Advertorials", "Product pages", "Bundle offers", "A/B copy variants"],
+      "Generate landing pages that match your ad angles for full funnel congruency — listicles, advertorials, and product pages built to convert.",
+    skills: ["/build-page", "/script-ads", "/image-prompt-architect"],
   },
   {
     id: "storeManagement",
     label: "Store management",
     title: "Store management hands-free",
     description:
-      "Manage listings, product images, and niche trends without lifting a finger. Your store stays fresh while Frydai runs 24/7.",
-    skills: ["Product listings", "Image optimization", "Trend analysis", "SEO updates", "Inventory alerts"],
+      "Manage listings, reviews, carts, and store health without lifting a finger. Your Shopify store stays fresh while Frydai runs 24/7.",
+    skills: [
+      "/listing-optimizer",
+      "/store-health-monitor",
+      "/review-responder",
+      "/abandoned-cart-rescuer",
+      "/order-status-updater",
+    ],
   },
   {
     id: "marketing",
     label: "Marketing",
     title: "Full-stack marketing ops",
     description:
-      "Run paid and organic marketing from one operator. Meta ads, email flows, performance reports, and content — coordinated automatically.",
-    skills: ["Meta ads", "Email marketing", "Ad analysis", "Organic posting", "Budget scaling"],
+      "Run Meta ads, email flows, and performance ops from one operator — coordinated with approval guardrails.",
+    skills: ["/launch-ads", "/ad-order", "/abandoned-cart-rescuer", "/onboard"],
   },
   {
     id: "more",
-    label: "50+ more",
-    title: "50+ skills — updated every week",
+    label: "40+ more",
+    title: "40+ skills — 21 core workflows",
     description:
-      "New e-com skills ship to your agent automatically. Trending tools on Twitter? Your operator often has them before the week is out.",
-    skills: ["Weekly skill drops", "Telegram commands", "Custom rules", "Guardrails", "Team workflows"],
+      "New e-com capabilities ship regularly to your operator. Core workflows cover research, ad creative, landing pages, Shopify ops, and Meta ads.",
+    skills: ["/onboard", "/my-business", "/skill-creator", "/summarize", "/video-analyzer"],
   },
 ];

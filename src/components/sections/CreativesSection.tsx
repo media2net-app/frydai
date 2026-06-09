@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { cx } from "@/lib/cx";
+import { IllustrativeDisclaimer } from "@/components/ui/IllustrativeDisclaimer";
 import { copy } from "@/lib/copy";
+import { cx } from "@/lib/cx";
 import { FRYDAI_CREATIVES } from "@/lib/creatives-data";
 
 const FEATURED_CREATIVES = FRYDAI_CREATIVES.slice(0, 6);
@@ -76,6 +77,10 @@ export function CreativesSection() {
             </div>
           </div>
         </div>
+
+        <IllustrativeDisclaimer className="mx-auto mt-8 max-w-2xl">
+          {t.footnote}
+        </IllustrativeDisclaimer>
       </div>
     </section>
   );
